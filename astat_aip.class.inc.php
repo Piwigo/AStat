@@ -2191,7 +2191,7 @@ class AStat_AIP extends AStat_AIM
 
     for($i=0;$i<4;$i++) 
     { 
-      if(!is_numeric($tmp[$i])) {Â return (false); } 
+      if(!is_numeric($tmp[$i])) { return (false); } 
     }
     return (true);
   }

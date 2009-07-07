@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AStat.2
-Version: 2.0.4
+Version: 2.0.5
 Description: Statistiques avancées / Advanced statistics
 Plugin URI: http://phpwebgallery.net/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
@@ -32,6 +32,7 @@ Author URI: http://photos.grum.fr/
                           SQL request for stat by categories works with mySQL 4.1.22 and not with mySQL 5
 2.0.4       - 21/05/09  - bug on tools 
                             it was not possible to use tools to manage deleted items
+2.0.5       - 07/07/09  - bug in code - invalid character on line 2194
 
 :: TO DO
 
@@ -53,7 +54,7 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 define('ASTAT_DIR' , basename(dirname(__FILE__)));
 define('ASTAT_PATH' , PHPWG_PLUGINS_PATH . ASTAT_DIR . '/');
 
-define('ASTAT_VERSION' , '2.0.4'); // => ne pas oublier la version dans l'entête !!
+define('ASTAT_VERSION' , '2.0.5'); // => ne pas oublier la version dans l'entête !!
 
 global $prefixeTable;
 
