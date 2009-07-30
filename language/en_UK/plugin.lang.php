@@ -209,5 +209,9 @@ $lang['AStat_AddIP'] = "Add to the blacklist";
 $lang['AStat_DelIP'] = "Delete from the blacklist";
 $lang['AStat_tools_purge_history_ipid0'] = "To purge events associated with IP from the blacklist (%s items in the blacklist, %s events in history)"
 $lang['AStat_IP_blacklist'] = "Add to the blacklist";
+$lang['AStat_enableddisabled_true'] = "Filter enabled";
+$lang['AStat_enableddisabled_false'] = "Filter disabled";
+$lang['AStat_enableddisabled_invert'] = "Filtre inverted";
+
 
 ?>

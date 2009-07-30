@@ -210,4 +210,9 @@ $lang['AStat_AddIP'] = "Añadir a la lista negra";
 $lang['AStat_DelIP'] = "Eliminar de la lista negra";
 $lang['AStat_tools_purge_history_ipid0'] = "Para purgar los acontecimientos asociados con la IP de la lista negra (%s elementos en la lista negra, %s acontecimientos en la reseña histórica)";
 $lang['AStat_IP_blacklist'] = "Poner en lista negra";
+$lang['AStat_enableddisabled_true'] = "Filtro activado";
+$lang['AStat_enableddisabled_false'] = "Filtro discapacitados";
+$lang['AStat_enableddisabled_invert'] = "Filtro invertida";
+
+
 ?>

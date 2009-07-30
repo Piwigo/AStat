@@ -61,7 +61,8 @@ class AStat_AIM extends common_plugin
       'AStat_BarColor_Cat' => 'fff966',
       'AStat_DefaultSortIP' => 'page',    //page, ip, picture
       'AStat_SeeTimeRequests' => 'false',
-      'AStat_BlackListedIP' => ''    // ip blacklisted (separator : ",")
+      'AStat_BlackListedIP' => '',    // ip blacklisted (separator : ",")
+      'AStat_UseBlackList' => 'false'    // if false, blacklist usage is disabled, if "invert" then result are inverted
       );
 
   }

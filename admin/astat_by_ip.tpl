@@ -9,7 +9,7 @@
   {if isset($datarows) and count($datarows)}
     {foreach from=$datarows key=name item=data}
       <tr class="StatTableRow">
-        <td style="white-space: nowrap"><a href="">{$data.ASTAT_IP_BLACKLIST} {$data.ASTAT_IP_GEOLOCALISATION} {$data.ASTAT_IP_ADRESS}</td>
+        <td style="white-space: nowrap">{$data.ASTAT_IP_BLACKLIST} {$data.ASTAT_IP_GEOLOCALISATION} {$data.ASTAT_IP_ADRESS}</td>
         <td class="number">{$data.PAGES}</td>
         <td class="number">{$data.PICTURES}</td>
         <td>

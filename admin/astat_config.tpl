@@ -306,6 +306,14 @@
          <input type="button" value="{'AStat_DelIP'|@translate}" id="idelipbutton" onclick="delIP();"/>
         </td>
       </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="2">
+          <select name="f_AStat_UseBlackList">
+            {html_options values=$AStat_enableddisabled_list_values output=$AStat_enableddisabled_list_labels selected=$datas.AStat_UseBlackList_selected}
+          </select>
+        </td>
+      </tr>
 
 
 

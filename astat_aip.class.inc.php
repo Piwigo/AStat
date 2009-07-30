@@ -419,10 +419,11 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
-    if($this->my_config['AStat_BlackListedIP']!="")
+    if(($this->my_config['AStat_UseBlackList']!="false")&&($this->my_config['AStat_BlackListedIP']!=""))
     {
       ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
-      $sql_where .= " NOT ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      ($this->my_config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      $sql_where .= $this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
     }
 
     $sql_max=", (select max(n.MaxPages) as MaxPages, max(n.MaxIP) as MaxIP, max(n.MaxImg) as MaxImg
@@ -497,16 +498,36 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
-    if($this->my_config['AStat_BlackListedIP']!="")
+    if(($this->my_config['AStat_UseBlackList']!="false")&&($this->my_config['AStat_BlackListedIP']!=""))
     {
       ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
-      $sql_where .= " NOT ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      ($this->my_config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      $sql_where .= $this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      $sql.=" , 'N' AS blacklist";
+    }
+    else
+    {
+      if($this->my_config['AStat_BlackListedIP']=='')
+      {
+        $sql.=" , 'N' AS blacklist";
+      }
+      else
+      {
+        $sql.=" , (CASE ";
+        $tmp=explode(',', $this->my_config['AStat_BlackListedIP']);
+        foreach($tmp as $key=>$val)
+        {
+          $sql.=" WHEN IP LIKE '".$val."' THEN 'Y' ";
+        }
+        $sql.="ELSE 'N' END) AS blacklist ";
+      }
     }
 
     $sql_max=", (select max(n.MaxPages) as MaxPages, max(n.MaxImg) as MaxImg
         from (select if(".HISTORY_TABLE.".user_id = 2, IP, if(".USERS_TABLE.".username is null, '[".l10n("AStat_deleted_user")."]', ".USERS_TABLE.".username)) as IP_USER, count(".HISTORY_TABLE.".id) as MaxPages, count(image_id) as MaxImg
             from ".HISTORY_TABLE." LEFT JOIN ".USERS_TABLE." ON ".HISTORY_TABLE.".user_id = ".USERS_TABLE.".id ".$sql_where.$sql_group.") as n) as n ";
     $sql=$sql_select.$sql.$sql_nfomax.$sql_from.$sql_max.$sql_where.$sql_group.$sql_order.$sql_limit;
+
 
     $result = pwg_query($sql);
     $sql="select FOUND_ROWS()";
@@ -604,9 +625,10 @@ class AStat_AIP extends AStat_AIM
     ($sql_where=="")?$sql_where=" where ":$sql_where.=" and ";
     $sql_where .= "  ic2.catid = ".HISTORY_TABLE.".category_id ";
 
-    if($this->my_config['AStat_BlackListedIP']!="")
+    if(($this->my_config['AStat_UseBlackList']!="false")&&($this->my_config['AStat_BlackListedIP']!=""))
     {
-      $sql_where .= " AND NOT ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      ($this->my_config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      $sql_where .= $this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
     }
 
     $sql=$sql_select.$sql.$sql_thumb.$sql_from.$sql_fromthumb.$sql_max.$sql_where.$sql_group.$sql_order.$sql_limit;
@@ -699,10 +721,11 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
-    if($this->my_config['AStat_BlackListedIP']!="")
+    if(($this->my_config['AStat_UseBlackList']!="false")&&($this->my_config['AStat_BlackListedIP']!=""))
     {
       ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
-      $sql_where .= " NOT ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      ($this->my_config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      $sql_where .= $this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
     }
 
 
@@ -1045,7 +1068,14 @@ class AStat_AIP extends AStat_AIM
           $ip_blacklist.="&amp;fAStat_SortIP=$sortip";
         }
 
-        $ip_blacklist=$this->format_link("[".l10n('AStat_IP_blacklist')."]", $ip_blacklist);
+        if($stats[$i]["blacklist"]=='Y')
+        {
+          $ip_blacklist="[".l10n('AStat_IP_blacklist')."]";
+        }
+        else
+        {
+          $ip_blacklist=$this->format_link("[".l10n('AStat_IP_blacklist')."]", $ip_blacklist);
+        }
       }
       else
       {
@@ -1470,6 +1500,7 @@ class AStat_AIP extends AStat_AIM
 
     $template_datas['AStat_showthumbcat_selected']=$this->my_config['AStat_ShowThumbCat'];
     $template_datas['AStat_showthumbimg_selected']=$this->my_config['AStat_ShowThumbImg'];
+    $template_datas['AStat_UseBlackList_selected']=$this->my_config['AStat_UseBlackList'];
 
     // making lists zones
     // default period
@@ -1507,6 +1538,13 @@ class AStat_AIP extends AStat_AIM
     $template_list_values['yesno'][]='false';
     $template_list_labels['yesno'][]=l10n('AStat_yesno_false');
 
+    $template_list_values['enableddisabled'][]='true';
+    $template_list_values['enableddisabled'][]='false';
+    $template_list_values['enableddisabled'][]='invert';
+    $template_list_labels['enableddisabled'][]=l10n('AStat_enableddisabled_true');
+    $template_list_labels['enableddisabled'][]=l10n('AStat_enableddisabled_false');
+    $template_list_labels['enableddisabled'][]=l10n('AStat_enableddisabled_invert');
+
     $template_datas["L_STAT_TITLE"]=l10n('AStat_config_title');
 
     $template->assign("datas", $template_datas);
@@ -1520,6 +1558,8 @@ class AStat_AIP extends AStat_AIM
     $template->assign("AStat_defaultsortimg_list_labels", $template_list_labels['sortimg']);
     $template->assign("AStat_yesno_list_values", $template_list_values['yesno']);
     $template->assign("AStat_yesno_list_labels", $template_list_labels['yesno']);
+    $template->assign("AStat_enableddisabled_list_values", $template_list_values['enableddisabled']);
+    $template->assign("AStat_enableddisabled_list_labels", $template_list_labels['enableddisabled']);
 
     $template->assign_var_from_handle('ASTAT_BODY_PAGE', 'body_page');
   } // display_config
@@ -2404,6 +2444,7 @@ class AStat_AIP extends AStat_AIM
     }
     return($returned);
   }
+
 
   /* ---------------------------------------------------------------------------
    * AJAX functions
