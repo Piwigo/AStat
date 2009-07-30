@@ -109,7 +109,7 @@ $lang['AStat_sortip_picture'] = 'Nombre d\'images vues';
 $lang['AStat_sortip_ip'] = 'Utilisateur / Adresse';
 $lang['AStat_sortip_page'] = 'Nombre de pages vues';
 $lang['AStat_RefIPLabel'] = 'Utilisateur / Adresse IP';
-$lang['AStat_DefaultSortIP'] = 'Tri par défaut'; 
+$lang['AStat_DefaultSortIP'] = 'Tri par défaut';
 $lang['AStat_general_config'] = 'Configuration générale';
 $lang['AStat_SeeTimeRequests'] = 'Voir la durée d\'exécution des requêtes';
 $lang['AStat_time_request_label'] = 'Exécution de la requête en';
@@ -157,22 +157,22 @@ $lang['AStat_tools_deleted_picture_apply'] = 'Effectuer la mise à jour';
 
 $lang['AStat_section_old_deleted_cat'] = 'Ancienne catégorie n\'ayant pu être importée';
 $lang['AStat_tools_general_nfo_nfo'] = "<ul><li>%s évènements sont présents dans l'historique</li>
-						<li>La table pèse %s (Table: %s ; Index: %s)</li>
-						<li>Date du premier évènement : %s</li>
-						<li>Date du dernier évènement : %s</li>";
+            <li>La table pèse %s (Table: %s ; Index: %s)</li>
+            <li>Date du premier évènement : %s</li>
+            <li>Date du dernier évènement : %s</li>";
 $lang['AStat_tools_purge_history'] = "Purge de l'historique";
 $lang['AStat_tools_purge_history_nfo'] = "Cette fonction effectue sur l'historique une purge de tous les évènements antérieurs à une date donnée et optimise la table. <br><b>Cette action irréversible</b>.";
 $lang['AStat_tools_purge_history_apply'] = "Appliquer la purge";
-$lang['AStat_tools_purge_history_date'] = "Purger les évènements antérieurs à (JJ/MM/AAAA) "; 
-$lang['AStat_tools_purge_history_imageid0'] = "Purger les évènements associés à des images supprimées (%s évènements dans l'historique)"; 
-$lang['AStat_tools_purge_history_categoryid0'] = "Purger les évènements associés à des catégories supprimées (%s évènements dans l'historique)"; 
+$lang['AStat_tools_purge_history_date'] = "Purger les évènements antérieurs à ";
+$lang['AStat_tools_purge_history_imageid0'] = "Purger les évènements associés à des images supprimées (%s évènements dans l'historique)";
+$lang['AStat_tools_purge_history_categoryid0'] = "Purger les évènements associés à des catégories supprimées (%s évènements dans l'historique)";
 $lang['AStat_tools_result_ko'] = "Une erreur est survenue, l'action n'a pu être correctement menée";
-$lang['AStat_tools_invalid_date'] = "La date renseignée est invalide !"; 
-$lang['AStat_tools_invalid_date2'] = "La date renseignée est supérieure ou égale à la date du jour !"; 
-$lang['AStat_tools_deleted_picture_error0'] = "La préparation a échouée"; 
-$lang['AStat_tools_deleted_picture_error1'] = "La réassocation des évènements de l'historique a échouée"; 
-$lang['AStat_tools_deleted_picture_ok0'] = "La préparation de la table a réussie, vous pouvez procéder à la réorganisation des fichiers sur le serveur"; 
-$lang['AStat_tools_deleted_picture_ok1'] = "La réassocation des évènements de l'historique a réussie"; 
+$lang['AStat_tools_invalid_date'] = "La date renseignée est invalide !";
+$lang['AStat_tools_invalid_date2'] = "La date renseignée est supérieure ou égale à la date du jour !";
+$lang['AStat_tools_deleted_picture_error0'] = "La préparation a échouée";
+$lang['AStat_tools_deleted_picture_error1'] = "La réassocation des évènements de l'historique a échouée";
+$lang['AStat_tools_deleted_picture_ok0'] = "La préparation de la table a réussie, vous pouvez procéder à la réorganisation des fichiers sur le serveur";
+$lang['AStat_tools_deleted_picture_ok1'] = "La réassocation des évènements de l'historique a réussie";
 
 $lang['AStat_tools_deleted_picture_nfo3'] = "Lorsque des images sont déplacées physiquement d'un répertoire, la synchronisation supprime les images de la base et les réinsère avec une nouvelle référence. Une image déplacée laisse donc dans les évènements de l'historique une trace avec des références qui n'existent plus.</p><p><i>AStat</i> permet :<ul><li>de mémoriser les références d'images <u><i>avant</i></u> de procéder à la synchronisation </li><li>de réassocier dans les évènements de l'historique les bonnes références d'une image <u><i>après</i></u> avoir procédé à une synchronisation</li></ul></p><p><b>Attention !</b><br><ul><li>si des images différentes ont les mêmes noms de fichiers, le résultat est imprévisible</li><li>cette fonctionnalité ne peut pas traiter les images pour lesquelles le fichier sur le serveur a été renomé</li></ul>";
 
@@ -182,7 +182,7 @@ $lang['AStat_tools_deleted_picture_do'] = "Effectuer le traitement";
 $lang['AStat_tools_deleted_picture_nfo_nb'] = "(%s identifiants d'images peuvent être réassociés à %s évènements de l'historique)";
 
 
-$lang['AStat_tools_deleted_category'] = 'Mettre à jour dans l\'historique les références de catégories'; 
+$lang['AStat_tools_deleted_category'] = 'Mettre à jour dans l\'historique les références de catégories';
 $lang['AStat_tools_deleted_category_nfo0'] = "Affecte pour les évènements de l'historique référencants des catégories qui n'existent plus, la section <i>Catégorie supprimée</i>."; // v1.3.0
 $lang['AStat_tools_deleted_category_nfo1'] = "%s catégories inexistantes sont présentes dans les évènements de l'historique et impactent %s évènements : <ul>%s</ul>";
 $lang['AStat_tools_deleted_category_nfo2'] = "Toutes les catégories présentes dans les évènements de l'historique existent. Aucune action n'a besoin d'être menée.";
@@ -204,5 +204,11 @@ $lang['AStat_nofilter'] = "--- Pas de filtre ---";
 $lang['AStat_confignotsaved'] = "Une erreur s'est produite, la configuration n'a pas été enregistrée";
 $lang['AStat_gpc2_not_installed'] = "Le plugin 'Grum Plugins Classes 2' (version >= %s) est nécessaire pour que AStat puisse être installé";
 
+//--- >> v2.1.0 >>
+$lang['AStat_BlackListedIP'] = "Liste noire des adresses IP";
+$lang['AStat_AddIP'] = "Ajouter à la liste";
+$lang['AStat_DelIP'] = "Supprimer de la liste";
+$lang['AStat_tools_purge_history_ipid0'] = "Purger les évènements associés aux IP de la liste noire (%s éléments dans la liste noire, %s évènements dans l'historique)";
+$lang['AStat_IP_blacklist'] = "Mettre sur liste noire";
 
 ?>

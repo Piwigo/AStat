@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AStat.2
-Version: 2.0.5
+Version: 2.1.0
 Description: Statistiques avancées / Advanced statistics
 Plugin URI: http://phpwebgallery.net/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
@@ -20,19 +20,34 @@ Author URI: http://photos.grum.fr/
 
 :: HISTORY
 
-2.0.0       - 13/05/07  - release for piwigo 2.0
-2.0.1       - 09/03/01  - bug corrected (can't open file because plugin directory
-                          was hardcoded...)
-2.0.2       - 09/03/08  - bug referenced
-                            english forum : http://piwigo.org/forum/viewtopic.php?pid=105990#p105990
-                            french forum  : http://fr.piwigo.org/forum/viewtopic.php?pid=107205#p107205
-                          SQL request for stat by categories works with mySQL 4.1.22 and not with mySQL 5
-2.0.3       - 28/03/08  - bug referenced
-                            french forum  : http://fr.piwigo.org/forum/viewtopic.php?pid=107236#p107236
-                          SQL request for stat by categories works with mySQL 4.1.22 and not with mySQL 5
-2.0.4       - 21/05/09  - bug on tools 
-                            it was not possible to use tools to manage deleted items
-2.0.5       - 07/07/09  - bug in code - invalid character on line 2194
+
+| release | date       |
+| 2.0.0   | 2007/05/07 | * release for piwigo 2.0
+| 2.0.1   | 2008/03/01 | * bug corrected (can't open file because plugin directory
+|         |            |   was hardcoded...)
+| 2.0.2   | 2008/03/09 | * bug referenced
+|         |            |    english forum : http://piwigo.org/forum/viewtopic.php?pid=105990#p105990
+|         |            |    french forum  : http://fr.piwigo.org/forum/viewtopic.php?pid=107205#p107205
+|         |            |    SQL request for stat by categories works with mySQL 4.1.22 and not with mySQL 5
+| 2.0.3   | 2008/03/28 | * bug referenced
+|         |            |   french forum  : http://fr.piwigo.org/forum/viewtopic.php?pid=107236#p107236
+|         |            |   SQL request for stat by categories works with mySQL 4.1.22 and not with mySQL 5
+| 2.0.4   | 2009/05/21 | * bug on tools
+|         |            |   it was not possible to use tools to manage deleted items
+| 2.0.5   | 2009/07/07 | * bug in code - invalid character on line 2194
+| 2.1.0   | 2009/07/28 | * add a blacklist for IP and use it for stats
+|         |            | * new tools
+|         |            |    - possibility to purge history on blacklisted IP address
+|         |            |    - use of jQuery datepicker for purge date
+|         |            |
+|         |            |
+|         |            |
+|         |            |
+|         |            |
+|         |            |
+|         |            |
+
+
 
 :: TO DO
 
@@ -54,7 +69,7 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 define('ASTAT_DIR' , basename(dirname(__FILE__)));
 define('ASTAT_PATH' , PHPWG_PLUGINS_PATH . ASTAT_DIR . '/');
 
-define('ASTAT_VERSION' , '2.0.5'); // => ne pas oublier la version dans l'entête !!
+define('ASTAT_VERSION' , '2.1.0'); // => ne pas oublier la version dans l'entête !!
 
 global $prefixeTable;
 

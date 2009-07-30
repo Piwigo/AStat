@@ -19,6 +19,168 @@
     objbar.style.width = objinp.value+'px';
   }
 
+  function isAValidIP(ip, strict)
+  {
+    returnedip=ip;
+    re = /^(\d{1,3}){1}(\.\d{1,3}){0,3}$/i;
+    if(re.test(ip))
+    {
+      num = ip.split('.');
+      for(i=0;i<num.length;i++)
+      {
+        if(num[i]>255) return(false);
+      }
+      if(!strict)
+      {
+        returnedip+="%";
+      }
+      for(j=4-i;j>0;j--)
+      {
+        returnedip+=".%";
+      }
+      return(returnedip);
+    }
+    else
+    {
+      return(false);
+    }
+  }
+
+  function makeOptionsFromList(list, options)
+  {
+    if(list=="")
+    {
+       return(false);
+    }
+
+    items=list.split(",");
+    for(i=0;i<items.length;i++)
+    {
+      opt = document.createElement("option");
+      opt.value=items[i];
+      opt.text=items[i];
+      options.appendChild(opt);
+    }
+  }
+
+  function makeListFromOptions(options)
+  {
+    list="";
+    for(i=0;i<options.length;i++)
+    {
+      (i!=0)?list+=",":"";
+      list+=options[i].value;
+    }
+    return(list);
+  }
+
+  function addIP()
+  {
+    ip=isAValidIP($("#iaddblackip").val(), true);
+
+    if(ip==false) return(false);
+
+    list = $("#iblacklistedip").val()+",";
+    if(list.indexOf(ip+",")==-1)
+    {
+      opt = document.createElement("option");
+      opt.value=ip;
+      opt.text=ip;
+      $("#iblacklistip")[0].appendChild(opt);
+      $("#iblacklistedip").val(makeListFromOptions($("#iblacklistip")[0].options));
+    }
+    $("#iaddblackip").val("");
+    checkButtons();
+  }
+
+  function delIP()
+  {
+    opt = $("#iblacklistip")[0];
+
+    i=0;
+    while(i<opt.options.length)
+    {
+      if(opt.options[i].selected)
+      {
+        opt.removeChild(opt.options[i]);
+      }
+      else
+      {
+        i++;
+      }
+    }
+    $("#iblacklistedip").val(makeListFromOptions(opt.options));
+    checkButtons();
+  }
+
+  function checkButtons()
+  {
+    $("#idelipbutton").attr('disabled', !($("#iblacklistip")[0].selectedIndex!=-1));
+    $("#iaddipbutton").attr('disabled', (isAValidIP($('#iaddblackip').val(),true)==false) );
+  }
+
+  function init()
+  {
+    makeOptionsFromList($("#iblacklistedip").val(), $("#iblacklistip")[0]);
+
+    $("#iaddblackip").bind("keyup focus", getIPList).bind("blur", hideIPList);
+    p = $("#iaddblackip").offset()
+    $("#iplist").css({
+      left:p.left+1,
+      top:p.top+$("#iaddblackip").outerHeight()-1
+    });
+    $("#iblacklistip").bind("change", checkButtons);
+    checkButtons();
+  }
+
+  function getIPList()
+  {
+    /*if($("#iaddblackip").val()=="")
+    {
+      ip="%";
+    }
+    else
+    {
+      ip=isAValidIP($("#iaddblackip").val(),false);
+    }
+    if(ip==false) return(false);*/
+    ip=$("#iaddblackip").val()+"%";
+
+    checkButtons();
+    $("html,input").css({cursor:"progress"});
+    $.get("{/literal}{$datas.ajaxurl}{literal}", {
+        ajaxfct:"astat_listip",
+        ipfilter:ip,
+        exclude:$("#iblacklistedip").val()
+      },
+      function (data)
+      {
+        $("#iplist").html(data).css({visibility:"visible"});
+        $("#iipsellist")
+          .bind("mouseover", function (event) {
+              $("#iaddblackip").unbind("blur");
+          } )
+          .bind("mouseout", function (event) {
+              $("#iaddblackip").bind("blur", hideIPList);
+          } )
+          .bind("blur", hideIPList)
+          .bind("change", function (event) {
+            $("#iaddblackip").val($("#iipsellist").val());
+            $("#iipsellist").trigger("blur").attr("selectedIndex", -1);
+            checkButtons();
+            hideIPList();
+          } ) ;
+        $("html,input").css({cursor:"default"});
+        $("input:text").css({cursor:"text"});
+      }
+    );
+  }
+
+  function hideIPList()
+  {
+    $("#iplist").css({visibility:"hidden"});
+  }
+
 </script>
 {/literal}
 
@@ -111,17 +273,42 @@
     <table class="formtable">
       <tr>
         <td>{'AStat_NbIPPerPages'|@translate}</td>
-        <td><input type="text" name="f_AStat_NpIPPerPages" value="{$datas.f_AStat_NpIPPerPages}" maxlength=4/></td>
+        <td colspan="2"><input type="text" name="f_AStat_NpIPPerPages" value="{$datas.f_AStat_NpIPPerPages}" maxlength=4/></td>
       </tr>
 
       <tr>
         <td>{'AStat_DefaultSortIP'|@translate}</td>
-        <td>
+        <td colspan="2">
           <select name="f_AStat_DefaultSortIP">
             {html_options values=$AStat_defaultsortip_list_values output=$AStat_defaultsortip_list_labels selected=$datas.AStat_defaultsortip_selected}
           </select>
         </td>
       </tr>
+
+      <tr>
+        <td>{'AStat_BlackListedIP'|@translate}</td>
+        <td>
+          <input type="text" size="15" id="iaddblackip" style="width:200px;" autocomplete="off"/>
+          <input type="hidden" id="iblacklistedip" name="f_AStat_BlackListedIP" value="{$datas.f_AStat_BlackListedIP}"/>
+          <div id="iplist"></div>
+        </td>
+        <td>
+          <input type="button" value="{'AStat_AddIP'|@translate}" id="iaddipbutton" onclick="addIP();"/>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>
+         <select multiple size="4" id="iblacklistip" style="width:200px;height:150px;">
+         </select>
+        </td>
+        <td>
+         <input type="button" value="{'AStat_DelIP'|@translate}" id="idelipbutton" onclick="delIP();"/>
+        </td>
+      </tr>
+
+
+
     </table>
   </fieldset>
 
@@ -189,5 +376,7 @@
 
 </form>
 
-
+<script type="text/javascript">
+  init();
+</script>
 

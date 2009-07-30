@@ -109,7 +109,7 @@ $lang['AStat_sortip_picture'] = 'Número de imágenes vistas';
 $lang['AStat_sortip_ip'] = 'Utilizador / Dirección';
 $lang['AStat_sortip_page'] = 'Número de páginas vistas';
 $lang['AStat_RefIPLabel'] = 'Utilizador / Dirección IP';
-$lang['AStat_DefaultSortIP'] = 'Selección por defecto'; 
+$lang['AStat_DefaultSortIP'] = 'Selección por defecto';
 $lang['AStat_general_config'] = 'Configuración general';
 $lang['AStat_SeeTimeRequests'] = 'Ver la duración de ejecución de las demandas';
 $lang['AStat_time_request_label'] = 'Ejecución de la demanda';
@@ -157,22 +157,22 @@ $lang['AStat_tools_deleted_picture_apply'] = 'Efectuar la puesta al día';
 
 $lang['AStat_section_old_deleted_cat'] = 'Antigua categoría que no ha podido ser importada';
 $lang['AStat_tools_general_nfo_nfo'] = "<ul><li>%s acontecimientos están presentes en la reseña histórica</li>
-						<li>La mesa pesa %s (Mesa: %s ; Índice: %s)</li>
-						<li>Data del primer acontecimiento : %s</li>
-						<li>Data del último acontecimiento : %s</li>";
+            <li>La mesa pesa %s (Mesa: %s ; Índice: %s)</li>
+            <li>Data del primer acontecimiento : %s</li>
+            <li>Data del último acontecimiento : %s</li>";
 $lang['AStat_tools_purge_history'] = "Purga de la reseña histórica";
 $lang['AStat_tools_purge_history_nfo'] = "Esta función efectúa sobre la reseña histórica una purga de todos los acontecimientos anteriores a una fecha dada y optimiza la mesa. <br><b>Esta acción irreversible</b>.";
 $lang['AStat_tools_purge_history_apply'] = "Aplicar la purga";
-$lang['AStat_tools_purge_history_date'] = "Purgar los acontecimientos anteriores a (JJ/MM/AAAA) "; 
-$lang['AStat_tools_purge_history_imageid0'] = "Purgar los acontecimientos asociados con imágenes suprimidas  (%s acontecimientos en la reseña histórica)"; 
-$lang['AStat_tools_purge_history_categoryid0'] = "Purger les évènements associés à des catégories supprimées (%s acontecimientos en la reseña histórica)"; 
+$lang['AStat_tools_purge_history_date'] = "Purgar los acontecimientos anteriores a (JJ/MM/AAAA) ";
+$lang['AStat_tools_purge_history_imageid0'] = "Purgar los acontecimientos asociados con imágenes suprimidas (%s acontecimientos en la reseña histórica)";
+$lang['AStat_tools_purge_history_categoryid0'] = "Purgar los acontecimientos asociados con categorías suprimidas (%s acontecimientos en la reseña histórica)";
 $lang['AStat_tools_result_ko'] = "Un error sobrevino, la acción no pudo ser correctamente llevada";
-$lang['AStat_tools_invalid_date'] = "La fecha informada es inválida !"; 
-$lang['AStat_tools_invalid_date2'] = "¡ La fecha informada es superior o igual a la fecha del día!"; 
-$lang['AStat_tools_deleted_picture_error0'] = "La preparación fue suspendido"; 
-$lang['AStat_tools_deleted_picture_error1'] = "El réassocation de los acontecimientos de la reseña histórica fue suspendido"; 
-$lang['AStat_tools_deleted_picture_ok0'] = "La preparación de la mesa tuvo éxito, usted puede proceder a la reorganización de los ficheros sobre el servidor"; 
-$lang['AStat_tools_deleted_picture_ok1'] = "El réassocation de los acontecimientos de la reseña histórica tuvo éxito"; 
+$lang['AStat_tools_invalid_date'] = "La fecha informada es inválida !";
+$lang['AStat_tools_invalid_date2'] = "¡ La fecha informada es superior o igual a la fecha del día!";
+$lang['AStat_tools_deleted_picture_error0'] = "La preparación fue suspendido";
+$lang['AStat_tools_deleted_picture_error1'] = "El réassocation de los acontecimientos de la reseña histórica fue suspendido";
+$lang['AStat_tools_deleted_picture_ok0'] = "La preparación de la mesa tuvo éxito, usted puede proceder a la reorganización de los ficheros sobre el servidor";
+$lang['AStat_tools_deleted_picture_ok1'] = "El réassocation de los acontecimientos de la reseña histórica tuvo éxito";
 
 $lang['AStat_tools_deleted_picture_nfo3'] = "Cuando imágenes son desplazadas físicamente por un repertorio, la sincronización suprime las imágenes de la base y las reinserta con una nueva referencia. Una imagen trasladada deja pues en los acontecimientos de la reseña histórica un rastro con referencias que no existen más.</p><p><i>AStat</i> Permite :<ul><li>de memorizar las referencias de imágenes <u><i>delantera</i></u> De proceder a la sincronización </li><li>de reasociar en los acontecimientos de la reseña histórica las buenas referencias de una imagen <u><i>Después</i></u> haber procedido a una sincronización</li></ul></p><p><b>Atención !</b><br><ul><li> si imágenes diferentes tienen los mismos nombres de ficheros, el resultado es imprevisible</li><li>este carácter funcional no puede tratar las imágenes para las cuales el fichero sobre el servidor fue renomé</li></ul>";
 
@@ -182,7 +182,7 @@ $lang['AStat_tools_deleted_picture_do'] = "Efectuar el tratamiento";
 $lang['AStat_tools_deleted_picture_nfo_nb'] = "(%s identifiants de imágenes pueden ser réassociés a %s acontecimientos de la reseña histórica)";
 
 
-$lang['AStat_tools_deleted_category'] = 'Poner al día en la reseña histórica las referencias de categorías'; 
+$lang['AStat_tools_deleted_category'] = 'Poner al día en la reseña histórica las referencias de categorías';
 $lang['AStat_tools_deleted_category_nfo0'] = "Afecta para los acontecimientos de la reseña histórica référencants categorías que no existen más, la sección <i>Categoría suprimida</i>."; // v1.3.0
 $lang['AStat_tools_deleted_category_nfo1'] = "%s categorías inexistentes son presentes en los acontecimientos de la reseña histórica e impactent %s acontecimientos : <ul>%s</ul>";
 $lang['AStat_tools_deleted_category_nfo2'] = "Todas las categorías presentes en los acontecimientos de la reseña histórica existen. Ninguna acción necesita ser llevada.";
@@ -204,5 +204,10 @@ $lang['AStat_nofilter'] = "--- Ningún filtro ---";
 $lang['AStat_confignotsaved'] = "Un error se produjo, la configuración no ha sido registrada";
 $lang['AStat_gpc2_not_installed'] = "El plugin ' Grum Plugins Classes 2' (version >= %s) es necesario para que AStat pueda estar instalado";
 
-
+//--- >> v2.1.0 >>
+$lang['AStat_BlackListedIP'] = "Lista negra de direcciones IP";
+$lang['AStat_AddIP'] = "Añadir a la lista negra";
+$lang['AStat_DelIP'] = "Eliminar de la lista negra";
+$lang['AStat_tools_purge_history_ipid0'] = "Para purgar los acontecimientos asociados con la IP de la lista negra (%s elementos en la lista negra, %s acontecimientos en la reseña histórica)";
+$lang['AStat_IP_blacklist'] = "Poner en lista negra";
 ?>

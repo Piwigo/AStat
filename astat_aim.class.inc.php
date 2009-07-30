@@ -19,7 +19,7 @@ include_once(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/common_plugin.class.inc.
 include_once(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/css.class.inc.php');
 
 class AStat_AIM extends common_plugin
-{ 
+{
   protected $css = null;
 
   function AStat_AIM($prefixeTable, $filelocation)
@@ -60,7 +60,8 @@ class AStat_AIM extends common_plugin
       'AStat_NbImgPerPages' => '100',
       'AStat_BarColor_Cat' => 'fff966',
       'AStat_DefaultSortIP' => 'page',    //page, ip, picture
-      'AStat_SeeTimeRequests' => 'false'
+      'AStat_SeeTimeRequests' => 'false',
+      'AStat_BlackListedIP' => ''    // ip blacklisted (separator : ",")
       );
 
   }
@@ -95,8 +96,8 @@ class AStat_AIM extends common_plugin
   */
   function generate_CSS()
   {
-    $text = ".AStatBar1, .AStatBar2, .AStatBar3, .AStatBar4, .AStatBarX { 
-      border:0px; 
+    $text = ".AStatBar1, .AStatBar2, .AStatBar3, .AStatBar4, .AStatBarX {
+      border:0px;
       height:8px;
       display: block;
       margin:0px;
@@ -104,8 +105,8 @@ class AStat_AIM extends common_plugin
       left:0;
       position:relative;
       }
-       .MiniSquare1, .MiniSquare2, .MiniSquare3, .MiniSquare4 { 
-      border:0px; 
+       .MiniSquare1, .MiniSquare2, .MiniSquare3, .MiniSquare4 {
+      border:0px;
       height:8px;
       width:8px;
       margin:0px;
@@ -118,10 +119,11 @@ class AStat_AIM extends common_plugin
        .AStatBarX { background-color:transparent; top:-3px; height:1px; }
        .MiniSquare1 { color:#".$this->my_config['AStat_BarColor_Pages'].";   }
        .MiniSquare2 { color:#".$this->my_config['AStat_BarColor_Img'].";  }
-       .MiniSquare3 { color:#".$this->my_config['AStat_BarColor_IP']."; } 
-       .MiniSquare4 { color:#".$this->my_config['AStat_BarColor_Cat']."; } 
+       .MiniSquare3 { color:#".$this->my_config['AStat_BarColor_IP']."; }
+       .MiniSquare4 { color:#".$this->my_config['AStat_BarColor_Cat']."; }
        .StatTableRow:hover { background-color:#".$this->my_config['AStat_MouseOverColor']."; }
-       .formtable, .formtable P { text-align:left; display:block; } 
+       .formtable, .formtable P { text-align:left; display:block; }
+       .formtable tr { vertical-align:top; }
        .window_thumb {
       position:absolute;
       border: none;
@@ -132,12 +134,12 @@ class AStat_AIM extends common_plugin
       padding:0px;
       z-index:100;
       overflow:hidden;
-      visibility:hidden; }  
+      visibility:hidden; }
         .img_thumb {
       border: solid 3px #ffffff;
       background: #000000;
       margin:0px;
-      padding:0px; }  
+      padding:0px; }
         .time_request {
       font-size:83%;
       text-align:right; }
@@ -145,6 +147,9 @@ class AStat_AIM extends common_plugin
       .littlefont { font-size:90%; }
       table.littlefont th { padding:3px; }
       table.littlefont td { padding:0px;padding-left:3px;padding-right:3px; }
+      #iplist { visibility:hidden; position:absolute; width:200px; z-index:1000; }
+      .iipsellistitem { float:right; }
+      #iipsellist { width:100%; font-family:monospace; }
     ";
 
     return($text);

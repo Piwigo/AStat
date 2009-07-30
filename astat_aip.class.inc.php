@@ -16,14 +16,16 @@ if (!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
 
 include_once('astat_aim.class.inc.php');
 include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
+include_once(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/ajax.class.inc.php');
 
 class AStat_AIP extends AStat_AIM
-{ 
-  protected $tabsheet; 
+{
+  protected $tabsheet;
   protected $list_periods = array('global', 'all', 'year', 'month', 'day');
   protected $list_sortcat = array('page', 'picture', 'nbpicture');
   protected $list_sortimg = array('picture', 'catname');
   protected $list_sortip = array('page', 'picture', 'ip');
+  protected $ajax;
 
   protected $catfilter;    //filter on categories
   protected $max_width;
@@ -55,6 +57,8 @@ class AStat_AIP extends AStat_AIM
     $this->tabsheet->add('tools',
                           l10n('AStat_tools'),
                           $this->page_link.'&amp;fAStat_tabsheet=tools');
+
+    $this->ajax = new Ajax();
   }
 
   /*
@@ -77,6 +81,8 @@ class AStat_AIP extends AStat_AIM
   public function manage()
   {
     global $template;
+
+    $this->return_ajax_content();
 
     $template->set_filename('plugin_admin_content', dirname(__FILE__)."/admin/astat_admin.tpl");
 
@@ -101,6 +107,11 @@ class AStat_AIP extends AStat_AIM
     }
     elseif($_REQUEST['fAStat_tabsheet']=='stats_by_ip')
     {
+      if(isset($_REQUEST['fAStat_IP_BL']))
+      {
+        $this->add_ip_to_filter($_REQUEST['fAStat_IP_BL']);
+      }
+
       $this->display_stats_by_ip(
           $_REQUEST['fAStat_year'],
           $_REQUEST['fAStat_month'],
@@ -165,6 +176,36 @@ class AStat_AIP extends AStat_AIM
   /* ---------------------------------------------------------------------------
   Private classe functions
   --------------------------------------------------------------------------- */
+
+  /*
+    return ajax content
+  */
+  protected function return_ajax_content()
+  {
+    global $ajax, $template;
+
+    if(isset($_REQUEST['ajaxfct']))
+    {
+      //$this->debug("AJAXFCT:".$_REQUEST['ajaxfct']);
+      $result="<p class='errors'>An error has occured</p>";
+      switch($_REQUEST['ajaxfct'])
+      {
+        case 'astat_listip':
+          if(!isset($_REQUEST['ipfilter'])) $_REQUEST['ipfilter']="";
+          if(!isset($_REQUEST['exclude'])) $_REQUEST['exclude']="";
+          $result=$this->ajax_listip($_REQUEST['ipfilter'], $_REQUEST['exclude']);
+          break;
+      }
+      //$template->
+      $this->ajax->return_result($result);
+    }
+  }
+
+
+
+
+
+
 
   private function init_request()
   {
@@ -291,14 +332,14 @@ class AStat_AIP extends AStat_AIM
     $sql_groupdef="";
 
     if($day!="")
-    { 
+    {
       $sql_groupdef="HOUR(time) as GId,";
       $sql_select="select HOUR(time) as GId, ";
       $sql_where=" where YEAR(date) = $year and MONTH(date) = $month and DAY(date) = $day ";
       $sql_group=" group by GId ";
       $sql_order=" order by GId asc";
 
-      for($i=0;$i<24;$i++) 
+      for($i=0;$i<24;$i++)
       {
         $returned[$i] = array(
                           "GId" => $i,
@@ -312,8 +353,8 @@ class AStat_AIP extends AStat_AIM
                         );
       }
     }
-    elseif($month!="") 
-    { 
+    elseif($month!="")
+    {
       $sql_groupdef="DAY(date) as GId,";
       $sql_select="select DAY(date) as GId, ";
       $sql_where=" where YEAR(date) = $year and MONTH(date) = $month ";
@@ -322,7 +363,7 @@ class AStat_AIP extends AStat_AIM
 
       $delta = 1;
       $NbDays = strftime('%d', mktime(0,0,0,$month+1,0,$year));
-      for($i=0;$i<$NbDays;$i++) 
+      for($i=0;$i<$NbDays;$i++)
       {
         $returned[$i] = array(
                           "GId" => $i+1,
@@ -336,8 +377,8 @@ class AStat_AIP extends AStat_AIM
                         );
       }
     }
-    elseif($year!="") 
-    { 
+    elseif($year!="")
+    {
       $sql_groupdef="MONTH(date) as GId,";
       $sql_select="select MONTH(date) as GId, ";
       $sql_where=" where YEAR(date) = $year ";
@@ -345,7 +386,7 @@ class AStat_AIP extends AStat_AIM
       $sql_order=" order by GId asc ";
 
       $delta = 1;
-      for($i=0;$i<12;$i++) 
+      for($i=0;$i<12;$i++)
       {
         $returned[$i] = array(
                           "GId" => $i+1,
@@ -359,7 +400,7 @@ class AStat_AIP extends AStat_AIM
                         );
       }
     }
-    elseif($total!="Y") 
+    elseif($total!="Y")
     {
       $sql_groupdef="YEAR(date) as GId,";
       $sql_select="select YEAR(date) as GId, ";
@@ -378,9 +419,15 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
+    if($this->my_config['AStat_BlackListedIP']!="")
+    {
+      ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
+      $sql_where .= " NOT ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+    }
+
     $sql_max=", (select max(n.MaxPages) as MaxPages, max(n.MaxIP) as MaxIP, max(n.MaxImg) as MaxImg
         from (select ".$sql_groupdef." count(id) as MaxPages, count(distinct IP) as MaxIP, count(image_id) as MaxImg
-            from ".HISTORY_TABLE.$sql_where.$sql_group.") as n) as n "; 
+            from ".HISTORY_TABLE.$sql_where.$sql_group.") as n) as n ";
     $sql=$sql_select.$sql.$sql_nfomax.$sql_from.$sql_max.$sql_where.$sql_group.$sql_order;
 
     $result = pwg_query($sql);
@@ -393,7 +440,7 @@ class AStat_AIP extends AStat_AIM
       else
       { $returned[$row["GId"]-$delta] = $row; }
     }
-    
+
     return($returned);
   } //stat by period
 
@@ -422,20 +469,20 @@ class AStat_AIP extends AStat_AIM
     $sql_from = " from ".HISTORY_TABLE." LEFT JOIN ".USERS_TABLE." ON ".HISTORY_TABLE.".user_id = ".USERS_TABLE.".id ";
     $sql_where = "";
     $sql_group=" group by IP_USER ";
-    $sql_order=" order by ".$sortlist[$sortip]." "; 
+    $sql_order=" order by ".$sortlist[$sortip]." ";
     $sql_limit=" limit ".(($pagenumber-1)* $nbipperpage).", ".$nbipperpage;
 
 
-    if($day!="") 
-    { 
+    if($day!="")
+    {
       $sql_where=" where YEAR(date) = $year and MONTH(date) = $month and DAY(date) = $day ";
     }
-    elseif($month!="") 
-    { 
+    elseif($month!="")
+    {
       $sql_where=" where YEAR(date) = $year and MONTH(date) = $month ";
     }
-    elseif($year!="") 
-    { 
+    elseif($year!="")
+    {
       $sql_where=" where YEAR(date) = $year ";
     }
     else
@@ -450,9 +497,15 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
+    if($this->my_config['AStat_BlackListedIP']!="")
+    {
+      ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
+      $sql_where .= " NOT ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+    }
+
     $sql_max=", (select max(n.MaxPages) as MaxPages, max(n.MaxImg) as MaxImg
-        from (select if(".HISTORY_TABLE.".user_id = 2, IP, if(".USERS_TABLE.".username is null, '[".l10n("AStat_deleted_user")."]', ".USERS_TABLE.".username)) as IP_USER, count(".HISTORY_TABLE.".id) as MaxPages, count(image_id) as MaxImg 
-            from ".HISTORY_TABLE." LEFT JOIN ".USERS_TABLE." ON ".HISTORY_TABLE.".user_id = ".USERS_TABLE.".id ".$sql_where.$sql_group.") as n) as n "; 
+        from (select if(".HISTORY_TABLE.".user_id = 2, IP, if(".USERS_TABLE.".username is null, '[".l10n("AStat_deleted_user")."]', ".USERS_TABLE.".username)) as IP_USER, count(".HISTORY_TABLE.".id) as MaxPages, count(image_id) as MaxImg
+            from ".HISTORY_TABLE." LEFT JOIN ".USERS_TABLE." ON ".HISTORY_TABLE.".user_id = ".USERS_TABLE.".id ".$sql_where.$sql_group.") as n) as n ";
     $sql=$sql_select.$sql.$sql_nfomax.$sql_from.$sql_max.$sql_where.$sql_group.$sql_order.$sql_limit;
 
     $result = pwg_query($sql);
@@ -474,7 +527,7 @@ class AStat_AIP extends AStat_AIM
     {
       $returned[1] = -1;
     }
-    
+
     return($returned);
   } //stat by ip
 
@@ -482,7 +535,7 @@ class AStat_AIP extends AStat_AIM
     Stats per categories
       %Pages
       %Images
-      by : 
+      by :
         Categories
         Categories/years
         Categories/years/months
@@ -504,7 +557,7 @@ class AStat_AIP extends AStat_AIM
   count(".HISTORY_TABLE.".image_id) as NbImg, MaxImg.somme, 100*(count(".HISTORY_TABLE.".image_id)/MaxImg.somme) as PctImg, ic2.nb_images as NbImgCat, (count(".HISTORY_TABLE.".image_id)/ic2.nb_images) as RatioImg, greatest(100*(count(".HISTORY_TABLE.".id)/MaxPages.somme), 100*(count(".HISTORY_TABLE.".image_id)/MaxImg.somme)) as MaxPct ";
 
     if($show_thumb=='true')
-    { 
+    {
       $sql_thumb = ', '.IMAGES_TABLE.'.path as ThumbPath, '.IMAGES_TABLE.'.file as ThumbFile, '.IMAGES_TABLE.'.tn_ext as Extension';
       $sql_fromthumb = "LEFT JOIN ".IMAGES_TABLE." ON ic2.representative_picture_id = ".IMAGES_TABLE.".id  ";
     }
@@ -513,27 +566,27 @@ class AStat_AIP extends AStat_AIM
       $sql_thumb = "";
       $sql_fromthumb = "";
     }
-    
+
     $sql_from = " from (".HISTORY_TABLE." LEFT JOIN ".CATEGORIES_TABLE." ON ".CATEGORIES_TABLE.".id = ".HISTORY_TABLE.".category_id),
-(select category_id as catid, count(image_id) as nb_images, representative_picture_id 
+(select category_id as catid, count(image_id) as nb_images, representative_picture_id
  from ".IMAGE_CATEGORY_TABLE.", ".CATEGORIES_TABLE."
  where ".CATEGORIES_TABLE.".id = ".IMAGE_CATEGORY_TABLE.".category_id group by category_id) as ic2 ";
     $sql_where = "";
     $sql_group=" group by category_id, section ";
     $sql_group2="";
-    $sql_order=" order by ".$sortlist[$sortcat]; 
+    $sql_order=" order by ".$sortlist[$sortcat];
     $sql_limit=" limit ".(($pagenumber-1)* $nbipperpage).", ".$nbipperpage;
 
-    if($day!="") 
-    { 
+    if($day!="")
+    {
       $sql_where=" where YEAR(date) = $year and MONTH(date) = $month and DAY(date)= $day ";
     }
-    elseif($month!="") 
-    { 
+    elseif($month!="")
+    {
       $sql_where=" where YEAR(date) = $year and MONTH(date) = $month ";
     }
-    elseif($year!="") 
-    { 
+    elseif($year!="")
+    {
       $sql_where=" where YEAR(date) = $year ";
     }
     else { }
@@ -551,6 +604,10 @@ class AStat_AIP extends AStat_AIM
     ($sql_where=="")?$sql_where=" where ":$sql_where.=" and ";
     $sql_where .= "  ic2.catid = ".HISTORY_TABLE.".category_id ";
 
+    if($this->my_config['AStat_BlackListedIP']!="")
+    {
+      $sql_where .= " AND NOT ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+    }
 
     $sql=$sql_select.$sql.$sql_thumb.$sql_from.$sql_fromthumb.$sql_max.$sql_where.$sql_group.$sql_order.$sql_limit;
 
@@ -573,7 +630,7 @@ class AStat_AIP extends AStat_AIM
     {
       $returned[1] = -1;
     }
-    
+
     return($returned);
   } // stats per categories
 
@@ -581,7 +638,7 @@ class AStat_AIP extends AStat_AIM
     Stats by image
       Num of view per image
       %view on period
-      by : 
+      by :
         Images
         Images/years
         Images/years/months
@@ -604,7 +661,7 @@ class AStat_AIP extends AStat_AIM
         MaxImg.somme, 100*(count(".HISTORY_TABLE.".image_id)/MaxImg.somme) as PctImg,
         ".IMAGES_TABLE.".path as ThumbPath, ".IMAGES_TABLE.".file as ThumbFile,
         MaxImg2.somme as NbVuesMax, ".IMAGES_TABLE.".tn_ext as Extension ";
-    
+
     $sql_from = " from ((".HISTORY_TABLE." LEFT JOIN ".IMAGES_TABLE." ON
   ".IMAGES_TABLE.".id = ".HISTORY_TABLE.".image_id) LEFT JOIN ".CATEGORIES_TABLE."
   ON ".CATEGORIES_TABLE.".id = ".HISTORY_TABLE.".category_id) ";
@@ -612,35 +669,42 @@ class AStat_AIP extends AStat_AIM
 
     $sql_where = " where ".HISTORY_TABLE.".image_id is not null ";
     $sql_group=" group by image_id, category_id ";
-    $sql_order=" order by ".$sortlist[$sortimg]; 
+    $sql_order=" order by ".$sortlist[$sortimg];
     $sql_limit=" limit ".(($pagenumber-1)* $nbipperpage).", ".$nbipperpage;
 
-    if($day!="") 
-    { 
+    if($day!="")
+    {
       $sql_where.=" and YEAR(date) = $year and MONTH(date) = $month and DAY(date)= $day ";
     }
-    elseif($month!="") 
-    { 
+    elseif($month!="")
+    {
       $sql_where.=" and YEAR(date) = $year and MONTH(date) = $month ";
     }
-    elseif($year!="") 
-    { 
+    elseif($year!="")
+    {
       $sql_where.=" and YEAR(date) = $year ";
     }
     else { }
 
     if($ip!="")
-    { 
+    {
       $sql_where.=" and ( ((IP = '$ip') and ( user_id = 2 ))  or (".USERS_TABLE.".username = '$ip') )";
-      $sql_from_ip=" LEFT JOIN ".USERS_TABLE." ON ".USERS_TABLE.".id = ".HISTORY_TABLE.".user_id ";   
+      $sql_from_ip=" LEFT JOIN ".USERS_TABLE." ON ".USERS_TABLE.".id = ".HISTORY_TABLE.".user_id ";
     }
-    
+
     if($this->catfilter!="")
     {
       $catfilter=$this->make_where_clause($this->catfilter);
       ($sql_where=="")?$sql_where=" where ":$sql_where.=" and ";
       $sql_where.=" category_id IN (".$catfilter.")";
     }
+
+    if($this->my_config['AStat_BlackListedIP']!="")
+    {
+      ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
+      $sql_where .= " NOT ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+    }
+
 
     $sql_max=", (select count(image_id) as somme from ".HISTORY_TABLE.$sql_from_ip.$sql_where.") as MaxImg, (select count(image_id) as somme from ".HISTORY_TABLE.$sql_from_ip.$sql_where." and ".HISTORY_TABLE.".image_id is not null group by image_id order by somme desc limit 0,1) as MaxImg2 ";
 
@@ -665,7 +729,7 @@ class AStat_AIP extends AStat_AIM
     {
       $returned[1] = -1;
     }
-    
+
     return($returned);
   } //stat by images
 
@@ -718,31 +782,31 @@ class AStat_AIP extends AStat_AIM
 
 
     /* period label + navigation links */
-    if($day!="") 
-    { 
+    if($day!="")
+    {
       $template_datas["PERIOD_LABEL"] = l10n("AStat_period_label_hours");
       $template_datas["L_STAT_TITLE"] = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$this->format_link($year, $a_links["year"])." / ".$this->format_link(l10n("AStat_month_of_year_".$month), $a_links["month"])." / ".l10n("AStat_day_of_week_".date("w",mktime(0, 0, 0, $month, $day, $year)))." $day";
     }
-    elseif($month!="") 
-    { 
+    elseif($month!="")
+    {
       $template_datas["PERIOD_LABEL"] = l10n("AStat_period_label_days");
       $template_datas["L_STAT_TITLE"] = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$this->format_link($year, $a_links["year"])." / ".l10n("AStat_month_of_year_".$month);
     }
-    elseif($year!="") 
-    { 
+    elseif($year!="")
+    {
       $template_datas["PERIOD_LABEL"] = l10n("AStat_period_label_months");
       $template_datas["L_STAT_TITLE"] = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$year;
     }
-    elseif($total!="Y") 
-    { 
+    elseif($total!="Y")
+    {
       $template_datas["PERIOD_LABEL"] = l10n("AStat_period_label_years");
       $template_datas["L_STAT_TITLE"] = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".l10n("AStat_period_label_all");
     }
-    else 
-    { 
+    else
+    {
       $template_datas["PERIOD_LABEL"] = l10n("AStat_period_label_all");
       $template_datas["L_STAT_TITLE"] = l10n("AStat_period_label_global");
-    } 
+    }
     $template_datas["MAX_WIDTH"] = $max_width+10;
     $template_datas["ASTAT_NFO_STAT"] = l10n("AStat_Nfo_Period");
 
@@ -762,14 +826,14 @@ class AStat_AIP extends AStat_AIM
         $width_cat = ceil(($stats[$i]["NbCat"] * $max_width) / $stats[$i]["MaxPages"] );
       }
       else
-      { 
-        $width_pages = 0; 
+      {
+        $width_pages = 0;
         $width_img = 0;
         $width_ip = 0;
         $width_cat = 0;
       }
 
-    
+
       if($day!="")
       { // si jours sÃ©lectionnÃ©, heures affichÃ©es
         $value=$stats[$i]["GId"];
@@ -786,7 +850,7 @@ class AStat_AIP extends AStat_AIM
         $value_cat=$cat_links["day"].$stats[$i]["GId"];
         $value_img=$img_links["day"].$stats[$i]["GId"];
       }
-      elseif($year!="") 
+      elseif($year!="")
       { // si annÃ©e sÃ©lectionnÃ©e, mois affichÃ©s
         $value = l10n("AStat_month_of_year_".$stats[$i]["GId"]);
         $link=$this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=".$stats[$i]["GId"];
@@ -802,9 +866,9 @@ class AStat_AIP extends AStat_AIM
         $value_cat=$cat_links["year"].$stats[$i]["GId"];
         $value_img=$img_links["year"].$stats[$i]["GId"];
       }
-      else 
-      { 
-        $value=l10n("AStat_period_label_all"); 
+      else
+      {
+        $value=l10n("AStat_period_label_all");
         $link=$this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N";
         $value_ip=$ip_links["all"];
         $value_cat=$cat_links["all"];
@@ -896,44 +960,44 @@ class AStat_AIP extends AStat_AIM
 
 
     /* periode label + navigation links */
-    if($day!="") 
-    { 
+    if($day!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$this->format_link($year, $a_links["year"])." / ".$this->format_link(l10n("AStat_month_of_year_".$month), $a_links["month"])." / ".l10n("AStat_day_of_week_".date("w",mktime(0, 0, 0, $month, $day, $year)))." $day";
       $page_link=$ip_links["day"];
       $img_link=$img_links["day"];
     }
-    elseif($month!="") 
-    { 
+    elseif($month!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$this->format_link($year, $a_links["year"])." / ".l10n("AStat_month_of_year_".$month);
       $page_link=$ip_links["month"];
       $img_link=$img_links["month"];
     }
-    elseif($year!="") 
-    { 
+    elseif($year!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$year;
       $page_link=$ip_links["year"];
       $img_link=$img_links["year"];
     }
-    else 
-    { 
+    else
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".l10n("AStat_period_label_all");
       $page_link=$ip_links["all"];
       $img_link=$img_links["all"];
     }
-    
+
 
     if($nbpages>1) { $plural="s"; } else { $plural=""; }
     $pages_links=l10n("AStat_page".$plural."_label")." : ";
     for($i=1;$i<=$nbpages;$i++)
     {
-      if($i==$pagenumber) 
-      { $pages_links.=" $i "; } 
+      if($i==$pagenumber)
+      { $pages_links.=" $i "; }
       else
       {
         $pages_links.=$this->format_link(" $i ", $page_link."&amp;fAStat_page_number=$i&amp;fAStat_SortIP=$sortip");
       }
     }
-    
+
     $template_datas["L_STAT_TITLE"] = $dir_links;
     $template_datas["MAX_WIDTH"]=$max_width+10;
     $template_datas["NB_TOTAL_IP"] = l10n('AStat_nb_total_ip')." : $nbfoundrows";
@@ -954,13 +1018,13 @@ class AStat_AIP extends AStat_AIM
     for($i=0;$i<count($stats);$i++)
     {
         if($stats[$i]["MaxPages"] > 0)
-      { 
-        $width_pages = ceil(($stats[$i]["NbPages"] * $max_width) / $stats[$i]["MaxPages"] ); 
+      {
+        $width_pages = ceil(($stats[$i]["NbPages"] * $max_width) / $stats[$i]["MaxPages"] );
         $width_img = ceil(($stats[$i]["NbImg"] * $max_width) / $stats[$i]["MaxPages"] );
       }
       else
-      { 
-        $width_pages = 0; 
+      {
+        $width_pages = 0;
         $width_img = 0;
       }
 
@@ -969,15 +1033,31 @@ class AStat_AIP extends AStat_AIM
       {
         $ip_geolocalisation='<a href="http://www.geoiptool.com/fr/?IP='.$stats[$i]["IP_USER"].'" title="Geo IP localisation" target="_blank">['.l10n('AStat_IP_geolocalisation').'] </a>';
         $ip_adress='<a href="http://www.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext='.$stats[$i]["IP_USER"].'+&amp;do_search=Search" title="Ripe Whois" target="_blank">'.$stats[$i]["IP_USER"].'</a>';
+        $ip_blacklist=$page_link."&amp;fAStat_IP_BL=".$stats[$i]["IP_USER"];
+
+        if($pagenumber>1)
+        {
+          $ip_blacklist.="&amp;fAStat_page_number=$pagenumber";
+        }
+
+        if($sortip!="page")
+        {
+          $ip_blacklist.="&amp;fAStat_SortIP=$sortip";
+        }
+
+        $ip_blacklist=$this->format_link("[".l10n('AStat_IP_blacklist')."]", $ip_blacklist);
       }
-      else 
+      else
       {
         $ip_geolocalisation='';
         $ip_adress=$stats[$i]["IP_USER"];
+        $ip_blacklist='';
       }
 
 
+
       $template_datarows[]=array(
+        'ASTAT_IP_BLACKLIST' => $ip_blacklist,
         'ASTAT_IP_GEOLOCALISATION' => $ip_geolocalisation,
         'ASTAT_IP_ADRESS' => $ip_adress,
         'PAGES' => $stats[$i]["NbPages"],
@@ -1029,27 +1109,27 @@ class AStat_AIP extends AStat_AIM
         "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
     /* make navigation links */
-    if($day!="") 
-    { 
+    if($day!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$this->format_link($year, $a_links["year"])." / ".$this->format_link(l10n("AStat_month_of_year_".$month), $a_links["month"])." / ".l10n("AStat_day_of_week_".date("w",mktime(0, 0, 0, $month, $day, $year)))." $day";
       $page_link=$cat_links["day"];
     }
-    elseif($month!="") 
-    { 
+    elseif($month!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$this->format_link($year, $a_links["year"])." / ".l10n("AStat_month_of_year_".$month);
       $page_link=$cat_links["month"];
     }
-    elseif($year!="") 
-    { 
+    elseif($year!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$year;
       $page_link=$cat_links["year"];
     }
-    else 
-    { 
+    else
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".l10n("AStat_period_label_all");
       $page_link=$cat_links["all"];
     }
-    
+
 
     if($nbpages>1)
     {
@@ -1063,7 +1143,7 @@ class AStat_AIP extends AStat_AIM
     $pages_links=l10n("AStat_page".$plural."_label")." : ";
     for($i=1;$i<=$nbpages;$i++)
     {
-      if($i==$pagenumber) 
+      if($i==$pagenumber)
       {
         $pages_links.=" $i ";
       }
@@ -1095,9 +1175,9 @@ class AStat_AIP extends AStat_AIM
     {
       $width_pages = ceil(($stats[$i]["PctPages"] * $max_width)/100);
       $width_img = ceil(($stats[$i]["PctImg"] * $max_width)/100 );
-      
+
       if($showthumb=='true')
-      { 
+      {
         $filethumb=$this->change_file_ext($stats[$i]["ThumbFile"], $stats[$i]["Extension"]);
         $filethumb=str_replace($stats[$i]["ThumbFile"],"thumbnail/".$conf['prefix_thumbnail'].$filethumb,$stats[$i]["ThumbPath"]); }
       else
@@ -1108,7 +1188,7 @@ class AStat_AIP extends AStat_AIM
       if($stats[$i]["category_id"]>0)
       { $category = $this->format_link($stats[$i]["IdCat"], PHPWG_ROOT_PATH."index.php?/category/".$stats[$i]["category_id"]); }
       else
-      { 
+      {
         $category = "<i>".l10n('AStat_section_label').' : ';
         if(l10n('AStat_section_'.$stats[$i]["IdCat"])!='AStat_section_'.$stats[$i]["IdCat"])
         {
@@ -1141,7 +1221,7 @@ class AStat_AIP extends AStat_AIM
 
 
   /* ------------------------------------------------------------------------------------------
-      display stats for images 
+      display stats for images
       ------------------------------------------------------------------------------------------ */
   function display_stats_by_image($year, $month, $day, $max_width, $nbipperpage, $pagenumber,$showthumb, $sortimg, $ip, $seetimerequest)
   {
@@ -1175,23 +1255,23 @@ class AStat_AIP extends AStat_AIM
         "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
     /* navigation links */
-    if($day!="") 
-    { 
+    if($day!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$this->format_link($year, $a_links["year"])." / ".$this->format_link(l10n("AStat_month_of_year_".$month), $a_links["month"])." / ".l10n("AStat_day_of_week_".date("w",mktime(0, 0, 0, $month, $day, $year)))." $day";
       $page_link=$img_links["day"];
     }
-    elseif($month!="") 
-    { 
+    elseif($month!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$this->format_link($year, $a_links["year"])." / ".l10n("AStat_month_of_year_".$month);
       $page_link=$img_links["month"];
     }
-    elseif($year!="") 
-    { 
+    elseif($year!="")
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".$this->format_link(l10n("AStat_period_label_all"), $a_links["all"])." / ".$year;
       $page_link=$img_links["year"];
     }
-    else 
-    { 
+    else
+    {
       $dir_links = $this->format_link(l10n("AStat_period_label_global"), $a_links["global"])." / ".l10n("AStat_period_label_all");
       $page_link=$img_links["all"];
     }
@@ -1200,14 +1280,14 @@ class AStat_AIP extends AStat_AIM
     {
       $dir_links.= " [IP : $ip]";
     }
-    
+
 
     if($nbpages>1) { $plural="s"; } else { $plural=""; }
     $pages_links=l10n("AStat_page".$plural."_label")." : ";
     for($i=1;$i<=$nbpages;$i++)
     {
-      if($i==$pagenumber) 
-      { $pages_links.=" $i "; } 
+      if($i==$pagenumber)
+      { $pages_links.=" $i "; }
       else
       {
         if($ip!="") { $ip_link="&amp;fAStat_IP=$ip"; } else { $ip_link=""; }
@@ -1235,13 +1315,13 @@ class AStat_AIP extends AStat_AIM
 
     for($i=0;$i<count($stats);$i++)
     {
-      $width_pages = ceil(($stats[$i]["NbVues"] * $max_width)/$stats[$i]["NbVuesMax"] ); 
+      $width_pages = ceil(($stats[$i]["NbVues"] * $max_width)/$stats[$i]["NbVuesMax"] );
       $width_img = ceil(($stats[$i]["PctImg"] * $max_width)/100 );
-      
+
       if($showthumb=='true')
       {
         $filethumb=$this->change_file_ext($stats[$i]["ThumbFile"], $stats[$i]["Extension"]);
-        $filethumb=str_replace($stats[$i]["ThumbFile"],"thumbnail/".$conf['prefix_thumbnail'].$filethumb,$stats[$i]["ThumbPath"]); 
+        $filethumb=str_replace($stats[$i]["ThumbFile"],"thumbnail/".$conf['prefix_thumbnail'].$filethumb,$stats[$i]["ThumbPath"]);
       }
       else
       {
@@ -1257,7 +1337,7 @@ class AStat_AIP extends AStat_AIM
           $image_links.=$this->format_link($stats[$i]["ImgName"], PHPWG_ROOT_PATH."picture.php?/".$stats[$i]["ImgId"]."/category/".$stats[$i]["IdCat"]);
         }
         else
-        { 
+        {
           if($stats[$i]["ThumbFile"]!="")
           {
             $image_links.=$this->format_link("[ ".$stats[$i]["ThumbFile"]." ]", PHPWG_ROOT_PATH."picture.php?/".$stats[$i]["ImgId"]."/category/".$stats[$i]["IdCat"]);
@@ -1269,7 +1349,7 @@ class AStat_AIP extends AStat_AIM
         }
       }
       else
-      { 
+      {
         $image_links = "<i>".l10n('AStat_section_label').' : ';
         if(l10n('AStat_section_'.$stats[$i]["CatName"])!='AStat_section_'.$stats[$i]["CatName"])
         {
@@ -1280,14 +1360,14 @@ class AStat_AIP extends AStat_AIM
           $image_links.=sprintf(l10n('AStat_section_unknown'), $stats[$i]["CatName"]);
         }
 
-        $image_links.="</i> / "; 
+        $image_links.="</i> / ";
 
         if($stats[$i]["ImgName"]!="")
         {
           $image_links.=$stats[$i]["ImgName"];
         }
         else
-        { 
+        {
           if($stats[$i]["ThumbFile"]!="")
           {
             $image_links.="[ ".$stats[$i]["ThumbFile"]." ]";
@@ -1319,6 +1399,16 @@ class AStat_AIP extends AStat_AIM
 
 
 
+  private function add_ip_to_filter($ip)
+  {
+    if(strpos($this->my_config['AStat_BlackListedIP'].",", $ip.",")===false)
+    {
+      ($this->my_config['AStat_BlackListedIP']!='')?$this->my_config['AStat_BlackListedIP'].=",":"";
+      $this->my_config['AStat_BlackListedIP'].=$ip;
+      $this->save_config();
+    }
+  }
+
 
   /*
     display config page
@@ -1329,12 +1419,12 @@ class AStat_AIP extends AStat_AIM
 
     $save_status=false;
 
-    if(isset($_POST['submit'])) 
+    if(isset($_POST['submit']))
     {
       if(!is_adviser())
       {
-        reset($this->my_config); 
-        while (list($key, $val) = each($this->my_config)) 
+        reset($this->my_config);
+        while (list($key, $val) = each($this->my_config))
         {
           if(isset($_POST['f_'.$key]))
           {
@@ -1363,11 +1453,14 @@ class AStat_AIP extends AStat_AIM
     $template_list_labels=array();
 
     //standards inputs zones
-    reset($this->my_config); 
-    while (list($key, $val) = each($this->my_config)) 
+    reset($this->my_config);
+    while (list($key, $val) = each($this->my_config))
     {
       $template_datas["f_".$key]=$val;
     }
+
+    //
+    $template_datas['ajaxurl']=$this->page_link;
 
     // define selected item for lists zones
     $template_datas['AStat_periods_selected']=$this->my_config['AStat_default_period'];
@@ -1394,8 +1487,8 @@ class AStat_AIP extends AStat_AIM
       $template_list_labels['sortcat'][]=l10n('AStat_sortcat_'.$val);
     }
     // default ip order
-    reset($this->list_sortip); 
-    while (list($key, $val) = each($this->list_sortip)) 
+    reset($this->list_sortip);
+    while (list($key, $val) = each($this->list_sortip))
     {
       $template_list_values['sortip'][]=$val;
       $template_list_labels['sortip'][]=l10n('AStat_sortip_'.$val);
@@ -1433,7 +1526,7 @@ class AStat_AIP extends AStat_AIM
 
 
 
-  /* 
+  /*
     display tools page
   */
   private function display_tools()
@@ -1447,14 +1540,14 @@ class AStat_AIP extends AStat_AIM
     $template_datas=array();
 
     // >> PURGE HISTORY --------------------------------------------------------
-    if(isset($_POST['apply_tool_purge_history'])) 
+    if(isset($_POST['apply_tool_purge_history']))
     {
       if(!is_adviser())
       {
-        $action_result['action']='AStat_tools_purge_history';     
-        $action_result['result']='false';     
+        $action_result['action']='AStat_tools_purge_history';
+        $action_result['result']='false';
         $action_result['msg']='AStat_tools_result_ko';
-        
+
         $ok_to_purge=true;
         if($_REQUEST['fAStat_purge_history_type']=='bydate')
         {
@@ -1465,27 +1558,31 @@ class AStat_AIP extends AStat_AIM
           if(!isset($date[2])) { $date[2]=0; }
 
           $purge_date=mktime(0,0,0,$date[1],$date[0],$date[2]);
-          $fdate=date("Y-m-d", mktime(0,0,0,$date[1],$date[0],$date[2]));
+          $fparam=date("Y-m-d", mktime(0,0,0,$date[1],$date[0],$date[2]));
 
           if(date("d/m/Y", $purge_date)!=$_REQUEST['fAStat_purge_history_date'])
-          {     
-            $action_result['nfo']='AStat_tools_invalid_date';     
+          {
+            $action_result['nfo']='AStat_tools_invalid_date';
             $ok_to_purge=false;
           }
           elseif(date("Ymd", $purge_date)>=date("Ymd"))
           {
-            $action_result['nfo']='AStat_tools_invalid_date2';      
+            $action_result['nfo']='AStat_tools_invalid_date2';
             $ok_to_purge=false;
           }
         }
+        elseif($_REQUEST['fAStat_purge_history_type']=='byipid0')
+        {
+          $fparam=$this->my_config['AStat_BlackListedIP'];
+        }
         else
         {
-          $fdate="";
+          $fparam="";
         }
 
         if($ok_to_purge)
         {
-          $result=$this->do_purge_history( $fdate, $_REQUEST['fAStat_purge_history_type']);
+          $result=$this->do_purge_history( $fparam, $_REQUEST['fAStat_purge_history_type']);
           if($result)
           {
             $action_result['result']='true';
@@ -1541,7 +1638,7 @@ class AStat_AIP extends AStat_AIM
         array_push($page['errors'], l10n('AStat_adviser_not_authorized'));
       }
     }
-    // 
+    //
     elseif(isset($_POST['apply_tool_deleted_picture']))
     {
       if(!is_adviser())
@@ -1565,7 +1662,7 @@ class AStat_AIP extends AStat_AIM
     // << DELETED_PICTURE ------------------------------------------------------
 
     // >> DELETED_CATEGORY -----------------------------------------------------
-    elseif(isset($_POST['apply_tool_deleted_category'])) 
+    elseif(isset($_POST['apply_tool_deleted_category']))
     {
       if(!is_adviser())
       {
@@ -1586,9 +1683,9 @@ class AStat_AIP extends AStat_AIM
       }
     }
     // << DELETED_CATEGORY -----------------------------------------------------
-      
+
     // >> DELETED USER ---------------------------------------------------------
-    elseif(isset($_POST['apply_tool_deleted_user'])) 
+    elseif(isset($_POST['apply_tool_deleted_user']))
     {
       if(!is_adviser())
       {
@@ -1614,12 +1711,12 @@ class AStat_AIP extends AStat_AIM
     // >> DISPLAY DELETED_PICTURE NFO ------------------------------------------
     $table_exists=$this->verify_AStat_picture_table_status();
     if($table_exists==true)
-    { 
+    {
       $template_datas["ASTAT_DELETED_PICTURE_DO_ACTION"] = "checked";
       $template_datas["ASTAT_DELETED_PICTURE_PREPARE"] = "disabled";
     }
     else
-    { 
+    {
       $template_datas["ASTAT_DELETED_PICTURE_PREPARE"]="checked";
       $template_datas["ASTAT_DELETED_PICTURE_DO_ACTION"]="disabled";
     }
@@ -1631,10 +1728,10 @@ class AStat_AIP extends AStat_AIM
     if($nfo[0]>0)
     {
       $list='';
-      for($i=0;$i<count($nfo[2]);$i++) 
-      { 
+      for($i=0;$i<count($nfo[2]);$i++)
+      {
         if($nfo[2][$i][0]>1) { $s='s'; } else { $s=''; }
-        $list.="<li>image_id #".$nfo[2][$i][1]." : ".$nfo[2][$i][0]." ".l10n("AStat_event$s")."</li>"; 
+        $list.="<li>image_id #".$nfo[2][$i][1]." : ".$nfo[2][$i][0]." ".l10n("AStat_event$s")."</li>";
       }
       $template_datas["ASTAT_DELETED_PICTURE_NFO"] = sprintf(l10n('AStat_tools_deleted_picture_nfo1'), $nfo[0], $nfo[1], $list);
       //function not yet implemented
@@ -1643,7 +1740,7 @@ class AStat_AIP extends AStat_AIM
     else
     {
       $template_datas["ASTAT_DELETED_PICTURE_NFO"] = l10n('AStat_tools_deleted_picture_nfo2');
-    } 
+    }
     // << DISPLAY DELETED_PICTURE NFO ------------------------------------------
 
     // >> DISPLAY DELETED_CATEGORY NFO -----------------------------------------
@@ -1671,10 +1768,10 @@ class AStat_AIP extends AStat_AIM
     if($nfo[0]>0)
     {
       $list='';
-      for($i=0;$i<count($nfo[2]);$i++) 
-      { 
+      for($i=0;$i<count($nfo[2]);$i++)
+      {
         if($nfo[2][$i][0]>1) { $s='s'; } else { $s=''; }
-        $list.="<li>user_id #".$nfo[2][$i][1]." : ".$nfo[2][$i][0]." ".l10n("AStat_event$s")."</li>"; 
+        $list.="<li>user_id #".$nfo[2][$i][1]." : ".$nfo[2][$i][0]." ".l10n("AStat_event$s")."</li>";
       }
       $template_datas["ASTAT_DELETED_USER_NFO"] = sprintf(l10n('AStat_tools_deleted_user_nfo1'), $nfo[0], $nfo[1], $list);
       $template_datas['AStat_deleted_user_submit'] = 'yes';
@@ -1682,7 +1779,7 @@ class AStat_AIP extends AStat_AIM
     else
     {
       $template_datas["ASTAT_DELETED_USER_NFO"] = l10n('AStat_tools_deleted_user_nfo2');
-    } 
+    }
     // << DISPLAY DELETED USER NFO ---------------------------------------------
 
 
@@ -1691,25 +1788,32 @@ class AStat_AIP extends AStat_AIM
     if($nfo[0]>0)
     {
       $template_datas["ASTAT_GENERAL_NFO"] = sprintf(l10n('AStat_tools_general_nfo_nfo'),
-              $nfo[0], 
+              $nfo[0],
               $this->formatoctet($nfo[3]+$nfo[4], "A", " ", 2, true),
               $this->formatoctet($nfo[3], "A", " ", 2, true),
               $this->formatoctet($nfo[4], "A", " ", 2, true),
-              date(l10n('AStat_date_time_format'), strtotime($nfo[2])), 
+              date(l10n('AStat_date_time_format'), strtotime($nfo[2])),
               date(l10n('AStat_date_time_format'), strtotime($nfo[1])) );
+      $template_datas["ASTAT_MINDATE"]=date("m/d/Y",strtotime($nfo[2]));
     }
 
     $nfo=$this->purge_history_count_imageid0();
     $template_datas["ASTAT_PURGE_HISTORY_IMAGE_NFO"] = sprintf(l10n('AStat_tools_purge_history_imageid0'), $nfo);
-    if($nfo==0) 
-    { 
+    if($nfo==0)
+    {
       $template_datas["ASTAT_PURGE_HISTORY_IMAGE_DISABLED"] = " disabled ";
     }
     $nfo=$this->purge_history_count_categoryid0();
     $template_datas["ASTAT_PURGE_HISTORY_CATEGORY_NFO"] = sprintf(l10n('AStat_tools_purge_history_categoryid0'), $nfo);
-    if($nfo==0) 
-    { 
+    if($nfo==0)
+    {
       $template_datas["ASTAT_PURGE_HISTORY_CATEGORY_DISABLED"] = " disabled ";
+    }
+    $nfo=$this->purge_history_count_ipid0();
+    $template_datas["ASTAT_PURGE_HISTORY_IP_NFO"] = sprintf(l10n('AStat_tools_purge_history_ipid0'), $nfo[1], $nfo[0]);
+    if($nfo[0]==0)
+    {
+      $template_datas["ASTAT_PURGE_HISTORY_IP_DISABLED"] = " disabled ";
     }
     // << GENERAL NFO ----------------------------------------------------------
 
@@ -1751,9 +1855,9 @@ class AStat_AIP extends AStat_AIM
     tools : deleted_user
     allow to force HISTORY_TABLE.user_id at  2 (guest) for records with user ident
     doesn't exist anymore in the USERS_TABLE
-    
+
     Two usages :
-      - analyse : return infos about records wich need to be updated 
+      - analyse : return infos about records wich need to be updated
           * number of users
           * number of records in HISTORY_TABLE
           * the users list
@@ -1762,7 +1866,7 @@ class AStat_AIP extends AStat_AIM
   private function tools_deleted_user($mode)
   {
     $returned = array(-1,0,'');
-    
+
     if($mode=='analyse')
     {
       $sql="SELECT count(id) as NbRecord, user_id ";
@@ -1780,7 +1884,7 @@ class AStat_AIP extends AStat_AIM
           $returned[0]++;
           $returned[1]+=$row[0];
         }
-        
+
       }
     }
     elseif($mode=='resynchro')
@@ -1796,7 +1900,7 @@ class AStat_AIP extends AStat_AIM
 
 
   /*
-    tools : deleted_picture 
+    tools : deleted_picture
     analyse history to find deleted pictures
     Two functions :
       - analyse : return infos
@@ -1808,7 +1912,7 @@ class AStat_AIP extends AStat_AIM
   private function tools_deleted_picture($mode)
   {
     $returned = array(-1,0,'');
-    
+
     if($mode=='analyse')
     {
       $sql="SELECT count(id) as NbRecord, image_id ";
@@ -1827,14 +1931,14 @@ class AStat_AIP extends AStat_AIM
           $returned[0]++;
           $returned[1]+=$row[0];
         }
-        
+
       }
     }
     elseif($mode=='to0')
     {
       $sql="UPDATE ".HISTORY_TABLE."
-        SET image_id = 0 
-        WHERE ".HISTORY_TABLE.".image_id > 0 
+        SET image_id = 0
+        WHERE ".HISTORY_TABLE.".image_id > 0
           AND ".HISTORY_TABLE.".image_id NOT IN (SELECT id FROM ".IMAGES_TABLE.")";
       $result=pwg_query($sql);
 
@@ -1860,7 +1964,7 @@ class AStat_AIP extends AStat_AIM
   private function tools_deleted_category($mode)
   {
     $returned = array(-1,0,'');
-    
+
     if($mode=='analyse')
     {
       $sql="SELECT count(id) as NbRecord, category_id ";
@@ -1879,14 +1983,14 @@ class AStat_AIP extends AStat_AIM
           $returned[0]++;
           $returned[1]+=$row[0];
         }
-        
+
       }
     }
     elseif($mode=='to0')
     {
       $sql="UPDATE ".HISTORY_TABLE."
-        SET category_id = NULL, section = 'deleted_cat'  
-        WHERE ".HISTORY_TABLE.".category_id > 0 
+        SET category_id = NULL, section = 'deleted_cat'
+        WHERE ".HISTORY_TABLE.".category_id > 0
           AND ".HISTORY_TABLE.".category_id NOT IN (SELECT id FROM ".CATEGORIES_TABLE.")";
       $result=pwg_query($sql);
 
@@ -1900,7 +2004,7 @@ class AStat_AIP extends AStat_AIM
 
 
   /*
-    tools : general_nfo 
+    tools : general_nfo
     return infos about historic
       0 : nulber of records
       1 : date of newest record
@@ -1911,16 +2015,16 @@ class AStat_AIP extends AStat_AIM
   private function tools_general_nfo()
   {
     $returned = array(-1,'','',0,0);
-  
+
     $sql="SELECT count(id) AS NbRecord, MAX(concat(date,' ', time)) AS LastDate, MIN(concat(date,' ', time)) AS FirstDate ";
     $sql.=" FROM ".HISTORY_TABLE;
     $result=pwg_query($sql);
     if($result)
     {
       $row = mysql_fetch_array($result);
-      if(is_array($row)) 
-      { 
-        $returned = $row; 
+      if(is_array($row))
+      {
+        $returned = $row;
         $sql="SHOW TABLE STATUS LIKE '".HISTORY_TABLE."';";
         $result=pwg_query($sql);
         if($result)
@@ -1935,16 +2039,16 @@ class AStat_AIP extends AStat_AIM
 
 
   /*
-    tools : do_purge_history 
+    tools : do_purge_history
     do a purge of history table :
     - $purgetype='bydate' : purge all record wich date is less than given date
     - $purgetype='byimageid0' : with and image_id = 0
   ------------------------------------------------------------------------------------ */
-  private function do_purge_history($date, $purgetype)
+  private function do_purge_history($param, $purgetype)
   {
     if($purgetype=='bydate')
     {
-      $sql="DELETE FROM ".HISTORY_TABLE." WHERE date < '$date'";
+      $sql="DELETE FROM ".HISTORY_TABLE." WHERE date < '$param'";
     }
     elseif($purgetype=='byimageid0')
     {
@@ -1954,8 +2058,12 @@ class AStat_AIP extends AStat_AIM
     {
       $sql="DELETE FROM ".HISTORY_TABLE." WHERE category_id is null and section='deleted_cat'";
     }
-    else 
-    { 
+    elseif($purgetype=='byipid0')
+    {
+      $sql="DELETE FROM ".HISTORY_TABLE." WHERE ".$this->make_IP_where_clause($param);
+    }
+    else
+    {
       return(false);
     }
 
@@ -1964,7 +2072,7 @@ class AStat_AIP extends AStat_AIM
     {
       $sql="OPTIMIZE TABLE ".HISTORY_TABLE;
       $result=pwg_query($sql);
-      return($result);    
+      return($result);
     }
     return(false);
   }
@@ -1993,11 +2101,39 @@ class AStat_AIP extends AStat_AIM
     return(0);
   }
 
+  private function purge_history_count_ipid0()
+  {
+    if($this->my_config['AStat_BlackListedIP']!="")
+    {
+      $list=explode(',', $this->my_config['AStat_BlackListedIP']);
+    }
+    else
+    {
+      $list=array();
+    }
+
+    $returned=array(0,count($list));
+
+    if($this->my_config['AStat_BlackListedIP']!='')
+    {
+      $sql="SELECT COUNT(id)
+            FROM ".HISTORY_TABLE."
+            WHERE ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      $result=pwg_query($sql);
+      if($result)
+      {
+        $row=mysql_fetch_array($result);
+        $returned[0]=$row[0];
+      }
+    }
+    return($returned);
+  }
+
 
   /*
-    tools : deleted_picture 
-    > verify_AStat_picture_table_status : 
-    > prepare_AStat_picture_table : 
+    tools : deleted_picture
+    > verify_AStat_picture_table_status :
+    > prepare_AStat_picture_table :
   */
   private function verify_AStat_picture_table_status()
   {
@@ -2019,14 +2155,14 @@ class AStat_AIP extends AStat_AIM
   {
     global $prefixeTable;
 
-    $sql="CREATE TABLE ".$prefixeTable."AStat_picture (PRIMARY KEY (id), KEY ifile(file)) 
-      SELECT id, file 
+    $sql="CREATE TABLE ".$prefixeTable."AStat_picture (PRIMARY KEY (id), KEY ifile(file))
+      SELECT id, file
       FROM ".IMAGES_TABLE;
     $result=pwg_query($sql);
     if($result)
     {
       return(true);
-    } 
+    }
     return(false);
   }
 
@@ -2034,12 +2170,12 @@ class AStat_AIP extends AStat_AIM
   {
     global $prefixeTable;
     $returned=array(false,0,0);
-    
+
     if($this->verify_AStat_picture_table_status())
     {
       $sql="SELECT count(DISTINCT ".$prefixeTable."AStat_picture.id), count(".HISTORY_TABLE.".id)
-        FROM ".HISTORY_TABLE.", ".$prefixeTable."AStat_picture 
-        WHERE ".HISTORY_TABLE.".image_id = ".$prefixeTable."AStat_picture.id 
+        FROM ".HISTORY_TABLE.", ".$prefixeTable."AStat_picture
+        WHERE ".HISTORY_TABLE.".image_id = ".$prefixeTable."AStat_picture.id
         AND ".HISTORY_TABLE.".image_id NOT IN (SELECT id FROM ".IMAGES_TABLE.")
         ORDER BY ".$prefixeTable."AStat_picture.id";
       $result=pwg_query($sql);
@@ -2063,10 +2199,10 @@ class AStat_AIP extends AStat_AIM
     $returned=false;
 
     $sql="CREATE TABLE ".$prefixeTable."AStat_picture2 (PRIMARY KEY (OldId))
-      SELECT AStat_tmp.id as OldId , ".IMAGES_TABLE.".id as NewId, ".IMAGES_TABLE.".storage_category_id as NewCatId 
+      SELECT AStat_tmp.id as OldId , ".IMAGES_TABLE.".id as NewId, ".IMAGES_TABLE.".storage_category_id as NewCatId
       FROM (SELECT DISTINCT ".$prefixeTable."AStat_picture.*
-        FROM ".HISTORY_TABLE.", ".$prefixeTable."AStat_picture 
-        WHERE ".HISTORY_TABLE.".image_id = ".$prefixeTable."AStat_picture.id 
+        FROM ".HISTORY_TABLE.", ".$prefixeTable."AStat_picture
+        WHERE ".HISTORY_TABLE.".image_id = ".$prefixeTable."AStat_picture.id
         AND ".HISTORY_TABLE.".image_id NOT IN (SELECT id FROM ".IMAGES_TABLE.")
         ORDER BY ".$prefixeTable."AStat_picture.id
       ) as AStat_tmp
@@ -2076,7 +2212,7 @@ class AStat_AIP extends AStat_AIM
     {
       $sql="UPDATE ".HISTORY_TABLE.", ".$prefixeTable."AStat_picture2, ".IMAGES_TABLE."
         SET ".HISTORY_TABLE.".image_id = ".$prefixeTable."AStat_picture2.NewId,
-            ".HISTORY_TABLE.".category_id = ".$prefixeTable."AStat_picture2.NewCatId 
+            ".HISTORY_TABLE.".category_id = ".$prefixeTable."AStat_picture2.NewCatId
         WHERE ".$prefixeTable."AStat_picture2.OldId = ".HISTORY_TABLE.".image_id";
       $result=pwg_query($sql);
       if($result)
@@ -2087,7 +2223,7 @@ class AStat_AIP extends AStat_AIM
       $result=pwg_query($sql);
       $sql="DROP TABLE IF EXISTS ".$prefixeTable."AStat_picture";
       $result=pwg_query($sql);
-    } 
+    }
     return($returned);
   }
 
@@ -2145,7 +2281,7 @@ class AStat_AIP extends AStat_AIM
   } //make_filter_list
 
 
-  /* 
+  /*
     this function make SELECT "WHERE" clause for filter list
 
       $selected : category_id of selected item ("" if none)
@@ -2172,7 +2308,7 @@ class AStat_AIP extends AStat_AIM
   }
 
 
-  /* 
+  /*
     format text : <a href="$link">$value</a>
   */
   private function format_link($value, $link)
@@ -2186,12 +2322,12 @@ class AStat_AIP extends AStat_AIM
   private function is_IP($ip)
   {  //basic test, maybe a pcre will be more appropriate...
     $tmp=explode('.', $ip);
-    if(count($tmp)!=4) 
+    if(count($tmp)!=4)
     { return (false); }
 
-    for($i=0;$i<4;$i++) 
-    { 
-      if(!is_numeric($tmp[$i])) { return (false); } 
+    for($i=0;$i<4;$i++)
+    {
+      if(!is_numeric($tmp[$i])) { return (false); }
     }
     return (true);
   }
@@ -2202,11 +2338,11 @@ class AStat_AIP extends AStat_AIM
   private function change_file_ext($file, $newext)
   {  //filename can be <filename.truc.jpeg> for example
     $tmp = explode('.', $file);
-    if(count($tmp)>1) { $tmp[count($tmp)-1] = $newext; }  
-    return implode('.', $tmp);     
+    if(count($tmp)>1) { $tmp[count($tmp)-1] = $newext; }
+    return implode('.', $tmp);
   }
 
-  /* 
+  /*
       format number $octets with unit
       $format = "A" : auto
                 "O" : o
@@ -2228,7 +2364,7 @@ class AStat_AIP extends AStat_AIM
     elseif($octets<1024000000)
     { $format="M"; }
     else
-    { $format="G"; }  
+    { $format="G"; }
     }
     switch($format)
     {
@@ -2243,14 +2379,68 @@ class AStat_AIP extends AStat_AIM
       break;
     case "G":
       $unite="Go"; $div=1024000000;
-      break;  
+      break;
     }
-    
+
     $retour=number_format($octets/$div, $prec, '.', $thsep);
     if($unitevis)
     { $retour.=" ".$unite; }
     return($retour);
   }
+
+  private function make_IP_where_clause($list)
+  {
+    $returned="";
+
+    $tmp=explode(",", $list);
+    foreach($tmp as $key=>$val)
+    {
+      if($returned!="") { $returned.=" OR "; }
+      $returned.=" IP LIKE '".$val."' ";
+    }
+    if($returned!="")
+    {
+      $returned ="(".$returned.")";
+    }
+    return($returned);
+  }
+
+  /* ---------------------------------------------------------------------------
+   * AJAX functions
+   * ------------------------------------------------------------------------- */
+  protected function ajax_listip($filter, $exclude)
+  {
+    $sql="SELECT IP, COUNT(id) as NbEvents FROM ".HISTORY_TABLE;
+
+    $where=array();
+    if($filter!="")
+    {
+      $where[]=" IP LIKE '".$filter."' ";
+    }
+    if($exclude!="")
+    {
+      $where[]=" NOT ".$this->make_IP_where_clause($exclude);
+    }
+    if(count($where)>0)
+    {
+      $sql.=" WHERE ".implode(" AND ", $where);
+    }
+    $sql.=" GROUP BY IP ORDER BY NbEvents desc, IP asc LIMIT 0,100";
+
+    $list="<select multiple id='iipsellist'>";
+    $result=pwg_query($sql);
+    if($result)
+    {
+      while($row=mysql_fetch_array($result))
+      {
+        $list.="<option value='".$row['IP']."'>".$row['IP'].str_repeat("&nbsp;", 15-strlen($row['IP']))."&nbsp;&nbsp;&nbsp;&nbsp;(".$row['NbEvents'].")</option>";
+      }
+    }
+    $list.="</select>";
+
+    return($list);
+  }
+
 
 } // AStat_AI class
 

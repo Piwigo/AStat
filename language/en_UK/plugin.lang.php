@@ -107,7 +107,7 @@ $lang['AStat_sortip_picture'] = 'Number of pictures seen';
 $lang['AStat_sortip_ip'] = 'User / IP Adress';
 $lang['AStat_sortip_page'] = 'Number of pages seen';
 $lang['AStat_RefIPLabel'] = 'User / IP Adress';
-$lang['AStat_DefaultSortIP'] = 'Default sort'; 
+$lang['AStat_DefaultSortIP'] = 'Default sort';
 $lang['AStat_general_config'] = 'Global settings';
 $lang['AStat_SeeTimeRequests'] = 'Show time execution of requests';
 $lang['AStat_time_request_label'] = 'Request executed in';
@@ -161,13 +161,13 @@ $lang['AStat_tools_general_nfo_nfo'] = "<ul><li>%s events are present in the his
 $lang['AStat_tools_purge_history'] = "Cleaning of the history";
 $lang['AStat_tools_purge_history_nfo'] = "This function will clean the history from all past event from a given date and will optimize the table.<br><b>Operation cannot be reversed</b>.";
 $lang['AStat_tools_purge_history_apply'] = "Clean";
-$lang['AStat_tools_purge_history_date'] = "To purge all events prior (DD/MM/AAAA) ";
-$lang['AStat_tools_purge_history_imageid0'] = "To purge all events associated to deleted images (%s events in history)"; 
-$lang['AStat_tools_purge_history_categoryid0'] = "To purge events associated to deleted categories (%s events in history)"; 
+$lang['AStat_tools_purge_history_date'] = "To purge all events prior ";
+$lang['AStat_tools_purge_history_imageid0'] = "To purge all events associated to deleted images (%s events in history)";
+$lang['AStat_tools_purge_history_categoryid0'] = "To purge events associated to deleted categories (%s events in history)";
 $lang['AStat_tools_result_ko'] = "An error has occurred. Action has not been correctly performed";
-$lang['AStat_tools_invalid_date'] = "Given date is not valid !"; 
-$lang['AStat_tools_invalid_date2'] = "Given date is upper or equal to date of the day"; 
-$lang['AStat_tools_deleted_picture_error0'] = "Priming has failed"; 
+$lang['AStat_tools_invalid_date'] = "Given date is not valid !";
+$lang['AStat_tools_invalid_date2'] = "Given date is upper or equal to date of the day";
+$lang['AStat_tools_deleted_picture_error0'] = "Priming has failed";
 $lang['AStat_tools_deleted_picture_error1'] = "New association of events in the history has failed";
 $lang['AStat_tools_deleted_picture_ok0'] = "Priming of the table succeeded, files can be reorganized on the server";
 $lang['AStat_tools_deleted_picture_ok1'] = "Linking event in the history has succeeded";
@@ -203,5 +203,11 @@ $lang['AStat_nofilter'] = "--- No filter ---";
 $lang['AStat_confignotsaved'] = "An error has occured, settings aren't saved";
 $lang['AStat_gpc2_not_installed'] = "Plugin 'Grum Plugins Classes 2' (release >= %s) is needed to install AStat";
 
+//--- >> v2.1.0 >>
+$lang['AStat_BlackListedIP'] = "Blacklisted IP";
+$lang['AStat_AddIP'] = "Add to the blacklist";
+$lang['AStat_DelIP'] = "Delete from the blacklist";
+$lang['AStat_tools_purge_history_ipid0'] = "To purge events associated with IP from the blacklist (%s items in the blacklist, %s events in history)"
+$lang['AStat_IP_blacklist'] = "Add to the blacklist";
 
 ?>
