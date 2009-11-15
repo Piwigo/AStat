@@ -15,7 +15,7 @@
 
  function enabled_purge()
  {
-  re = /\d{2}/\d{2}/\d{4}/i;
+  re = /\d{2}\/\d{2}\/\d{4}/i;
 
   if(($('#purge_history_confirm').attr('checked')&&$('#purge_history_type0').attr('checked')&&re.test($('#purge_history_date').val()))||
      ($('#purge_history_confirm').attr('checked')&&!('#purge_history_type0').attr('checked')))

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AStat.2
-Version: 2.1.0
+Version: 2.1.1
 Description: Statistiques avancées / Advanced statistics
 Plugin URI: http://phpwebgallery.net/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
@@ -39,7 +39,8 @@ Author URI: http://photos.grum.fr/
 |         |            | * new tools
 |         |            |    - possibility to purge history on blacklisted IP address
 |         |            |    - use of jQuery datepicker for purge date
-|         |            |
+| 2.1.1   | 2009/11/15 | * bug on tools (cf. bug #1242 in mantis)
+|         |            |   it was impossible to purge items in history due to an invalid regexp in the javascript
 |         |            |
 |         |            |
 |         |            |
@@ -69,7 +70,7 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 define('ASTAT_DIR' , basename(dirname(__FILE__)));
 define('ASTAT_PATH' , PHPWG_PLUGINS_PATH . ASTAT_DIR . '/');
 
-define('ASTAT_VERSION' , '2.1.0'); // => ne pas oublier la version dans l'entête !!
+define('ASTAT_VERSION' , '2.1.1'); // => ne pas oublier la version dans l'entête !!
 
 global $prefixeTable;
 
