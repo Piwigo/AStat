@@ -28,8 +28,8 @@ $gpc_installed=false;
 if(file_exists(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/common_plugin.class.inc.php'))
 {
   @include_once(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/main.inc.php');
-  // need GPC release greater or equal than 2.0.1
-  if(checkGPCRelease(2,0,1))
+  // need GPC release greater or equal than 2.0.5
+  if(checkGPCRelease(2,0,5))
   {
     @include_once("astat_aim.class.inc.php");
     $gpc_installed=true;
@@ -38,7 +38,7 @@ if(file_exists(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/common_plugin.class.in
 
 function gpcMsgError(&$errors)
 {
-  array_push($errors, sprintf(l10n('AStat_gpc2_not_installed'), "2.0.1"));
+  array_push($errors, sprintf(l10n('AStat_gpc2_not_installed'), "2.0.5"));
 }
 // -----------------------------------------------------------------------------
 
