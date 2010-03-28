@@ -1,6 +1,6 @@
-{known_script id="jquery.ui" src=$ROOT_URL|@cat:"template-common/lib/ui/ui.core.packed.js"}
-{known_script id="jquery.ui.datepicker" src=$ROOT_URL|@cat:"template-common/lib/ui/ui.datepicker.packed.js"}
-{assign var="datepicker_language" value="template-common/lib/ui/i18n/ui.datepicker-"|@cat:$lang_info.code|@cat:".js"}
+{known_script id="jquery.ui" src=$ROOT_URL|@cat:"themes/default/js/ui/packed/ui.core.packed.js"}
+{known_script id="jquery.ui.datepicker" src=$ROOT_URL|@cat:"themes/default/js/ui/packed/ui.datepicker.packed.js"}
+{assign var="datepicker_language" value="themes/default/js/ui/packed/i18n/ui.datepicker-"|@cat:$lang_info.code|@cat:".js"}
 
 {if "PHPWG_ROOT_PATH"|@constant|@cat:$datepicker_language|@file_exists}
 {known_script id="jquery.ui.datepicker-$lang_info.code" src=$ROOT_URL|@cat:$datepicker_language}
@@ -18,13 +18,13 @@
   re = /\d{2}\/\d{2}\/\d{4}/i;
 
   if(($('#purge_history_confirm').attr('checked')&&$('#purge_history_type0').attr('checked')&&re.test($('#purge_history_date').val()))||
-     ($('#purge_history_confirm').attr('checked')&&!('#purge_history_type0').attr('checked')))
+     ($('#purge_history_confirm').attr('checked')&&!$('#purge_history_type0').attr('checked')))
   {
-    $('#purge_history_button').attr('disabled', true);
+    $('#purge_history_button').attr('disabled', false);
   }
   else
   {
-    $('#purge_history_button').attr('disabled', false);
+    $('#purge_history_button').attr('disabled', true);
   }
  }
 

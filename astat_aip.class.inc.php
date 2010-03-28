@@ -434,7 +434,7 @@ class AStat_AIP extends AStat_AIM
     $result = pwg_query($sql);
 
     $i=0;
-    while ($row = mysql_fetch_array($result))
+    while ($row = pwg_db_fetch_assoc($result))
     {
       if($year.$month.$day=="")
       { $returned[$i] = $row; $i++; }
@@ -533,7 +533,7 @@ class AStat_AIP extends AStat_AIM
     $sql="select FOUND_ROWS()";
 
     $i=0;
-    while ($row = mysql_fetch_array($result))
+    while ($row = pwg_db_fetch_assoc($result))
     {
       $returned0[$i] = $row; $i++;
     }
@@ -542,7 +542,7 @@ class AStat_AIP extends AStat_AIM
     $result = pwg_query($sql);
     if($result)
     {
-      $row = mysql_fetch_array($result); $returned[1] = $row[0];
+      $row = pwg_db_fetch_row($result); $returned[1] = $row[0];
     }
     else
     {
@@ -637,7 +637,7 @@ class AStat_AIP extends AStat_AIM
     $sql="select FOUND_ROWS()";
 
     $i=0;
-    while ($row = mysql_fetch_array($result))
+    while ($row = pwg_db_fetch_assoc($result))
     {
       $returned0[$i] = $row; $i++;
     }
@@ -646,7 +646,7 @@ class AStat_AIP extends AStat_AIM
     $result = pwg_query($sql);
     if($result)
     {
-      $row = mysql_fetch_array($result); $returned[1] = $row[0];
+      $row = pwg_db_fetch_row($result); $returned[1] = $row[0];
     }
     else
     {
@@ -737,7 +737,7 @@ class AStat_AIP extends AStat_AIM
     $sql="select FOUND_ROWS()";
 
     $i=0;
-    while ($row = mysql_fetch_array($result))
+    while ($row = pwg_db_fetch_assoc($result))
     {
       $returned0[$i] = $row; $i++;
     }
@@ -746,7 +746,7 @@ class AStat_AIP extends AStat_AIM
     $result = pwg_query($sql);
     if($result)
     {
-      $row = mysql_fetch_array($result); $returned[1] = $row[0];
+      $row = pwg_db_fetch_row($result); $returned[1] = $row[0];
     }
     else
     {
@@ -1115,6 +1115,8 @@ class AStat_AIP extends AStat_AIM
 
     $template->set_filename('body_page', dirname(__FILE__)."/admin/astat_by_category.tpl");
 
+    $template_datas=array();
+    $template_datarows=array();
 
     /* requete */
     //calc_time(true);
@@ -1917,7 +1919,7 @@ class AStat_AIP extends AStat_AIM
       if($result)
       {
         $returned[0]=0;
-        while ($row = mysql_fetch_array($result))
+        while ($row = pwg_db_fetch_row($result))
         {
           $returned[2][$returned[0]][0] = $row[0];
           $returned[2][$returned[0]][1] = $row[1];
@@ -1964,7 +1966,7 @@ class AStat_AIP extends AStat_AIM
       if($result)
       {
         $returned[0]=0;
-        while ($row = mysql_fetch_array($result))
+        while ($row = pwg_db_fetch_row($result))
         {
           $returned[2][$returned[0]][0] = $row[0];
           $returned[2][$returned[0]][1] = $row[1];
@@ -2016,7 +2018,7 @@ class AStat_AIP extends AStat_AIM
       if($result)
       {
         $returned[0]=0;
-        while ($row = mysql_fetch_array($result))
+        while ($row = pwg_db_fetch_row($result))
         {
           $returned[2][$returned[0]][0] = $row[0];
           $returned[2][$returned[0]][1] = $row[1];
@@ -2061,7 +2063,7 @@ class AStat_AIP extends AStat_AIM
     $result=pwg_query($sql);
     if($result)
     {
-      $row = mysql_fetch_array($result);
+      $row = pwg_db_fetch_row($result);
       if(is_array($row))
       {
         $returned = $row;
@@ -2069,7 +2071,7 @@ class AStat_AIP extends AStat_AIM
         $result=pwg_query($sql);
         if($result)
         {
-          $row2=mysql_fetch_array($result);
+          $row2=pwg_db_fetch_assoc($result);
           array_push($returned, $row2['Data_length'], $row2['Index_length']);
         }
       }
@@ -2123,7 +2125,7 @@ class AStat_AIP extends AStat_AIM
     $result=pwg_query($sql);
     if($result)
     {
-      $row=mysql_fetch_array($result);
+      $row=pwg_db_fetch_row($result);
       return($row[0]);
     }
     return(0);
@@ -2135,7 +2137,7 @@ class AStat_AIP extends AStat_AIM
     $result=pwg_query($sql);
     if($result)
     {
-      $row=mysql_fetch_array($result);
+      $row=pwg_db_fetch_row($result);
       return($row[0]);
     }
     return(0);
@@ -2162,7 +2164,7 @@ class AStat_AIP extends AStat_AIM
       $result=pwg_query($sql);
       if($result)
       {
-        $row=mysql_fetch_array($result);
+        $row=pwg_db_fetch_row($result);
         $returned[0]=$row[0];
       }
     }
@@ -2183,7 +2185,7 @@ class AStat_AIP extends AStat_AIM
     $result=pwg_query($sql);
     if($result)
     {
-      if(mysql_num_rows($result)==1)
+      if(pwg_db_num_rows($result)==1)
       {
         return(true);
       }
@@ -2221,9 +2223,9 @@ class AStat_AIP extends AStat_AIM
       $result=pwg_query($sql);
       if($result)
       {
-        if(mysql_num_rows($result)>0)
+        if(pwg_db_num_rows($result)>0)
         {
-          $row=mysql_fetch_row($result);
+          $row=pwg_db_fetch_row($result);
           $returned[0]=true;
           $returned[1]=$row[0];
           $returned[2]=$row[1];
@@ -2295,7 +2297,7 @@ class AStat_AIP extends AStat_AIM
     $result = pwg_query($sql);
     if($result)
     {
-      while ($row = mysql_fetch_array($result))
+      while ($row = pwg_db_fetch_assoc($result))
       {
         $text=str_repeat('&nbsp;&nbsp;', substr_count($row['global_rank'], '.'));
         $template_datarows_values[]=$row['id'];
@@ -2338,7 +2340,7 @@ class AStat_AIP extends AStat_AIM
 
     if($result)
     {
-      while ($row = mysql_fetch_row($result))
+      while ($row = pwg_db_fetch_row($result))
       {
         $returned[]=$row[0];
       }
@@ -2472,7 +2474,7 @@ class AStat_AIP extends AStat_AIM
     $result=pwg_query($sql);
     if($result)
     {
-      while($row=mysql_fetch_array($result))
+      while($row=pwg_db_fetch_assoc($result))
       {
         $list.="<option value='".$row['IP']."'>".$row['IP'].str_repeat("&nbsp;", 15-strlen($row['IP']))."&nbsp;&nbsp;&nbsp;&nbsp;(".$row['NbEvents'].")</option>";
       }

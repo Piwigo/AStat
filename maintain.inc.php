@@ -11,10 +11,10 @@
 
   --------------------------------------------------------------------------- */
 
-if (!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
+if(!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
 
-define('ASTAT_DIR' , basename(dirname(__FILE__)));
-define('ASTAT_PATH' , PHPWG_PLUGINS_PATH . ASTAT_DIR . '/');
+if(!defined('ASTAT_DIR')) define('ASTAT_DIR' , basename(dirname(__FILE__)));
+if(!defined('ASTAT_PATH')) define('ASTAT_PATH' , PHPWG_PLUGINS_PATH . ASTAT_DIR . '/');
 
 //ini_set('error_reporting', E_ALL);
 //ini_set('display_errors', true);
@@ -45,7 +45,7 @@ function gpcMsgError(&$errors)
 
 load_language('plugin.lang', ASTAT_PATH);
 
-function plugin_install($plugin_id, $plugin_version, &$errors) 
+function plugin_install($plugin_id, $plugin_version, &$errors)
 {
   global $prefixeTable, $gpc_installed;
   if($gpc_installed)

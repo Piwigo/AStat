@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AStat.2
-Version: 2.1.1
+Version: 2.2.0
 Description: Statistiques avancées / Advanced statistics
 Plugin URI: http://phpwebgallery.net/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
@@ -41,6 +41,16 @@ Author URI: http://photos.grum.fr/
 |         |            |    - use of jQuery datepicker for purge date
 | 2.1.1   | 2009/11/15 | * bug on tools (cf. bug #1242 in mantis)
 |         |            |   it was impossible to purge items in history due to an invalid regexp in the javascript
+| 2.2.0   | 2010/03/28 | * release for compatibility with Piwigo 2.1
+|         |            | * mantis: bug 1192
+|         |            |   Constant already defined when deactivating the plugin
+|         |            | * mantis: bug 1344
+|         |            |   In tools, it's allowed to do purge only if checkbox is not checked
+|         |            |
+|         |            |
+|         |            |
+|         |            |
+|         |            |
 |         |            |
 |         |            |
 |         |            |
@@ -70,7 +80,7 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 define('ASTAT_DIR' , basename(dirname(__FILE__)));
 define('ASTAT_PATH' , PHPWG_PLUGINS_PATH . ASTAT_DIR . '/');
 
-define('ASTAT_VERSION' , '2.1.1'); // => ne pas oublier la version dans l'entête !!
+define('ASTAT_VERSION' , '2.2.0'); // => ne pas oublier la version dans l'entête !!
 
 global $prefixeTable;
 

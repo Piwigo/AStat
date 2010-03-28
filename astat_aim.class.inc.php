@@ -170,7 +170,7 @@ class AStat_AIM extends common_plugin
     $result=pwg_query($sql);
     if($result)
     {
-      $row = mysql_fetch_array($result);
+      $row = pwg_db_fetch_assoc($result);
       $list=substr($row['Type'], 5, strlen($row['Type'])-6);
       $returned[0]=explode(',', $list);
       if((strpos($list, "'$add'")===false)&&($add!=''))
