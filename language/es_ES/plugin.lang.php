@@ -214,5 +214,8 @@ $lang['AStat_enableddisabled_true'] = "Filtro activado";
 $lang['AStat_enableddisabled_false'] = "Filtro discapacitados";
 $lang['AStat_enableddisabled_invert'] = "Filtro invertida";
 
+//--- > 2.2.0
+$lang['To install this plugin, you need to install Grum Plugin Classes %s before'] = 'Para instalar este plugin, usted debe previamente, instalar el plugin Grum Plugin Classes %s';
+
 
 ?>
