@@ -21,7 +21,7 @@ load_language('plugin.lang', ASTAT_PATH);
 
 $main_plugin_object = get_plugin_data($plugin_id);
 
-$plugin_ai = new AStat_AIP($prefixeTable, $main_plugin_object->get_filelocation());
+$plugin_ai = new AStat_AIP($prefixeTable, $main_plugin_object->getFileLocation());
 $plugin_ai->manage();
 
 ?>

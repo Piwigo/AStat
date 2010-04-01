@@ -80,7 +80,7 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 define('ASTAT_DIR' , basename(dirname(__FILE__)));
 define('ASTAT_PATH' , PHPWG_PLUGINS_PATH . ASTAT_DIR . '/');
 
-define('ASTAT_VERSION' , '2.2.0'); // => ne pas oublier la version dans l'entête !!
+include_once('astat_version.inc.php'); // => Don't forget to update this file !!
 
 global $prefixeTable;
 
@@ -90,7 +90,7 @@ if(basename($_SERVER["PHP_SELF"])=='admin.php')
   include_once("astat_aim.class.inc.php");
 
   $obj = new AStat_AIM($prefixeTable, __FILE__);
-  $obj->init_events();
+  $obj->initEvents();
   set_plugin_data($plugin['id'], $obj);
 }
 

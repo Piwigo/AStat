@@ -15,36 +15,36 @@
 
 if (!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
 
-include_once(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/common_plugin.class.inc.php');
-include_once(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/css.class.inc.php');
+include_once(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/CommonPlugin.class.inc.php');
+include_once(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/GPCCss.class.inc.php');
 
-class AStat_AIM extends common_plugin
+class AStat_AIM extends CommonPlugin
 {
   protected $css = null;
 
   function AStat_AIM($prefixeTable, $filelocation)
   {
-    $this->plugin_name="AStat.2";
-    $this->plugin_name_files="astat";
+    $this->setPluginName("AStat.2");
+    $this->setPluginNameFiles("astat");
     parent::__construct($prefixeTable, $filelocation);
-    $this->css = new css(dirname($this->filelocation).'/'.$this->plugin_name_files.".css");
+    $this->css = new GPCCss(dirname($this->getFileLocation()).'/'.$this->getPluginNameFiles().".css");
   }
 
   /*
     initialize events call for the plugin
   */
-  function init_events()
+  function initEvents()
   {
-    add_event_handler('get_admin_plugin_menu_links', array(&$this, 'plugin_admin_menu') );
+    add_event_handler('get_admin_plugin_menu_links', array(&$this, 'pluginAdminMenu') );
   }
 
 
   /*
     initialization of config properties
   */
-  function init_config()
+  function initConfig()
   {
-    $this->my_config=array(
+    $this->config=array(
       'AStat_BarColor_Pages' => '6666ff',
       'AStat_BarColor_Img' => '66ff66',
       'AStat_BarColor_IP' => 'ff6666',
@@ -68,25 +68,25 @@ class AStat_AIM extends common_plugin
   }
 
   /*
-    surchage of common_plugin->save_config function
+    surchage of CommonPlugin->saveConfig function
   */
-  function load_config()
+  function loadConfig()
   {
-    parent::load_config();
-    if(!$this->css->css_file_exists())
+    parent::loadConfig();
+    if(!$this->css->fileExists())
     {
-      $this->css->make_CSS($this->generate_CSS());
+      $this->css->makeCSS($this->generate_CSS());
     }
   }
 
   /*
-    surchage of common_plugin->save_config function
+    surchage of CommonPlugin->saveConfig function
   */
-  function save_config()
+  function saveConfig()
   {
-    if(parent::save_config())
+    if(parent::saveConfig())
     {
-      $this->css->make_CSS($this->generate_CSS());
+      $this->css->makeCSS($this->generate_CSS());
       return(true);
     }
     return(false);
@@ -113,16 +113,16 @@ class AStat_AIM extends common_plugin
       margin:0px;
       padding:0px;
       }
-       .AStatBar1 { background-color:#".$this->my_config['AStat_BarColor_Pages']."; top:5px;  }
-       .AStatBar2 { background-color:#".$this->my_config['AStat_BarColor_Img']."; top:-3px; }
-       .AStatBar3 { background-color:#".$this->my_config['AStat_BarColor_IP']."; top:-3px;}
-       .AStatBar4 { background-color:#".$this->my_config['AStat_BarColor_Cat']."; top:-3px;}
+       .AStatBar1 { background-color:#".$this->config['AStat_BarColor_Pages']."; top:5px;  }
+       .AStatBar2 { background-color:#".$this->config['AStat_BarColor_Img']."; top:-3px; }
+       .AStatBar3 { background-color:#".$this->config['AStat_BarColor_IP']."; top:-3px;}
+       .AStatBar4 { background-color:#".$this->config['AStat_BarColor_Cat']."; top:-3px;}
        .AStatBarX { background-color:transparent; top:-3px; height:1px; }
-       .MiniSquare1 { color:#".$this->my_config['AStat_BarColor_Pages'].";   }
-       .MiniSquare2 { color:#".$this->my_config['AStat_BarColor_Img'].";  }
-       .MiniSquare3 { color:#".$this->my_config['AStat_BarColor_IP']."; }
-       .MiniSquare4 { color:#".$this->my_config['AStat_BarColor_Cat']."; }
-       .StatTableRow:hover { background-color:#".$this->my_config['AStat_MouseOverColor']."; }
+       .MiniSquare1 { color:#".$this->config['AStat_BarColor_Pages'].";   }
+       .MiniSquare2 { color:#".$this->config['AStat_BarColor_Img'].";  }
+       .MiniSquare3 { color:#".$this->config['AStat_BarColor_IP']."; }
+       .MiniSquare4 { color:#".$this->config['AStat_BarColor_Cat']."; }
+       .StatTableRow:hover { background-color:#".$this->config['AStat_MouseOverColor']."; }
        .formtable, .formtable P { text-align:left; display:block; }
        .formtable tr { vertical-align:top; }
        .window_thumb {

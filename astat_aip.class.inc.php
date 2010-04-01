@@ -16,7 +16,7 @@ if (!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
 
 include_once('astat_aim.class.inc.php');
 include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
-include_once(PHPWG_PLUGINS_PATH.'grum_plugins_classes-2/ajax.class.inc.php');
+include_once(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/GPCAjax.class.inc.php');
 
 class AStat_AIP extends AStat_AIM
 {
@@ -25,7 +25,6 @@ class AStat_AIP extends AStat_AIM
   protected $list_sortcat = array('page', 'picture', 'nbpicture');
   protected $list_sortimg = array('picture', 'catname');
   protected $list_sortip = array('page', 'picture', 'ip');
-  protected $ajax;
 
   protected $catfilter;    //filter on categories
   protected $max_width;
@@ -35,38 +34,37 @@ class AStat_AIP extends AStat_AIM
   {
     parent::__construct($prefixeTable, $filelocation);
 
-    $this->load_config();
-    $this->init_events();
+    $this->loadConfig();
+    $this->initEvents();
 
     $this->tabsheet = new tabsheet();
     $this->tabsheet->add('stats_by_period',
                           l10n('AStat_by_period'),
-                          $this->page_link.'&amp;fAStat_tabsheet=stats_by_period');
+                          $this->getAdminLink().'&amp;fAStat_tabsheet=stats_by_period');
     $this->tabsheet->add('stats_by_ip',
                           l10n('AStat_by_ip'),
-                          $this->page_link.'&amp;fAStat_tabsheet=stats_by_ip');
+                          $this->getAdminLink().'&amp;fAStat_tabsheet=stats_by_ip');
     $this->tabsheet->add('stats_by_category',
                           l10n('AStat_by_category'),
-                          $this->page_link.'&amp;fAStat_tabsheet=stats_by_category');
+                          $this->getAdminLink().'&amp;fAStat_tabsheet=stats_by_category');
     $this->tabsheet->add('stats_by_image',
                           l10n('AStat_by_image'),
-                          $this->page_link.'&amp;fAStat_tabsheet=stats_by_image');
+                          $this->getAdminLink().'&amp;fAStat_tabsheet=stats_by_image');
     $this->tabsheet->add('config',
                           l10n('AStat_config'),
-                          $this->page_link.'&amp;fAStat_tabsheet=config');
+                          $this->getAdminLink().'&amp;fAStat_tabsheet=config');
     $this->tabsheet->add('tools',
                           l10n('AStat_tools'),
-                          $this->page_link.'&amp;fAStat_tabsheet=tools');
+                          $this->getAdminLink().'&amp;fAStat_tabsheet=tools');
 
-    $this->ajax = new Ajax();
   }
 
   /*
     initialize events call for the plugin
   */
-  function init_events()
+  function initEvents()
   {
-    add_event_handler('loc_end_page_header', array(&$this->css, 'apply_CSS'));
+    add_event_handler('loc_end_page_header', array(&$this->css, 'applyCSS'));
   }
 
 
@@ -91,7 +89,7 @@ class AStat_AIP extends AStat_AIM
     $this->make_filter_list($_REQUEST['fAStat_catfilter']);
     if($_REQUEST['fAStat_catfilter']!="")
     {
-      $this->page_link.="&amp;fAStat_catfilter=".$_REQUEST['fAStat_catfilter'];
+      $this->setAdminLink($this->getAdminLink()."&amp;fAStat_catfilter=".$_REQUEST['fAStat_catfilter']);
     }
 
     if($_REQUEST['fAStat_tabsheet']=='stats_by_period')
@@ -101,8 +99,8 @@ class AStat_AIP extends AStat_AIM
           $_REQUEST['fAStat_year'],
           $_REQUEST['fAStat_month'],
           $_REQUEST['fAStat_day'],
-          $this->my_config['AStat_MaxBarWidth'],
-          $this->my_config['AStat_SeeTimeRequests']
+          $this->config['AStat_MaxBarWidth'],
+          $this->config['AStat_SeeTimeRequests']
       );
     }
     elseif($_REQUEST['fAStat_tabsheet']=='stats_by_ip')
@@ -116,11 +114,11 @@ class AStat_AIP extends AStat_AIM
           $_REQUEST['fAStat_year'],
           $_REQUEST['fAStat_month'],
           $_REQUEST['fAStat_day'],
-          $this->my_config['AStat_MaxBarWidth'],
-          $this->my_config['AStat_NpIPPerPages'],
+          $this->config['AStat_MaxBarWidth'],
+          $this->config['AStat_NpIPPerPages'],
           $_REQUEST['fAStat_page_number'],
           $_REQUEST['fAStat_SortIP'],
-          $this->my_config['AStat_SeeTimeRequests']
+          $this->config['AStat_SeeTimeRequests']
       );
     }
     elseif($_REQUEST['fAStat_tabsheet']=='stats_by_category')
@@ -129,12 +127,12 @@ class AStat_AIP extends AStat_AIM
           $_REQUEST['fAStat_year'],
           $_REQUEST['fAStat_month'],
           $_REQUEST['fAStat_day'],
-          $this->my_config['AStat_MaxBarWidth'],
-          $this->my_config['AStat_NpCatPerPages'],
+          $this->config['AStat_MaxBarWidth'],
+          $this->config['AStat_NpCatPerPages'],
           $_REQUEST['fAStat_page_number'],
-          $this->my_config['AStat_ShowThumbCat'],
+          $this->config['AStat_ShowThumbCat'],
           $_REQUEST['fAStat_SortCat'],
-          $this->my_config['AStat_SeeTimeRequests']
+          $this->config['AStat_SeeTimeRequests']
       );
     }
     elseif($_REQUEST['fAStat_tabsheet']=='stats_by_image')
@@ -143,13 +141,13 @@ class AStat_AIP extends AStat_AIM
           $_REQUEST['fAStat_year'],
           $_REQUEST['fAStat_month'],
           $_REQUEST['fAStat_day'],
-          $this->my_config['AStat_MaxBarWidth'],
-          $this->my_config['AStat_NbImgPerPages'],
+          $this->config['AStat_MaxBarWidth'],
+          $this->config['AStat_NbImgPerPages'],
           $_REQUEST['fAStat_page_number'],
-          $this->my_config['AStat_ShowThumbImg'],
+          $this->config['AStat_ShowThumbImg'],
           $_REQUEST['fAStat_SortImg'],
           $_REQUEST['fAStat_IP'],
-          $this->my_config['AStat_SeeTimeRequests']
+          $this->config['AStat_SeeTimeRequests']
       );
     }
     elseif($_REQUEST['fAStat_tabsheet']=='config')
@@ -196,8 +194,7 @@ class AStat_AIP extends AStat_AIM
           $result=$this->ajax_listip($_REQUEST['ipfilter'], $_REQUEST['exclude']);
           break;
       }
-      //$template->
-      $this->ajax->return_result($result);
+      GPCAjax::returnResult($result);
     }
   }
 
@@ -222,15 +219,15 @@ class AStat_AIP extends AStat_AIM
     }
     if(!array_key_exists('fAStat_SortCat', $_REQUEST))
     {
-      $_REQUEST['fAStat_SortCat']=$this->my_config['AStat_DefaultSortCat'];
+      $_REQUEST['fAStat_SortCat']=$this->config['AStat_DefaultSortCat'];
     }
     if(!array_key_exists('fAStat_SortImg', $_REQUEST))
     {
-      $_REQUEST['fAStat_SortImg']=$this->my_config['AStat_DefaultSortImg'];
+      $_REQUEST['fAStat_SortImg']=$this->config['AStat_DefaultSortImg'];
     }
     if(!array_key_exists('fAStat_SortIP', $_REQUEST))
     {
-      $_REQUEST['fAStat_SortIP']=$this->my_config['AStat_DefaultSortIP'];
+      $_REQUEST['fAStat_SortIP']=$this->config['AStat_DefaultSortIP'];
     }
     if(!array_key_exists('fAStat_page_number', $_REQUEST))
     {
@@ -251,25 +248,25 @@ class AStat_AIP extends AStat_AIM
 
     if(($_REQUEST['fAStat_tabsheet']=='stats_by_period')&&($_REQUEST['fAStat_defper']=='Y'))
     {
-      if($this->my_config['AStat_default_period']!='global')
+      if($this->config['AStat_default_period']!='global')
       {
         $default_request['all'] = 'N';
       }
 
-      if(($this->my_config['AStat_default_period']=='year')||
-        ($this->my_config['AStat_default_period']=='month')||
-        ($this->my_config['AStat_default_period']=='day'))
+      if(($this->config['AStat_default_period']=='year')||
+        ($this->config['AStat_default_period']=='month')||
+        ($this->config['AStat_default_period']=='day'))
       {
         $default_request['year'] = date('Y');
       }
 
-      if(($this->my_config['AStat_default_period']=='month')||
-        ($this->my_config['AStat_default_period']=='day'))
+      if(($this->config['AStat_default_period']=='month')||
+        ($this->config['AStat_default_period']=='day'))
       {
         $default_request['month'] = date('n');
       }
 
-      if($this->my_config['AStat_default_period']=='day')
+      if($this->config['AStat_default_period']=='day')
       {
         $default_request['day'] = date('j');
       }
@@ -419,11 +416,11 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
-    if(($this->my_config['AStat_UseBlackList']!="false")&&($this->my_config['AStat_BlackListedIP']!=""))
+    if(($this->config['AStat_UseBlackList']!="false")&&($this->config['AStat_BlackListedIP']!=""))
     {
       ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
-      ($this->my_config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
-      $sql_where .= $this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      ($this->config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      $sql_where .= $this->make_IP_where_clause($this->config['AStat_BlackListedIP']);
     }
 
     $sql_max=", (select max(n.MaxPages) as MaxPages, max(n.MaxIP) as MaxIP, max(n.MaxImg) as MaxImg
@@ -498,23 +495,23 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
-    if(($this->my_config['AStat_UseBlackList']!="false")&&($this->my_config['AStat_BlackListedIP']!=""))
+    if(($this->config['AStat_UseBlackList']!="false")&&($this->config['AStat_BlackListedIP']!=""))
     {
       ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
-      ($this->my_config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
-      $sql_where .= $this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      ($this->config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      $sql_where .= $this->make_IP_where_clause($this->config['AStat_BlackListedIP']);
       $sql.=" , 'N' AS blacklist";
     }
     else
     {
-      if($this->my_config['AStat_BlackListedIP']=='')
+      if($this->config['AStat_BlackListedIP']=='')
       {
         $sql.=" , 'N' AS blacklist";
       }
       else
       {
         $sql.=" , (CASE ";
-        $tmp=explode(',', $this->my_config['AStat_BlackListedIP']);
+        $tmp=explode(',', $this->config['AStat_BlackListedIP']);
         foreach($tmp as $key=>$val)
         {
           $sql.=" WHEN IP LIKE '".$val."' THEN 'Y' ";
@@ -625,10 +622,10 @@ class AStat_AIP extends AStat_AIM
     ($sql_where=="")?$sql_where=" where ":$sql_where.=" and ";
     $sql_where .= "  ic2.catid = ".HISTORY_TABLE.".category_id ";
 
-    if(($this->my_config['AStat_UseBlackList']!="false")&&($this->my_config['AStat_BlackListedIP']!=""))
+    if(($this->config['AStat_UseBlackList']!="false")&&($this->config['AStat_BlackListedIP']!=""))
     {
-      ($this->my_config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
-      $sql_where .= $this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      ($this->config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      $sql_where .= $this->make_IP_where_clause($this->config['AStat_BlackListedIP']);
     }
 
     $sql=$sql_select.$sql.$sql_thumb.$sql_from.$sql_fromthumb.$sql_max.$sql_where.$sql_group.$sql_order.$sql_limit;
@@ -721,11 +718,11 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
-    if(($this->my_config['AStat_UseBlackList']!="false")&&($this->my_config['AStat_BlackListedIP']!=""))
+    if(($this->config['AStat_UseBlackList']!="false")&&($this->config['AStat_BlackListedIP']!=""))
     {
       ($sql_where=="")?$sql_where=" where ":$sql_where.=" AND ";
-      ($this->my_config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
-      $sql_where .= $this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+      ($this->config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      $sql_where .= $this->make_IP_where_clause($this->config['AStat_BlackListedIP']);
     }
 
 
@@ -782,26 +779,26 @@ class AStat_AIP extends AStat_AIM
     //$timerequest=calc_time(false);
 
     $dir_links = "";
-    $a_links=array("global" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=Y",
-        "all" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N",
-        "year" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year",
-        "month" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $a_links=array("global" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=Y",
+        "all" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N",
+        "year" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $ip_links=array("all" => $this->page_link."&amp;fAStat_tabsheet=stats_by_ip",
-        "year" => $this->page_link."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=",
-        "month" => $this->page_link."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=",
-        "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
+    $ip_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip",
+        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=",
+        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=",
+        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
 
-    $cat_links=array("all" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category",
-        "year" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=",
-        "month" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=",
-        "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
+    $cat_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category",
+        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=",
+        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=",
+        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
 
-    $img_links=array("all" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image",
-        "year" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=",
-        "month" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=",
-        "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
+    $img_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image",
+        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=",
+        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=",
+        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
 
 
     /* period label + navigation links */
@@ -868,7 +865,7 @@ class AStat_AIP extends AStat_AIM
       elseif($month!="")
       { // si mois sÃ©lectionnÃ©, jours affichÃ©s
         $value = $stats[$i]["GId"]." (".l10n("AStat_day_of_week_".date("w",mktime(0, 0, 0, $month, $stats[$i]["GId"], $year))).")";
-        $link=$this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=".$stats[$i]["GId"];
+        $link=$this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=".$stats[$i]["GId"];
         $value_ip=$ip_links["day"].$stats[$i]["GId"];
         $value_cat=$cat_links["day"].$stats[$i]["GId"];
         $value_img=$img_links["day"].$stats[$i]["GId"];
@@ -876,7 +873,7 @@ class AStat_AIP extends AStat_AIM
       elseif($year!="")
       { // si annÃ©e sÃ©lectionnÃ©e, mois affichÃ©s
         $value = l10n("AStat_month_of_year_".$stats[$i]["GId"]);
-        $link=$this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=".$stats[$i]["GId"];
+        $link=$this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=".$stats[$i]["GId"];
         $value_ip=$ip_links["month"].$stats[$i]["GId"];
         $value_cat=$cat_links["month"].$stats[$i]["GId"];
         $value_img=$img_links["month"].$stats[$i]["GId"];
@@ -884,7 +881,7 @@ class AStat_AIP extends AStat_AIM
       elseif($total!="Y")
       { // si total sÃ©lectionnÃ©, annÃ©es affichÃ©es
         $value = $stats[$i]["GId"];
-        $link=$this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=".$stats[$i]["GId"];
+        $link=$this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=".$stats[$i]["GId"];
         $value_ip=$ip_links["year"].$stats[$i]["GId"];
         $value_cat=$cat_links["year"].$stats[$i]["GId"];
         $value_img=$img_links["year"].$stats[$i]["GId"];
@@ -892,7 +889,7 @@ class AStat_AIP extends AStat_AIM
       else
       {
         $value=l10n("AStat_period_label_all");
-        $link=$this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N";
+        $link=$this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N";
         $value_ip=$ip_links["all"];
         $value_cat=$cat_links["all"];
         $value_img=$img_links["all"];
@@ -965,21 +962,21 @@ class AStat_AIP extends AStat_AIM
 
     $dir_links = "";
     $page_link = "";
-    $a_links=array("global" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=Y",
-        "all" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N",
-        "year" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year",
-        "month" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $a_links=array("global" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=Y",
+        "all" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N",
+        "year" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $ip_links=array("all" => $this->page_link."&amp;fAStat_tabsheet=stats_by_ip",
-        "year" => $this->page_link."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year",
-        "month" => $this->page_link."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $ip_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip",
+        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $img_links=array("all" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image",
-        "year" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year",
-        "month" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $img_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image",
+        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
 
     /* periode label + navigation links */
@@ -1129,16 +1126,16 @@ class AStat_AIP extends AStat_AIM
 
     $dir_links = "";
     $page_link = "";
-    $a_links=array("global" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=Y",
-        "all" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N",
-        "year" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year",
-        "month" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $a_links=array("global" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=Y",
+        "all" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N",
+        "year" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $cat_links=array("all" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category",
-        "year" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year",
-        "month" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $cat_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category",
+        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
     /* make navigation links */
     if($day!="")
@@ -1275,16 +1272,16 @@ class AStat_AIP extends AStat_AIM
 
     $dir_links = "";
     $page_link = "";
-    $a_links=array("global" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=Y",
-        "all" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N",
-        "year" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year",
-        "month" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->page_link."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $a_links=array("global" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=Y",
+        "all" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N",
+        "year" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $img_links=array("all" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image",
-        "year" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year",
-        "month" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->page_link."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $img_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image",
+        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
     /* navigation links */
     if($day!="")
@@ -1433,11 +1430,11 @@ class AStat_AIP extends AStat_AIM
 
   private function add_ip_to_filter($ip)
   {
-    if(strpos($this->my_config['AStat_BlackListedIP'].",", $ip.",")===false)
+    if(strpos($this->config['AStat_BlackListedIP'].",", $ip.",")===false)
     {
-      ($this->my_config['AStat_BlackListedIP']!='')?$this->my_config['AStat_BlackListedIP'].=",":"";
-      $this->my_config['AStat_BlackListedIP'].=$ip;
-      $this->save_config();
+      ($this->config['AStat_BlackListedIP']!='')?$this->config['AStat_BlackListedIP'].=",":"";
+      $this->config['AStat_BlackListedIP'].=$ip;
+      $this->saveConfig();
     }
   }
 
@@ -1455,15 +1452,15 @@ class AStat_AIP extends AStat_AIM
     {
       if(!is_adviser())
       {
-        reset($this->my_config);
-        while (list($key, $val) = each($this->my_config))
+        reset($this->config);
+        while (list($key, $val) = each($this->config))
         {
           if(isset($_POST['f_'.$key]))
           {
-            $this->my_config[$key] = $_POST['f_'.$key];
+            $this->config[$key] = $_POST['f_'.$key];
           }
         }
-        if($this->save_config())
+        if($this->saveConfig())
         {
           array_push($page['infos'], l10n('AStat_config_saved'));
         }
@@ -1485,24 +1482,24 @@ class AStat_AIP extends AStat_AIM
     $template_list_labels=array();
 
     //standards inputs zones
-    reset($this->my_config);
-    while (list($key, $val) = each($this->my_config))
+    reset($this->config);
+    while (list($key, $val) = each($this->config))
     {
       $template_datas["f_".$key]=$val;
     }
 
     //
-    $template_datas['ajaxurl']=$this->page_link;
+    $template_datas['ajaxurl']=$this->getAdminLink();
 
     // define selected item for lists zones
-    $template_datas['AStat_periods_selected']=$this->my_config['AStat_default_period'];
-    $template_datas['AStat_defaultsortcat_selected']=$this->my_config['AStat_DefaultSortCat'];
-    $template_datas['AStat_defaultsortip_selected']=$this->my_config['AStat_DefaultSortIP'];
-    $template_datas['AStat_defaultsortimg_selected']=$this->my_config['AStat_DefaultSortImg'];
+    $template_datas['AStat_periods_selected']=$this->config['AStat_default_period'];
+    $template_datas['AStat_defaultsortcat_selected']=$this->config['AStat_DefaultSortCat'];
+    $template_datas['AStat_defaultsortip_selected']=$this->config['AStat_DefaultSortIP'];
+    $template_datas['AStat_defaultsortimg_selected']=$this->config['AStat_DefaultSortImg'];
 
-    $template_datas['AStat_showthumbcat_selected']=$this->my_config['AStat_ShowThumbCat'];
-    $template_datas['AStat_showthumbimg_selected']=$this->my_config['AStat_ShowThumbImg'];
-    $template_datas['AStat_UseBlackList_selected']=$this->my_config['AStat_UseBlackList'];
+    $template_datas['AStat_showthumbcat_selected']=$this->config['AStat_ShowThumbCat'];
+    $template_datas['AStat_showthumbimg_selected']=$this->config['AStat_ShowThumbImg'];
+    $template_datas['AStat_UseBlackList_selected']=$this->config['AStat_UseBlackList'];
 
     // making lists zones
     // default period
@@ -1615,7 +1612,7 @@ class AStat_AIP extends AStat_AIM
         }
         elseif($_REQUEST['fAStat_purge_history_type']=='byipid0')
         {
-          $fparam=$this->my_config['AStat_BlackListedIP'];
+          $fparam=$this->config['AStat_BlackListedIP'];
         }
         else
         {
@@ -2145,9 +2142,9 @@ class AStat_AIP extends AStat_AIM
 
   private function purge_history_count_ipid0()
   {
-    if($this->my_config['AStat_BlackListedIP']!="")
+    if($this->config['AStat_BlackListedIP']!="")
     {
-      $list=explode(',', $this->my_config['AStat_BlackListedIP']);
+      $list=explode(',', $this->config['AStat_BlackListedIP']);
     }
     else
     {
@@ -2156,11 +2153,11 @@ class AStat_AIP extends AStat_AIM
 
     $returned=array(0,count($list));
 
-    if($this->my_config['AStat_BlackListedIP']!='')
+    if($this->config['AStat_BlackListedIP']!='')
     {
       $sql="SELECT COUNT(id)
             FROM ".HISTORY_TABLE."
-            WHERE ".$this->make_IP_where_clause($this->my_config['AStat_BlackListedIP']);
+            WHERE ".$this->make_IP_where_clause($this->config['AStat_BlackListedIP']);
       $result=pwg_query($sql);
       if($result)
       {
