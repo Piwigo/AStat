@@ -68,14 +68,14 @@ $lang['AStat_Nfo_IP'] = "For the choosen period, represent number of pages & pic
 $lang['AStat_Nfo_Period'] = "For the choosen period, represent number of pages & pictures seen, as the number of distincts IP adresses connected";
 
 $lang['AStat_IP_geolocalisation'] = 'Geolocalisation';
-$lang['AStat_PeriodPerDefault'] = 'Default choosen period';
-$lang['AStat_specific_period_config'] = 'Specifics settings for statistics by periods';
+$lang['AStat_PeriodPerDefault'] = 'Default chosen period';
+$lang['AStat_specific_period_config'] = 'Specific settings for statistics by periods';
 $lang['AStat_PeriodPerDefault_global'] = 'Global';
 $lang['AStat_PeriodPerDefault_all'] = 'All years';
-$lang['AStat_PeriodPerDefault_year'] = 'The actual year';
-$lang['AStat_PeriodPerDefault_month'] = 'The actual month';
-$lang['AStat_PeriodPerDefault_day'] = 'The actual day';
-$lang['AStat_config_saved'] = 'Settings are saved !';
+$lang['AStat_PeriodPerDefault_year'] = 'The current year';
+$lang['AStat_PeriodPerDefault_month'] = 'The current month';
+$lang['AStat_PeriodPerDefault_day'] = 'The current day';
+$lang['AStat_config_saved'] = 'Settings are saved!';
 $lang['AStat_ShowThumbCat'] = 'Show the representative category\'s thumbnail';
 $lang['AStat_yesno_true'] = 'Yes';
 $lang['AStat_yesno_false'] = 'No';
@@ -104,9 +104,9 @@ $lang['AStat_BarColor_Cat'] = 'Number of categories';
 $lang['AStat_deleted_user'] = 'Deleted user';
 $lang['AStat_SortIPLabel'] = 'Sorted by ';
 $lang['AStat_sortip_picture'] = 'Number of pictures seen';
-$lang['AStat_sortip_ip'] = 'User / IP Adress';
+$lang['AStat_sortip_ip'] = 'User / IP Address';
 $lang['AStat_sortip_page'] = 'Number of pages seen';
-$lang['AStat_RefIPLabel'] = 'User / IP Adress';
+$lang['AStat_RefIPLabel'] = 'User / IP Address';
 $lang['AStat_DefaultSortIP'] = 'Default sort';
 $lang['AStat_general_config'] = 'Global settings';
 $lang['AStat_SeeTimeRequests'] = 'Show time execution of requests';
@@ -211,7 +211,7 @@ $lang['AStat_tools_purge_history_ipid0'] = "To purge events associated with IP f
 $lang['AStat_IP_blacklist'] = "Add to the blacklist";
 $lang['AStat_enableddisabled_true'] = "Filter enabled";
 $lang['AStat_enableddisabled_false'] = "Filter disabled";
-$lang['AStat_enableddisabled_invert'] = "Filtre inverted";
+$lang['AStat_enableddisabled_invert'] = "Filter inverted";
 
 
 ?>
