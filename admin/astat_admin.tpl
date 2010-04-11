@@ -3,7 +3,6 @@
 
 
 <div style="position:relative;top:-24px;clear:right;">
-  {$tabsheet}
 
   {if isset($datas)}
     <p>{$datas.ASTAT_NFO_STAT}</p>
