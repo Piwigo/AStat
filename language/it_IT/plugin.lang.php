@@ -1,4 +1,8 @@
 <?php
+
+//fr_FR.8859-1
+
+//--- >> v1.1.1 >>
 $lang['Pictures_seen'] = 'Immagini viste';
 $lang['Categories_seen'] = 'Categorie viste';
 $lang['IP_visit'] = 'Indirizzi IP';
@@ -15,6 +19,7 @@ $lang['AStat_period_label_months'] = 'Mesi';
 $lang['AStat_period_label_years'] = 'Anni';
 $lang['AStat_period_label_all'] = 'Tutti gli anni';
 $lang['AStat_period_label_global'] = 'Globale';
+
 
 $lang['AStat_day_of_week_0'] = 'Domenica';
 $lang['AStat_day_of_week_1'] = 'Lunedì';
@@ -59,6 +64,7 @@ $lang['AStat_page_label'] = 'Pagina';
 $lang['AStat_pages_label'] = 'Pagine';
 $lang['AStat_nb_total_ip'] = 'Numero totale d\'indirizzi IP';
 $lang['AStat_nb_total_category'] = 'Numero totale di categorie';
+
 $lang['AStat_Nfo_Category'] = 'Per il periodo, rappresentazione in percentuale del numero di pagine & immagini viste per categorie, e del numero medio di visualizzazione per immagine';
 $lang['AStat_Nfo_IP'] = 'Per il periodo, rappresentazione del numero di pagine & immagini viste per un indirizzo IP';
 $lang['AStat_Nfo_Period'] = 'Per il periodo, rappresentazione del numero di pagine & immagini viste, e del numero d\'indirizzi IP distinti che vi si sono collegtati';
@@ -66,16 +72,16 @@ $lang['AStat_Nfo_Period'] = 'Per il periodo, rappresentazione del numero di pagi
 $lang['AStat_IP_geolocalisation'] = 'Geolocalizzazione ';
 $lang['AStat_PeriodPerDefault'] = 'Periodo visualizzato di default';
 $lang['AStat_specific_period_config'] = 'Configurazione statistica specifica per periodo';
-$lang['AStat_PeriodPerDefault_global'] ='Globale';
-$lang['AStat_PeriodPerDefault_all'] ='Tutti gli anni';
-$lang['AStat_PeriodPerDefault_year'] ='Anno in corso';
-$lang['AStat_PeriodPerDefault_month'] ='Mese in corso';
+$lang['AStat_PeriodPerDefault_global'] = 'Globale';
+$lang['AStat_PeriodPerDefault_all'] = 'Tutti gli anni';
+$lang['AStat_PeriodPerDefault_year'] = 'Anno in corso';
+$lang['AStat_PeriodPerDefault_month'] = 'Mese in corso';
 $lang['AStat_PeriodPerDefault_day'] = 'Il giorno stesso';
-$lang['AStat_config_saved'] ='Configurazione registrata!';
+$lang['AStat_config_saved'] = 'Configurazione registrata!';
 $lang['AStat_ShowThumbCat'] = 'Visualizzare la rappresentativa della categoria';
-$lang['AStat_yesno_true'] ='Si';
-$lang['AStat_yesno_false'] ='No';
-$lang['AStat_sortcat_page'] ='Rappresentazione della percentuale delle pagine visitate';
+$lang['AStat_yesno_true'] = 'Si';
+$lang['AStat_yesno_false'] = 'No';
+$lang['AStat_sortcat_page'] = 'Rappresentazione della percentuale delle pagine visitate';
 $lang['AStat_sortcat_picture'] = 'Rappresentazione della percentuale delle immagini viste';
 $lang['AStat_sortcat_nbpicture'] = 'Numero medio di visite per immagine';
 $lang['AStat_DefaultSortCat'] = 'Ordine  di default';
@@ -85,7 +91,7 @@ $lang['AStat_version'] = 'versione';
 $lang['AStat_RefImageLabel'] = 'Categorie / Nome dell\'immagine';
 $lang['AStat_by_image'] = 'Per immagine';
 $lang['AStat_nb_total_image'] = 'Numero di immagini totale';
-$lang['AStat_SortImgLabel'] ='Ordinato  per:';
+$lang['AStat_SortImgLabel'] = 'Ordinato  per:';
 $lang['AStat_sortimg_picture'] = 'Numero di visite dell\'immagine';
 $lang['AStat_sortimg_catname'] = 'Ordine alfabetico - Categorie / Nome dell\'immagine';
 $lang['AStat_Nfo_Image'] = 'Per il periodo, il numero di visite per ogni immagine, e la percentuale che questo rappresenta sul numero totale di immagini';
@@ -96,39 +102,39 @@ $lang['AStat_DefaultSortImg'] = 'Ordine di default';
 
 //--- << v1.1.1 <<
 //--- >> v1.2.0 >>
-$lang['AStat_BarColor_Cat'] ='Numero di categrorie';
-$lang['AStat_deleted_user'] ='Utente cancellato';
-$lang['AStat_SortIPLabel'] ='Ordinato  per:';
-$lang['AStat_sortip_picture'] ='Numero di immagini viste';
-$lang['AStat_sortip_ip'] ='Utente/indirizzo ';
-$lang['AStat_sortip_page'] ='Numero di pagine viste';
-$lang['AStat_RefIPLabel'] ='Utente/indirizzo IP';
-$lang['AStat_DefaultSortIP'] ='Ordine  di default';
-$lang['AStat_general_config'] ='Configurazione generale';
-$lang['AStat_SeeTimeRequests'] ='Visualizzare la durata d\'esecuzione delle richieste';
-$lang['AStat_time_request_label'] ='Esecuzione della richiesta in';
+$lang['AStat_BarColor_Cat'] = 'Numero di categrorie';
+$lang['AStat_deleted_user'] = 'Utente cancellato';
+$lang['AStat_SortIPLabel'] = 'Ordinato  per:';
+$lang['AStat_sortip_picture'] = 'Numero di immagini viste';
+$lang['AStat_sortip_ip'] = 'Utente/indirizzo ';
+$lang['AStat_sortip_page'] = 'Numero di pagine viste';
+$lang['AStat_RefIPLabel'] = 'Utente/indirizzo IP';
+$lang['AStat_DefaultSortIP'] = 'Ordine  di default';
+$lang['AStat_general_config'] = 'Configurazione generale';
+$lang['AStat_SeeTimeRequests'] = 'Visualizzare la durata d\'esecuzione delle richieste';
+$lang['AStat_time_request_label'] = 'Esecuzione della richiesta in';
 
 $lang['AStat_section_categories'] = $lang['Categories'];
 $lang['AStat_section_tags'] = $lang['Tags'];
 $lang['AStat_section_search'] = $lang['search'];
-$lang['AStat_section_list'] = $lang['random_cat'] ;
+$lang['AStat_section_list'] = $lang['random_cat'] ; // correction v1.2.1
 $lang['AStat_section_favorites'] = $lang['favorites'];
 $lang['AStat_section_most_visited'] = $lang['most_visited_cat'];
 $lang['AStat_section_best_rated'] = $lang['best_rated_cat'];
 $lang['AStat_section_recent_pics'] = $lang['recent_pics_cat'];
 $lang['AStat_section_recent_cats'] = $lang['recent_cats_cat'];
-$lang['AStat_section_additional_page'] = 'Plugin <a href=""http://phpwebgallery.net/ext/extension_view.php?eid=153"">Additional pages</a>';
-$lang['AStat_section_web_services'] = 'Plugin <a href=""http://phpwebgallery.net/ext/extension_view.php?eid=171"">Web services statistics</a>';
-$lang['AStat_section_most_commented'] = 'Plugin <a href=""http://phpwebgallery.net/ext/extension_view.php?eid=145"">Most Commented</a>';
+$lang['AStat_section_additional_page'] = 'Plugin <a href="http://phpwebgallery.net/ext/extension_view.php?eid=153">Additional pages</a>';
+$lang['AStat_section_web_services'] = 'Plugin <a href="http://phpwebgallery.net/ext/extension_view.php?eid=171">Web services statistics</a>';
+$lang['AStat_section_most_commented'] = 'Plugin <a href="http://phpwebgallery.net/ext/extension_view.php?eid=145">Most Commented</a>';
 $lang['AStat_section_unknown'] = 'Non gestita [%s]';
 
 $lang['AStat_date_time_format'] = 'd/m/Y H:i:s';
-$lang['AStat_event'] ='evento';
-$lang['AStat_events'] ='eventi';
-$lang['AStat_section_label'] ='Sezione';
+$lang['AStat_event'] = 'evento';
+$lang['AStat_events'] = 'eventi';
+$lang['AStat_section_label'] = 'Sezione';
 $lang['AStat_deleted_picture'] = 'L\'immagine non è più nella base dati';
-$lang['AStat_tools'] ='Strumenti';
-$lang['AStat_tools_title'] ='Strumenti di manutenzione';
+$lang['AStat_tools'] = 'Strumenti';
+$lang['AStat_tools_title'] = 'Strumenti di manutenzione';
 $lang['AStat_tools_result_ok'] = 'L\'azione è stata condotta correttamente';
 
 $lang['AStat_tools_deleted_user'] = 'Aggiornare nella cronologia i riferimenti degli utenti';
@@ -150,21 +156,21 @@ $lang['AStat_tools_deleted_picture_apply'] = 'Effettuare l\'aggiornamento';
 //--- >> v1.3.0 >>
 
 $lang['AStat_section_old_deleted_cat'] = 'Vecchia categoria che non è stato possibile importare';
-$lang['AStat_tools_general_nfo_nfo'] ='<ul><li>%s eventi presenti nella cronologia</li>
-    <li>Dimensione della tabella %s (Tabella: %s ; Index: %s)</li>
-    <li>Data del primo evento : %s</li>
-    <li>Data del ultimo evento : %s</li>';
-$lang['AStat_tools_purge_history'] ='"Ripulire" la cronologia';
-$lang['AStat_tools_purge_history_nfo'] ='Elimina della cronologia tutti gli enventi precedente alla data ed ottimizza la tabella. <br><b>Questa azione è irreversibile</b>.';
-$lang['AStat_tools_purge_history_apply'] ='Ripulire';
-$lang['AStat_tools_purge_history_date'] ='"Ripulire" gli eventi precedente di ';
-$lang['AStat_tools_purge_history_imageid0'] ='"Ripulire" gli eventi associati alle immagini eliminate (%s eventi nella cronologia)';
-$lang['AStat_tools_purge_history_categoryid0'] ='"Ripulire" gli eventi associati alle catégorie eliminate (%s eventi nella cronologia)';
-$lang['AStat_tools_result_ko'] ='Un errore si è verificato, l\'azione non ha potuto essere eseguita correttamente ';
-$lang['AStat_tools_invalid_date'] ='La data inserita non è valida!';
-$lang['AStat_tools_invalid_date2'] ='La data inserita è superiore o uguale alla data del giorno!';
-$lang['AStat_tools_deleted_picture_error0'] ='La preparazione non ha funzionato';
-$lang['AStat_tools_deleted_picture_error1'] ='La riassociazione degli eventi della cronologia non ha funzionato';
+$lang['AStat_tools_general_nfo_nfo'] = '<ul><li>%s eventi presenti nella cronologia</li>
+			<li>Dimensione della tabella %s (Tabella: %s ; Index: %s)</li>
+			<li>Data del primo evento : %s</li>
+			<li>Data del ultimo evento : %s</li>';
+$lang['AStat_tools_purge_history'] = '"Ripulire" la cronologia';
+$lang['AStat_tools_purge_history_nfo'] = 'Elimina della cronologia tutti gli enventi precedente alla data ed ottimizza la tabella. <br><b>Questa azione è irreversibile</b>.';
+$lang['AStat_tools_purge_history_apply'] = 'Ripulire';
+$lang['AStat_tools_purge_history_date'] = '"Ripulire" gli eventi precedente di ';
+$lang['AStat_tools_purge_history_imageid0'] = '"Ripulire" gli eventi associati alle immagini eliminate (%s eventi nella cronologia)';
+$lang['AStat_tools_purge_history_categoryid0'] = '"Ripulire" gli eventi associati alle catégorie eliminate (%s eventi nella cronologia)';
+$lang['AStat_tools_result_ko'] = 'Un errore si è verificato, l\'azione non ha potuto essere eseguita correttamente ';
+$lang['AStat_tools_invalid_date'] = 'La data inserita non è valida!';
+$lang['AStat_tools_invalid_date2'] = 'La data inserita è superiore o uguale alla data del giorno!';
+$lang['AStat_tools_deleted_picture_error0'] = 'La preparazione non ha funzionato';
+$lang['AStat_tools_deleted_picture_error1'] = 'La riassociazione degli eventi della cronologia non ha funzionato';
 $lang['AStat_tools_deleted_picture_ok0'] = 'La preparazione della tabella è riuscita, potete procedere alla riorganizzazione dei file sul server';
 $lang['AStat_tools_deleted_picture_ok1'] = 'La riorganizzazione dei eventi della cronologia è riuscita';
 
@@ -185,18 +191,20 @@ $lang['AStat_tools_deleted_category_apply'] = 'Effettuare l\'aggiornamento';
 $lang['AStat_section_deleted_cat'] = 'Categoria eliminata';
 
 
+//--- << v1.3.0 <<
+//--- >> v1.3.2 >>
 $lang['AStat_adviser_not_authorized'] = 'Azione annulata: il profilo di consigliere non permette di effettuare questo tipo di azione';
-
-
+//--- << v1.3.2 <<
+//--- >> v1.4.0 >>
 $lang['AStat_catfilter_list'] = 'Applicare un filtro sulle catagorie';
 $lang['AStat_nofilter'] = '--- Nessun filtro ---';
+//--- << v1.4.0 <<
 
-
-
+//--- >> v2.0.0 >>
 $lang['AStat_confignotsaved'] = 'È sorto un errore, la configurazione non è stata registrata';
-$lang['AStat_gpc2_not_installed'] ='"Il plugin \'Grum Plugins Classes 2\' (versione >= %s) è necessario per i buon funzionamento di AStat"';
+$lang['AStat_gpc2_not_installed'] = '"Il plugin \'Grum Plugins Classes 2\' (versione >= %s) è necessario per i buon funzionamento di AStat"';
 
-
+//--- >> v2.1.0 >>
 $lang['AStat_BlackListedIP'] = 'blacklist degli indirizzi IP';
 $lang['AStat_AddIP'] = 'Aggiungere all\'elenco';
 $lang['AStat_DelIP'] = 'Eliminare dall\'elenco';
@@ -205,5 +213,10 @@ $lang['AStat_IP_blacklist'] = 'Mettere nella blacklist';
 $lang['AStat_IP_blacklist'] = 'Mettere nella blacklist';
 $lang['AStat_enableddisabled_true'] = 'Filtro attivato';
 $lang['AStat_enableddisabled_false'] = 'Filtro inattivo';
-$lang['AStat_enableddisabled_invert'] = 'Filtro invertito';
+$lang['AStat_enableddisabled_invert'] = 'Filtro inverso';
+
+//--- > 2.2.0
+$lang['To install this plugin, you need to install Grum Plugin Classes %s before'] = 'Per installare questo plugin, dovete prima di tutto, installare il plugin Grum Plugin Classes %s';
+
+
 ?>
