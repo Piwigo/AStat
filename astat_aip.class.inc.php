@@ -568,11 +568,11 @@ class AStat_AIP extends AStat_AIM
                 );
     $returned0 = array();
 
-    $sql_select="select SQL_CALC_FOUND_ROWS ";
+    $sql_select="SELECT SQL_CALC_FOUND_ROWS ";
 
-    $sql= "category_id, if(category_id > 0, ".CATEGORIES_TABLE.".name, section) as IdCat,
-  count(".HISTORY_TABLE.".id) as NbPages, MaxPages.somme, 100*(count(".HISTORY_TABLE.".id)/MaxPages.somme) as PctPages,
-  count(".HISTORY_TABLE.".image_id) as NbImg, MaxImg.somme, 100*(count(".HISTORY_TABLE.".image_id)/MaxImg.somme) as PctImg, ic2.nb_images as NbImgCat, (count(".HISTORY_TABLE.".image_id)/ic2.nb_images) as RatioImg, greatest(100*(count(".HISTORY_TABLE.".id)/MaxPages.somme), 100*(count(".HISTORY_TABLE.".image_id)/MaxImg.somme)) as MaxPct ";
+    $sql= "category_id, IF(category_id > 0, ".CATEGORIES_TABLE.".name, section) AS IdCat,
+  COUNT(".HISTORY_TABLE.".id) AS NbPages, MaxPages.somme, 100*(count(".HISTORY_TABLE.".id)/MaxPages.somme) AS PctPages,
+  COUNT(".HISTORY_TABLE.".image_id) AS NbImg, MaxImg.somme, 100*(count(".HISTORY_TABLE.".image_id)/MaxImg.somme) AS PctImg, ic2.nb_images as NbImgCat, (COUNT(".HISTORY_TABLE.".image_id)/ic2.nb_images) AS RatioImg, greatest(100*(COUNT(".HISTORY_TABLE.".id)/MaxPages.somme), 100*(COUNT(".HISTORY_TABLE.".image_id)/MaxImg.somme)) AS MaxPct ";
 
     if($show_thumb=='true')
     {
@@ -585,27 +585,27 @@ class AStat_AIP extends AStat_AIM
       $sql_fromthumb = "";
     }
 
-    $sql_from = " from (".HISTORY_TABLE." LEFT JOIN ".CATEGORIES_TABLE." ON ".CATEGORIES_TABLE.".id = ".HISTORY_TABLE.".category_id),
-(select category_id as catid, count(image_id) as nb_images, representative_picture_id
- from ".IMAGE_CATEGORY_TABLE.", ".CATEGORIES_TABLE."
- where ".CATEGORIES_TABLE.".id = ".IMAGE_CATEGORY_TABLE.".category_id group by category_id) as ic2 ";
+    $sql_from = " FROM (".HISTORY_TABLE." LEFT JOIN ".CATEGORIES_TABLE." ON ".CATEGORIES_TABLE.".id = ".HISTORY_TABLE.".category_id),
+(SELECT category_id AS catid, COUNT(image_id) AS nb_images, representative_picture_id
+ FROM ".IMAGE_CATEGORY_TABLE.", ".CATEGORIES_TABLE."
+ WHERE ".CATEGORIES_TABLE.".id = ".IMAGE_CATEGORY_TABLE.".category_id group by category_id) AS ic2 ";
     $sql_where = "";
-    $sql_group=" group by category_id, section ";
+    $sql_group=" GROUP BY category_id, section ";
     $sql_group2="";
-    $sql_order=" order by ".$sortlist[$sortcat];
-    $sql_limit=" limit ".(($pagenumber-1)* $nbipperpage).", ".$nbipperpage;
+    $sql_order=" ORDER BY ".$sortlist[$sortcat];
+    $sql_limit=" LIMIT ".(($pagenumber-1)* $nbipperpage).", ".$nbipperpage;
 
     if($day!="")
     {
-      $sql_where=" where YEAR(date) = $year and MONTH(date) = $month and DAY(date)= $day ";
+      $sql_where=" WHERE YEAR(date) = $year AND MONTH(date) = $month AND DAY(date)= $day ";
     }
     elseif($month!="")
     {
-      $sql_where=" where YEAR(date) = $year and MONTH(date) = $month ";
+      $sql_where=" WHERE YEAR(date) = $year AND MONTH(date) = $month ";
     }
     elseif($year!="")
     {
-      $sql_where=" where YEAR(date) = $year ";
+      $sql_where=" WHERE YEAR(date) = $year ";
     }
     else { }
 
@@ -616,22 +616,22 @@ class AStat_AIP extends AStat_AIM
       $sql_where.=" category_id IN (".$catfilter.")";
     }
 
-    $sql_max=", (select count(id) as somme from ".HISTORY_TABLE.$sql_where.$sql_group2.") as MaxPages,
-          (select count(image_id) as somme from ".HISTORY_TABLE.$sql_where.$sql_group2.") as MaxImg ";
+    $sql_max=", (SELECT COUNT(id) AS somme FROM ".HISTORY_TABLE.$sql_where.$sql_group2.") AS MaxPages,
+          (SELECT COUNT(image_id) AS somme FROM ".HISTORY_TABLE.$sql_where.$sql_group2.") AS MaxImg ";
 
-    ($sql_where=="")?$sql_where=" where ":$sql_where.=" and ";
+    ($sql_where=="")?$sql_where=" WHERE ":$sql_where.=" AND ";
     $sql_where .= "  ic2.catid = ".HISTORY_TABLE.".category_id ";
 
     if(($this->config['AStat_UseBlackList']!="false")&&($this->config['AStat_BlackListedIP']!=""))
     {
-      ($this->config['AStat_UseBlackList']=="true")?$sql_where .= " NOT ":"";
+      ($this->config['AStat_UseBlackList']=="true")?$sql_where .= " AND NOT ":"";
       $sql_where .= $this->make_IP_where_clause($this->config['AStat_BlackListedIP']);
     }
 
     $sql=$sql_select.$sql.$sql_thumb.$sql_from.$sql_fromthumb.$sql_max.$sql_where.$sql_group.$sql_order.$sql_limit;
 
     $result = pwg_query($sql);
-    $sql="select FOUND_ROWS()";
+    $sql="SELECT FOUND_ROWS()";
 
     $i=0;
     while ($row = pwg_db_fetch_assoc($result))
