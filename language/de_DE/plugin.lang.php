@@ -216,5 +216,13 @@ $lang['AStat_enableddisabled_invert'] = "Filter invertieren";
 //--- > 2.2.0
 $lang['To install this plugin, you need to install Grum Plugin Classes %s before'] = 'Um diesen Plugin zu installieren, müssen Sie zuerst Grum Plugin Classes %s installieren';
 
-
+//--- >> v2.1.0 >>
+$lang['AStat_BlackListedIP'] = "Gesperrte IP";
+$lang['AStat_AddIP'] = "In die Sperrliste aufnehmen";
+$lang['AStat_DelIP'] = "Aus Sperrliste entfernen";
+$lang['AStat_tools_purge_history_ipid0'] = "Entfernen von Ereignissen, die mit einer IP aus der Sperrliste im Zusammenhang stehen (%s Einträge in der Sperrliste, %s Ereignisse in der History)";
+$lang['AStat_IP_blacklist'] = "In die Sperrliste aufnehmen";
+$lang['AStat_enableddisabled_true'] = "Filter aktivieren";
+$lang['AStat_enableddisabled_false'] = "Filter deaktivieren";
+$lang['AStat_enableddisabled_invert'] = "Filter invertieren";
 ?>
