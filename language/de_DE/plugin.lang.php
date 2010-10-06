@@ -2,11 +2,11 @@
 
 //--- >> v1.1.1 >>
 $lang['Pictures_seen'] = 'Betrachtete Bilder';
-$lang['Categories_seen'] = 'Betrachtete Kategorien';
+$lang['Categories_seen'] = 'Betrachtete Alben';
 $lang['IP_visit'] = 'IP Adressen';
 $lang['AStat_title_page'] = 'Erweiterte Statistiken';
 $lang['IP_label'] = 'IP Adresse';
-$lang['CATEGORY_LABEL'] = 'Kategorie';
+$lang['CATEGORY_LABEL'] = 'Album';
 $lang['pct_Pictures_seen'] = '%Bilder';
 $lang['pct_Pages_seen'] = '%Seiten';
 $lang['ratio_Pictures_seen'] = 'Bilder betrachtet';
@@ -42,7 +42,7 @@ $lang['AStat_month_of_year_12'] = 'Dezember';
 
 $lang['AStat_by_period'] = 'Nach Zeitraum';
 $lang['AStat_by_ip'] = 'Nach IP';
-$lang['AStat_by_category'] = 'Nach Kategorie';
+$lang['AStat_by_category'] = 'Nach Album';
 $lang['AStat_config'] = 'Einstellungen';
 
 $lang['AStat_BarColor_Pages'] = 'Seitenanzahl';
@@ -54,16 +54,16 @@ $lang['AStat_config_colors_and_graph'] = 'Farb- und Grafikeinstellungen';
 $lang['AStat_specific_ip_config'] = 'Einstellungen für Statistiken nach IP Adressen';
 $lang['AStat_NbIPPerPages'] = 'Anzahl der IP Adressen pro Seite';
 $lang['AStat_MaxBarWidth'] = 'Maximale Balkenbreite (Pixel)';
-$lang['AStat_NbCatPerPages'] = 'Anzahl der Kategorien pro Seite';
-$lang['AStat_specific_category_config'] = 'Einstellungen für Statistiken nach Kategorien';
+$lang['AStat_NbCatPerPages'] = 'Anzahl der Alben pro Seite';
+$lang['AStat_specific_category_config'] = 'Einstellungen für Statistiken nach Alben';
 $lang['AStat_do_save'] = 'Speichern';
 
 $lang['AStat_page_label'] = 'Seite';
 $lang['AStat_pages_label'] = 'Seiten';
 $lang['AStat_nb_total_ip'] = 'Gesamtanzahl von IP Adressen';
-$lang['AStat_nb_total_category'] = 'Gesamtanzahl von Kategorien';
+$lang['AStat_nb_total_category'] = 'Gesamtanzahl von Alben';
 
-$lang['AStat_Nfo_Category'] = "Für den angegebenen Zeitraum wird die Anzahl der Seiten- und Bildaufrufe pro Kategorie in Prozent und die mittlere Anzahl der Bildaufrufe dargestellt";
+$lang['AStat_Nfo_Category'] = "Für den angegebenen Zeitraum wird die Anzahl der Seiten- und Bildaufrufe pro Album in Prozent und die mittlere Anzahl der Bildaufrufe dargestellt";
 $lang['AStat_Nfo_IP'] = "Für den angegebenen Zeitraum wird die Anzahl der Seiten- und Bildaufrufe pro IP Adresse dargestellt";
 $lang['AStat_Nfo_Period'] = "Für den angegebenen Zeitraum wird die Anzahl der Seiten- und Bildaufrufe sowie die Anzahl unterschiedlicher IP Adressen dargestellt";
 
@@ -76,7 +76,7 @@ $lang['AStat_PeriodPerDefault_year'] = 'Das aktuelle Jahr';
 $lang['AStat_PeriodPerDefault_month'] = 'Der aktuelle Monat';
 $lang['AStat_PeriodPerDefault_day'] = 'Der aktuelle Tag';
 $lang['AStat_config_saved'] = 'Die Einstellungen wurden gespeichert!';
-$lang['AStat_ShowThumbCat'] = 'Zeige das der Kategorie zugewiesene Miniaturbild';
+$lang['AStat_ShowThumbCat'] = 'Zeige das dem Album zugewiesene Miniaturbild';
 $lang['AStat_yesno_true'] = 'Ja';
 $lang['AStat_yesno_false'] = 'Nein';
 $lang['AStat_sortcat_page'] = 'Prozentuelle Darstellung der aufgerufenen Seiten';
@@ -86,12 +86,12 @@ $lang['AStat_DefaultSortCat'] = 'Standardsortierung';
 $lang['AStat_SortCatLabel'] = 'Sortierung nach ';
 $lang['AStat_version'] = 'version ';
 
-$lang['AStat_RefImageLabel'] = 'Kategorie / Bildname';
+$lang['AStat_RefImageLabel'] = 'Album / Bildname';
 $lang['AStat_by_image'] = 'Pro Bild';
 $lang['AStat_nb_total_image'] = 'Gesamtanzahl der Bilder';
 $lang['AStat_SortImgLabel'] = 'Sortiert nach ';
 $lang['AStat_sortimg_picture'] = 'Anzahl der Bildaufrufe';
-$lang['AStat_sortimg_catname'] = 'Alphabetische Auflistung - Kategorie / Bildname';
+$lang['AStat_sortimg_catname'] = 'Alphabetische Auflistung - Album / Bildname';
 $lang['AStat_Nfo_Image'] = "Für den angegebenen Zeitraum werden die Aufrufe jedes Bildes im Verhältnis zum Aufruf aller Fotos dargestellt (in Prozent)";
 $lang['AStat_specific_image_config'] = 'Einstellungen für Statistiken nach Bildern';
 $lang['AStat_NbImgPerPages'] = 'Anzahl Bilder pro Seite';
@@ -100,7 +100,7 @@ $lang['AStat_DefaultSortImg'] = 'Standardsortierung';
 
 //--- << v1.1.1 <<
 //--- >> v1.2.0 >>
-$lang['AStat_BarColor_Cat'] = 'Kategorieanzahl';
+$lang['AStat_BarColor_Cat'] = 'Albenanzahl';
 $lang['AStat_deleted_user'] = 'Gelöschte Benutzer';
 $lang['AStat_SortIPLabel'] = 'Sortierung nach ';
 $lang['AStat_sortip_picture'] = 'Anzahl aufgerufener Bilder';
@@ -153,7 +153,7 @@ $lang['AStat_tools_deleted_picture_apply'] = 'Update';
 
 //--- >> v1.3.0 >>
 
-$lang['AStat_section_old_deleted_cat'] = 'Die alte Kategorie kann nicht importiert werden ';
+$lang['AStat_section_old_deleted_cat'] = 'Das alte Album kann nicht importiert werden ';
 $lang['AStat_tools_general_nfo_nfo'] = "<ul><li>%s Ereignisse sind in der Historie gespeichert</li>
             <li>Tabellengewichtung %s (Tabelle: %s ; Index: %s)</li>
             <li>Datum des ersten Ereignisses : %s</li>
@@ -163,7 +163,7 @@ $lang['AStat_tools_purge_history_nfo'] = "Diese Funktion löscht alle vergangene
 $lang['AStat_tools_purge_history_apply'] = "Löschen";
 $lang['AStat_tools_purge_history_date'] = "Löschen aller Ereignisse vor ";
 $lang['AStat_tools_purge_history_imageid0'] = "Löschen aller Ereignisse in Verbindung mit gelöschten Bildern (%s Ereignisse in der Historie)";
-$lang['AStat_tools_purge_history_categoryid0'] = "Löschen aller Ereignisse in Verbindung mit gelöschten Kategorien (%s Ereignisse in der Historie)";
+$lang['AStat_tools_purge_history_categoryid0'] = "Löschen aller Ereignisse in Verbindung mit gelöschten Alben (%s Ereignisse in der Historie)";
 $lang['AStat_tools_result_ko'] = "Ein Fehler ist aufgetreten, die Maßnahme konnte nicht ordnungsgemäß durchgeführt werden";
 $lang['AStat_tools_invalid_date'] = "Das angegebene Datum ist nicht gültig !";
 $lang['AStat_tools_invalid_date2'] = "Das angegebene Datum ist der heutige Tag oder liegt in der Zukunft";
@@ -180,14 +180,14 @@ $lang['AStat_tools_deleted_picture_do'] = "Starten";
 $lang['AStat_tools_deleted_picture_nfo_nb'] = "(%s Bild-IDs können nicht mit %s Ereignissen in der Historie verbunden werden)";
 
 
-$lang['AStat_tools_deleted_category'] = 'Aktualisiere Kategorien in der Historie';
-$lang['AStat_tools_deleted_category_nfo0'] = "Ereignisse in der Historie, die sich auf gelöschte Kategorien referenzieren"; // v1.3.0
+$lang['AStat_tools_deleted_category'] = 'Aktualisiere Alben in der Historie';
+$lang['AStat_tools_deleted_category_nfo0'] = "Ereignisse in der Historie, die sich auf gelöschte Alben referenzieren"; // v1.3.0
 $lang['AStat_tools_deleted_category_nfo1'] = "%s nicht existierende Verzeichnisse in der Historie werden von %s Ereignissen referenziert : <ul>%s</ul>";
 $lang['AStat_tools_deleted_category_nfo2'] = "Alle Ereigniskategorien sind in der Historie vorhanden.";
 $lang['AStat_tools_deleted_category_apply'] = "Aktualisieren";
 
 
-$lang['AStat_section_deleted_cat'] = "Kategorie gelöscht";
+$lang['AStat_section_deleted_cat'] = "Album gelöscht";
 
 
 //--- << v1.3.0 <<
@@ -195,7 +195,7 @@ $lang['AStat_section_deleted_cat'] = "Kategorie gelöscht";
 $lang['AStat_adviser_not_authorized'] = "Vorgang abgebrochen: Das Beraterprofil besitzt nicht die benötigten Berechtigungen";
 //--- << v1.3.2 <<
 //--- >> v1.4.0 >>
-$lang['AStat_catfilter_list'] = "Wende Filter auf Kategorie an";
+$lang['AStat_catfilter_list'] = "Wende Filter auf Album an";
 $lang['AStat_nofilter'] = "--- Kein Filter ---";
 //--- << v1.4.0 <<
 
