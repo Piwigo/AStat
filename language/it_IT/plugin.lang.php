@@ -141,7 +141,7 @@ $lang['AStat_tools_deleted_user'] = 'Aggiornare nella cronologia i riferimenti d
 $lang['AStat_tools_deleted_user_nfo0'] = 'Questa funzione forza a <i>guest</i> l\'ID di un\'utente che ha generato un evento nella cronologia e di cui il conto è stato eliminato dal ';
 $lang['AStat_tools_deleted_user_nfo1'] = '%s ID sconosciuti sono presenti negli eventi della cronologia e impattano %s eventi:  <ul>%s </ul>';
 $lang['AStat_tools_deleted_user_nfo2'] = 'Tutti gli ID utente presenti negli eventi della cronologia esistono. Nessuna azione deve essere condotta.';
-$lang['AStat_tools_deleted_user_apply'] = 'Effettuare l\'aggiornamento'*;
+$lang['AStat_tools_deleted_user_apply'] = 'Effettuare l\'aggiornamento';
 
 $lang['AStat_tools_general_nfo'] = 'Informazioni generali sulla cronologia';
 
@@ -157,9 +157,9 @@ $lang['AStat_tools_deleted_picture_apply'] = 'Effettuare l\'aggiornamento';
 
 $lang['AStat_section_old_deleted_cat'] = 'Vecchia categoria che non è stato possibile importare';
 $lang['AStat_tools_general_nfo_nfo'] = '<ul><li>%s eventi presenti nella cronologia</li>
-			<li>Dimensione della tabella %s (Tabella: %s ; Index: %s)</li>
-			<li>Data del primo evento : %s</li>
-			<li>Data del ultimo evento : %s</li>';
+      <li>Dimensione della tabella %s (Tabella: %s ; Index: %s)</li>
+      <li>Data del primo evento : %s</li>
+      <li>Data del ultimo evento : %s</li>';
 $lang['AStat_tools_purge_history'] = '"Ripulire" la cronologia';
 $lang['AStat_tools_purge_history_nfo'] = 'Elimina della cronologia tutti gli enventi precedente alla data ed ottimizza la tabella. <br><b>Questa azione è irreversibile</b>.';
 $lang['AStat_tools_purge_history_apply'] = 'Ripulire';
@@ -174,7 +174,7 @@ $lang['AStat_tools_deleted_picture_error1'] = 'La riassociazione degli eventi de
 $lang['AStat_tools_deleted_picture_ok0'] = 'La preparazione della tabella è riuscita, potete procedere alla riorganizzazione dei file sul server';
 $lang['AStat_tools_deleted_picture_ok1'] = 'La riorganizzazione dei eventi della cronologia è riuscita';
 
-$lang['AStat_tools_deleted_picture_nfo3'] = 'Quando le immagini sono fisicamente spostati da una directory, la sincronizzazione le elimina dalla base dati e le re-inserisce con un nuovo riferimento. Un\'immagine spostata lascia dunque negli avvenimenti della cronologia dei riferimenti che non esistono più. </p><p><i>AStat</i> permette :<ul><li> di memorizzare i riferimenti alle immagini <u><i>prima</i></u> di procedere alla sincronizzazione </li><li> di riassociare negli eventi della cronologia le buone referenze di un'immagine <u><i>dopo</i></u> avere proceduto a una  sincronizzazione</li></ul></p><p><b>Attenzione!</b><br><ul><li> se delle immagini diverse hanno lo stesso nome file, il risultato è imprevedibile </li><li> Questa funzionalità non è in grado di trattare le immagini per il quale il file sul server è stato rinominata</li></ul>"";
+$lang['AStat_tools_deleted_picture_nfo3'] = 'Quando le immagini sono fisicamente spostati da una directory, la sincronizzazione le elimina dalla base dati e le re-inserisce con un nuovo riferimento. Un\'immagine spostata lascia dunque negli avvenimenti della cronologia dei riferimenti che non esistono più. </p><p><i>AStat</i> permette :<ul><li> di memorizzare i riferimenti alle immagini <u><i>prima</i></u> di procedere alla sincronizzazione </li><li> di riassociare negli eventi della cronologia le buone referenze di un immagine <u><i>dopo</i></u> avere proceduto a una  sincronizzazione</li></ul></p><p><b>Attenzione!</b><br><ul><li> se delle immagini diverse hanno lo stesso nome file, il risultato è imprevedibile </li><li> Questa funzionalità non è in grado di trattare le immagini per il quale il file sul server è stato rinominata</li></ul>';
 
 $lang['AStat_tools_deleted_picture_prepare_action'] = '<u>Prima</u> di procedere alla sincronizzazione : preparare <i>AStat</i>';
 $lang['AStat_tools_deleted_picture_do_action'] = '<u>Dopo</u> la sincronizzazione : riassociare i nuovi ID delle immagini agli eventi della storicizzazione ';
