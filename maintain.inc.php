@@ -16,33 +16,29 @@ if(!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
 if(!defined('ASTAT_DIR')) define('ASTAT_DIR' , basename(dirname(__FILE__)));
 if(!defined('ASTAT_PATH')) define('ASTAT_PATH' , PHPWG_PLUGINS_PATH . ASTAT_DIR . '/');
 
-include_once('astat_version.inc.php');
+include_once('astat_version.inc.php'); // => Don't forget to update this file !!
 
-//ini_set('error_reporting', E_ALL);
-//ini_set('display_errors', true);
 
-global $gpc_installed, $gpcNeeded, $lang; //needed for plugin manager compatibility
+global $gpcInstalled, $lang; //needed for plugin manager compatibility
 
 /* -----------------------------------------------------------------------------
-AStat-2 needs the Grum Plugin Classe
+AStat needs the Grum Plugin Classe
 ----------------------------------------------------------------------------- */
-$gpc_installed=false;
-$gpcNeeded="3.0.0";
+$gpcInstalled=false;
 if(file_exists(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/CommonPlugin.class.inc.php'))
 {
   @include_once(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/CommonPlugin.class.inc.php');
-  // need GPC release greater or equal than 3.0.0
-  if(CommonPlugin::checkGPCRelease(3,0,0))
+  // need GPC release greater or equal than 3.5.0
+  if(CommonPlugin::checkGPCRelease(ASTAT_GPC_NEEDED))
   {
-    @include_once("astat_aim.class.inc.php");
-    $gpc_installed=true;
+    include_once("astat_install.class.inc.php");
+    $gpcInstalled=true;
   }
 }
 
 function gpcMsgError(&$errors)
 {
-  global $gpcNeeded;
-  $msg=sprintf(l10n('To install this plugin, you need to install Grum Plugin Classes %s before'), $gpcNeeded);
+  $msg=sprintf(l10n('To install this plugin, you need to install Grum Plugin Classes %s before'), ASTAT_GPC_NEEDED);
   if(is_array($errors))
   {
     array_push($errors, $msg);
@@ -55,19 +51,19 @@ function gpcMsgError(&$errors)
 // -----------------------------------------------------------------------------
 
 
+
 load_language('plugin.lang', ASTAT_PATH);
+
+
+
 
 function plugin_install($plugin_id, $plugin_version, &$errors)
 {
-  global $prefixeTable, $gpc_installed, $gpcNeeded;
-  if($gpc_installed)
+  global $prefixeTable, $gpcInstalled;
+  if($gpcInstalled)
   {
-    $obj = new AStat_AIM($prefixeTable, __FILE__);
-    $obj->deleteConfig();
-    $obj->initConfig();
-    $obj->my_config['installed']=ASTAT_VERSION2;
-    $obj->saveConfig();
-    GPCCore::register($obj->getPluginName(), ASTAT_VERSION, $gpcNeeded);
+    $obj=new AStat_install($prefixeTable, __FILE__);
+    $result=$obj->install();
   }
   else
   {
@@ -77,40 +73,40 @@ function plugin_install($plugin_id, $plugin_version, &$errors)
 
 function plugin_activate($plugin_id, $plugin_version, &$errors)
 {
-  global $prefixeTable, $gpc_installed;
-  if($gpc_installed)
+  global $prefixeTable, $gpcInstalled;
+  if($gpcInstalled)
   {
-    $obj = new AStat_AIM($prefixeTable, __FILE__);
-    $obj->initConfig();
-    $obj->loadConfig();
-    $obj->my_config['installed']=ASTAT_VERSION2;
-    $obj->saveConfig();
-    $obj->alter_history_section_enum('deleted_cat');
-  }
-  else
-  {
-    gpcMsgError($errors);
+    $obj=new AStat_install($prefixeTable, __FILE__);
+    $result=$obj->activate();
   }
 }
 
 function plugin_deactivate($plugin_id)
 {
+  global $prefixeTable, $gpcInstalled;
+
+  if($gpcInstalled)
+  {
+    $obj=new AStat_install($prefixeTable, __FILE__);
+    $obj->deactivate();
+  }
 }
 
 function plugin_uninstall($plugin_id)
 {
-  global $prefixeTable, $gpc_installed;
-  if($gpc_installed)
+  global $prefixeTable, $gpcInstalled;
+  if($gpcInstalled)
   {
-    $obj = new AStat_AIM($prefixeTable, __FILE__);
-    $obj->deleteConfig();
-    GPCCore::unregister($obj->getPluginName());
+    $obj=new AStat_install($prefixeTable, __FILE__);
+    $result=$obj->uninstall();
   }
   else
   {
     gpcMsgError($errors);
   }
 }
+
+
 
 
 

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AStat.2
-Version: 2.2.2
+Version: 2.3.0
 Description: Statistiques avancées / Advanced statistics
 Plugin URI: http://phpwebgallery.net/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
@@ -62,6 +62,8 @@ Author URI: http://photos.grum.fr/
 | 2.2.2   | 2010/07/24 | * mantis: bug 1774
 |         |            |   Stat by categories doesn't work when IP filter is activated
 |         |            |
+| 2.3.0   | 2011/04/10 | * mantis: bug 2146
+|         |            |   . compatibility with piwigo 2.2
 |         |            |
 |         |            |
 |         |            |

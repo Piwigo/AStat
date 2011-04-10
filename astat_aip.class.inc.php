@@ -14,11 +14,11 @@
   --------------------------------------------------------------------------- */
 if (!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
 
-include_once('astat_aim.class.inc.php');
+include_once('astat_root.class.inc.php');
 include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
 include_once(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/GPCAjax.class.inc.php');
 
-class AStat_AIP extends AStat_AIM
+class AStat_AIP extends AStat_root
 {
   protected $tabsheet;
   protected $list_periods = array('global', 'all', 'year', 'month', 'day');
@@ -64,7 +64,7 @@ class AStat_AIP extends AStat_AIM
   */
   function initEvents()
   {
-    add_event_handler('loc_end_page_header', array(&$this->css, 'applyCSS'));
+    add_event_handler('loc_end_page_header', array(&$this, 'applyCSS'));
   }
 
 
@@ -72,6 +72,13 @@ class AStat_AIP extends AStat_AIM
   /* ---------------------------------------------------------------------------
   Public classe functions
   --------------------------------------------------------------------------- */
+
+  public function applyCSS()
+  {
+    GPCCore::addHeaderCSS(basename(dirname($this->getPluginNameFiles())), PHPWG_ROOT_PATH.PWG_LOCAL_DIR.'css/'.$this->getPluginNameFiles().".css");
+  }
+
+
 
   /*
     manage plugin integration into piwigo's admin interface

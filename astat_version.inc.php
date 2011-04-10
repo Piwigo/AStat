@@ -14,6 +14,7 @@
 
   if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
-  define('ASTAT_VERSION',  '2.2.2');
-  define('ASTAT_VERSION2', '02.02.02');
+  define('ASTAT_VERSION',  '2.3.0');
+  define('ASTAT_VERSION2', '02.03.00');
+  define('ASTAT_GPC_NEEDED', '3.5.0');
 ?>
