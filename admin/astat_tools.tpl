@@ -1,13 +1,13 @@
-{known_script id="jquery.ui" src=$ROOT_URL|@cat:"themes/default/js/ui/packed/ui.core.packed.js"}
-{known_script id="jquery.ui.datepicker" src=$ROOT_URL|@cat:"themes/default/js/ui/packed/ui.datepicker.packed.js"}
-{assign var="datepicker_language" value="themes/default/js/ui/packed/i18n/ui.datepicker-"|@cat:$lang_info.code|@cat:".js"}
+{combine_script id="jquery.ui" path="themes/default/js/ui/minified/jquery.ui.core.min.js"}
+{combine_script id="jquery.ui.datepicker" path="themes/default/js/ui/minified/jquery.ui.datepicker.min.js"}
+{assign var="datepicker_language" value="themes/default/js/ui/minified/i18n/jquery.ui.datepicker-"|@cat:$lang_info.code|@cat:".js"}
 
 {if "PHPWG_ROOT_PATH"|@constant|@cat:$datepicker_language|@file_exists}
-{known_script id="jquery.ui.datepicker-$lang_info.code" src=$ROOT_URL|@cat:$datepicker_language}
+{combine_script id="jquery.ui.datepicker-$lang_info.code" path=$datepicker_language}
 {/if}
 
 {html_head}
-<link rel="stylesheet" type="text/css" href="{$ROOT_URL}template-common/lib/ui/ui.datepicker.css">
+<link rel="stylesheet" type="text/css" href="themes/default/js/ui/theme/jquery.ui.datepicker.css">
 {/html_head}
 
 {literal}
