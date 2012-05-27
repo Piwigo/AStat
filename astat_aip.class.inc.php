@@ -40,22 +40,22 @@ class AStat_AIP extends AStat_root
     $this->tabsheet = new tabsheet();
     $this->tabsheet->add('stats_by_period',
                           l10n('AStat_by_period'),
-                          $this->getAdminLink().'&amp;fAStat_tabsheet=stats_by_period');
+                          $this->getAdminLink().'-stats_by_period');
     $this->tabsheet->add('stats_by_ip',
                           l10n('AStat_by_ip'),
-                          $this->getAdminLink().'&amp;fAStat_tabsheet=stats_by_ip');
+                          $this->getAdminLink().'-stats_by_ip');
     $this->tabsheet->add('stats_by_category',
                           l10n('AStat_by_category'),
-                          $this->getAdminLink().'&amp;fAStat_tabsheet=stats_by_category');
+                          $this->getAdminLink().'-stats_by_category');
     $this->tabsheet->add('stats_by_image',
                           l10n('AStat_by_image'),
-                          $this->getAdminLink().'&amp;fAStat_tabsheet=stats_by_image');
+                          $this->getAdminLink().'-stats_by_image');
     $this->tabsheet->add('config',
                           l10n('AStat_config'),
-                          $this->getAdminLink().'&amp;fAStat_tabsheet=config');
+                          $this->getAdminLink().'-config');
     $this->tabsheet->add('tools',
                           l10n('AStat_tools'),
-                          $this->getAdminLink().'&amp;fAStat_tabsheet=tools');
+                          $this->getAdminLink().'-tools');
 
   }
 
@@ -99,7 +99,7 @@ class AStat_AIP extends AStat_root
       $this->setAdminLink($this->getAdminLink()."&amp;fAStat_catfilter=".$_REQUEST['fAStat_catfilter']);
     }
 
-    if($_REQUEST['fAStat_tabsheet']=='stats_by_period')
+    if($_GET['tab']=='stats_by_period')
     {
       $this->display_stats_by_period(
           $_REQUEST['fAStat_all'],
@@ -110,7 +110,7 @@ class AStat_AIP extends AStat_root
           $this->config['AStat_SeeTimeRequests']
       );
     }
-    elseif($_REQUEST['fAStat_tabsheet']=='stats_by_ip')
+    elseif($_GET['tab']=='stats_by_ip')
     {
       if(isset($_REQUEST['fAStat_IP_BL']))
       {
@@ -128,7 +128,7 @@ class AStat_AIP extends AStat_root
           $this->config['AStat_SeeTimeRequests']
       );
     }
-    elseif($_REQUEST['fAStat_tabsheet']=='stats_by_category')
+    elseif($_GET['tab']=='stats_by_category')
     {
       $this->display_stats_by_category(
           $_REQUEST['fAStat_year'],
@@ -142,7 +142,7 @@ class AStat_AIP extends AStat_root
           $this->config['AStat_SeeTimeRequests']
       );
     }
-    elseif($_REQUEST['fAStat_tabsheet']=='stats_by_image')
+    elseif($_GET['tab']=='stats_by_image')
     {
       $this->display_stats_by_image(
           $_REQUEST['fAStat_year'],
@@ -157,22 +157,22 @@ class AStat_AIP extends AStat_root
           $this->config['AStat_SeeTimeRequests']
       );
     }
-    elseif($_REQUEST['fAStat_tabsheet']=='config')
+    elseif($_GET['tab']=='config')
     {
       $this->display_config();
     }
-    elseif($_REQUEST['fAStat_tabsheet']=='tools')
+    elseif($_GET['tab']=='tools')
     {
       $this->display_tools();
     }
 
-    $this->tabsheet->select($_REQUEST['fAStat_tabsheet']);
+    $this->tabsheet->select($_GET['tab']);
     $this->tabsheet->assign();
     $selected_tab=$this->tabsheet->get_selected();
     $template->assign($this->tabsheet->get_titlename(), "[".$selected_tab['caption']."]");
 
     $template_plugin["ASTAT_VERSION"] = "<i>AStat</i> ".l10n('AStat_version').ASTAT_VERSION;
-    $template_plugin["ASTAT_PAGE"] = $_REQUEST['fAStat_tabsheet'];
+    $template_plugin["ASTAT_PAGE"] = $_GET['tab'];
 
     $template->assign('plugin', $template_plugin);
     $template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');
@@ -216,9 +216,9 @@ class AStat_AIP extends AStat_root
     $default_request = array('all'=>'Y', 'year'=>'', 'month'=>'', 'day'=>'');
 
     //initialise $REQUEST values if not defined
-    if(!array_key_exists('fAStat_tabsheet', $_REQUEST))
+    if(!array_key_exists('tab', $_GET))
     {
-      $_REQUEST['fAStat_tabsheet']='stats_by_period';
+      $_GET['tab']='stats_by_period';
     }
     if(!array_key_exists('fAStat_defper', $_REQUEST))
     {
@@ -253,7 +253,7 @@ class AStat_AIP extends AStat_root
       $_REQUEST['fAStat_catfilter']="";
     }
 
-    if(($_REQUEST['fAStat_tabsheet']=='stats_by_period')&&($_REQUEST['fAStat_defper']=='Y'))
+    if(($_GET['tab']=='stats_by_period')&&($_REQUEST['fAStat_defper']=='Y'))
     {
       if($this->config['AStat_default_period']!='global')
       {
@@ -583,7 +583,7 @@ class AStat_AIP extends AStat_root
 
     if($show_thumb=='true')
     {
-      $sql_thumb = ', '.IMAGES_TABLE.'.path as ThumbPath, '.IMAGES_TABLE.'.file as ThumbFile, '.IMAGES_TABLE.'.tn_ext as Extension';
+      $sql_thumb = ', '.IMAGES_TABLE.'.path as ImgPath, '.IMAGES_TABLE.'.file as ThumbFile, '.IMAGES_TABLE.'.id as ImgId';
       $sql_fromthumb = "LEFT JOIN ".IMAGES_TABLE." ON ic2.representative_picture_id = ".IMAGES_TABLE.".id  ";
     }
     else
@@ -685,8 +685,8 @@ class AStat_AIP extends AStat_root
         if(category_id > 0, ".CATEGORIES_TABLE.".name, section) as CatName,
         ".HISTORY_TABLE.".category_id as IdCat, count(".HISTORY_TABLE.".image_id) as NbVues,
         MaxImg.somme, 100*(count(".HISTORY_TABLE.".image_id)/MaxImg.somme) as PctImg,
-        ".IMAGES_TABLE.".path as ThumbPath, ".IMAGES_TABLE.".file as ThumbFile,
-        MaxImg2.somme as NbVuesMax, ".IMAGES_TABLE.".tn_ext as Extension ";
+        ".IMAGES_TABLE.".path as ImgPath, ".IMAGES_TABLE.".file as ThumbFile,
+        MaxImg2.somme as NbVuesMax ";
 
     $sql_from = " from ((".HISTORY_TABLE." LEFT JOIN ".IMAGES_TABLE." ON
   ".IMAGES_TABLE.".id = ".HISTORY_TABLE.".image_id) LEFT JOIN ".CATEGORIES_TABLE."
@@ -792,20 +792,20 @@ class AStat_AIP extends AStat_root
         "month" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
         "day" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $ip_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip",
-        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=",
-        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=",
-        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
+    $ip_links=array("all" => $this->getAdminLink()."-stats_by_ip",
+        "year" => $this->getAdminLink()."-stats_by_ip&amp;fAStat_year=",
+        "month" => $this->getAdminLink()."-stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=",
+        "day" => $this->getAdminLink()."-stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
 
-    $cat_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category",
-        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=",
-        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=",
-        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
+    $cat_links=array("all" => $this->getAdminLink()."-stats_by_category",
+        "year" => $this->getAdminLink()."-stats_by_category&amp;fAStat_year=",
+        "month" => $this->getAdminLink()."-stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=",
+        "day" => $this->getAdminLink()."-stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
 
-    $img_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image",
-        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=",
-        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=",
-        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
+    $img_links=array("all" => $this->getAdminLink()."-stats_by_image",
+        "year" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=",
+        "month" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=",
+        "day" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=");
 
 
     /* period label + navigation links */
@@ -975,15 +975,15 @@ class AStat_AIP extends AStat_root
         "month" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
         "day" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $ip_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip",
-        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year",
-        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $ip_links=array("all" => $this->getAdminLink()."-stats_by_ip",
+        "year" => $this->getAdminLink()."-stats_by_ip&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."-stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."-stats_by_ip&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $img_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image",
-        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year",
-        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $img_links=array("all" => $this->getAdminLink()."-stats_by_image",
+        "year" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
 
     /* periode label + navigation links */
@@ -1139,10 +1139,10 @@ class AStat_AIP extends AStat_root
         "month" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
         "day" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $cat_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category",
-        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year",
-        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $cat_links=array("all" => $this->getAdminLink()."-stats_by_category",
+        "year" => $this->getAdminLink()."-stats_by_category&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."-stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."-stats_by_category&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
     /* make navigation links */
     if($day!="")
@@ -1214,8 +1214,8 @@ class AStat_AIP extends AStat_root
 
       if($showthumb=='true')
       {
-        $filethumb=$this->change_file_ext($stats[$i]["ThumbFile"], $stats[$i]["Extension"]);
-        $filethumb=str_replace($stats[$i]["ThumbFile"],"thumbnail/".$conf['prefix_thumbnail'].$filethumb,$stats[$i]["ThumbPath"]); }
+        $filethumb=DerivativeImage::thumb_url(array('id'=>$stats[$i]["ImgId"], 'path'=>$stats[$i]["ImgPath"]));
+      }
       else
       {
         $filethumb='';
@@ -1285,10 +1285,10 @@ class AStat_AIP extends AStat_root
         "month" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month",
         "day" => $this->getAdminLink()."&amp;fAStat_defper=N&amp;fAStat_all=N&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
-    $img_links=array("all" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image",
-        "year" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year",
-        "month" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month",
-        "day" => $this->getAdminLink()."&amp;fAStat_tabsheet=stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
+    $img_links=array("all" => $this->getAdminLink()."-stats_by_image",
+        "year" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=$year",
+        "month" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month",
+        "day" => $this->getAdminLink()."-stats_by_image&amp;fAStat_year=$year&amp;fAStat_month=$month&amp;fAStat_day=$day");
 
     /* navigation links */
     if($day!="")
@@ -1356,8 +1356,7 @@ class AStat_AIP extends AStat_root
 
       if($showthumb=='true')
       {
-        $filethumb=$this->change_file_ext($stats[$i]["ThumbFile"], $stats[$i]["Extension"]);
-        $filethumb=str_replace($stats[$i]["ThumbFile"],"thumbnail/".$conf['prefix_thumbnail'].$filethumb,$stats[$i]["ThumbPath"]);
+        $filethumb=DerivativeImage::thumb_url(array('id'=>$stats[$i]["ImgId"], 'path'=>$stats[$i]["ImgPath"]));
       }
       else
       {
@@ -2376,16 +2375,6 @@ class AStat_AIP extends AStat_root
       if(!is_numeric($tmp[$i])) { return (false); }
     }
     return (true);
-  }
-
-  /*
-    change filename extension
-  */
-  private function change_file_ext($file, $newext)
-  {  //filename can be <filename.truc.jpeg> for example
-    $tmp = explode('.', $file);
-    if(count($tmp)>1) { $tmp[count($tmp)-1] = $newext; }
-    return implode('.', $tmp);
   }
 
   /*

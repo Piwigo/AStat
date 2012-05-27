@@ -65,7 +65,8 @@ Author URI: http://photos.grum.fr/
 | 2.3.0   | 2011/04/10 | * mantis: bug 2146
 |         |            |   . compatibility with piwigo 2.2
 |         |            |
-|         |            |
+| 2.4.0   | 2011/04/10 | * mantis: bug 2636
+|         |            |   . compatibility with piwigo 2.4
 |         |            |
 |         |            |
 |         |            |
