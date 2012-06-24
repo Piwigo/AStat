@@ -59,24 +59,10 @@ class AStat_AIP extends AStat_root
 
   }
 
-  /*
-    initialize events call for the plugin
-  */
-  function initEvents()
-  {
-    add_event_handler('loc_end_page_header', array(&$this, 'applyCSS'));
-  }
-
-
 
   /* ---------------------------------------------------------------------------
   Public classe functions
   --------------------------------------------------------------------------- */
-
-  public function applyCSS()
-  {
-    GPCCore::addHeaderCSS(basename(dirname($this->getPluginNameFiles())), PHPWG_ROOT_PATH.PWG_LOCAL_DIR.'css/'.$this->getPluginNameFiles().".css");
-  }
 
 
 

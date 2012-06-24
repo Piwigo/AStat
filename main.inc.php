@@ -99,7 +99,7 @@ include_once('astat_version.inc.php'); // => Don't forget to update this file !!
 global $prefixeTable;
 
 //AStat loaded and active only if in admin page
-if(basename($_SERVER["PHP_SELF"])=='admin.php')
+if(defined('IN_ADMIN') && !defined('AJAX_CALL'))
 {
   include_once("astat_aim.class.inc.php");
 

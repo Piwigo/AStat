@@ -16,13 +16,10 @@
 if (!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
 
 include_once('astat_root.class.inc.php');
-include_once(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/GPCCss.class.inc.php');
 
 class AStat_AIM extends AStat_root
 {
-  protected $css = null;
-
-  function __construct($prefixeTable, $filelocation)
+  public function __construct($prefixeTable, $filelocation)
   {
     parent::__construct($prefixeTable, $filelocation);
   }
@@ -30,8 +27,9 @@ class AStat_AIM extends AStat_root
   /*
     initialize events call for the plugin
   */
-  function initEvents()
+  public function initEvents()
   {
+    parent::initEvents();
     add_event_handler('get_admin_plugin_menu_links', array(&$this, 'pluginAdminMenu') );
   }
 

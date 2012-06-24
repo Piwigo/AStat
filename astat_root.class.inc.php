@@ -16,13 +16,9 @@
 if (!defined('PHPWG_ROOT_PATH')) { die('Hacking attempt!'); }
 
 include_once(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/CommonPlugin.class.inc.php');
-include_once(PHPWG_PLUGINS_PATH.'GrumPluginClasses/classes/GPCCss.class.inc.php');
-
 
 class AStat_root extends CommonPlugin
 {
-  protected $css;   //the css object
-
   public function __construct($prefixeTable, $filelocation)
   {
     global $conf;
@@ -30,13 +26,6 @@ class AStat_root extends CommonPlugin
     $this->setPluginName("AStat.2");
     $this->setPluginNameFiles("astat");
     parent::__construct($prefixeTable, $filelocation);
-    $this->css = new GPCCss(PHPWG_ROOT_PATH.PWG_LOCAL_DIR.'css/'.$this->getPluginNameFiles().".css");
-  }
-
-  public function __destruct()
-  {
-    unset($this->css);
-    parent::__destruct();
   }
 
 
@@ -69,93 +58,25 @@ class AStat_root extends CommonPlugin
 
   }
 
-  /*
-    surchage of CommonPlugin->saveConfig function
-  */
-  function loadConfig()
+  public function loadCSS()
   {
-    parent::loadConfig();
-    if(!$this->css->fileExists())
-    {
-      $this->css->makeCSS($this->generate_CSS());
-    }
-  }
+    parent::loadCSS();
+    GPCCore::addHeaderCSS('astat.css', 'plugins/'.$this->getDirectory().'/'.$this->getPluginNameFiles().".css");
+    GPCCore::addHeaderContent('css',
+"
+.AStatBar1 { background-color:#".$this->config['AStat_BarColor_Pages']."; }
+.AStatBar2 { background-color:#".$this->config['AStat_BarColor_Img']."; }
+.AStatBar3 { background-color:#".$this->config['AStat_BarColor_IP']."; }
+.AStatBar4 { background-color:#".$this->config['AStat_BarColor_Cat']."; }
 
-  /*
-    surchage of CommonPlugin->saveConfig function
-  */
-  function saveConfig()
-  {
-    if(parent::saveConfig())
-    {
-      $this->css->makeCSS($this->generate_CSS());
-      return(true);
-    }
-    return(false);
-  }
+.MiniSquare1 { color:#".$this->config['AStat_BarColor_Pages'].";   }
+.MiniSquare2 { color:#".$this->config['AStat_BarColor_Img'].";  }
+.MiniSquare3 { color:#".$this->config['AStat_BarColor_IP']."; }
+.MiniSquare4 { color:#".$this->config['AStat_BarColor_Cat']."; }
 
-  /*
-    generate the css code
-  */
-  function generate_CSS()
-  {
-    $text = ".AStatBar1, .AStatBar2, .AStatBar3, .AStatBar4, .AStatBarX {
-      border:0px;
-      height:8px;
-      display: block;
-      margin:0px;
-      padding:0px;
-      left:0;
-      position:relative;
-      }
-       .MiniSquare1, .MiniSquare2, .MiniSquare3, .MiniSquare4 {
-      border:0px;
-      height:8px;
-      width:8px;
-      margin:0px;
-      padding:0px;
-      }
-       .AStatBar1 { background-color:#".$this->config['AStat_BarColor_Pages']."; top:5px;  }
-       .AStatBar2 { background-color:#".$this->config['AStat_BarColor_Img']."; top:-3px; }
-       .AStatBar3 { background-color:#".$this->config['AStat_BarColor_IP']."; top:-3px;}
-       .AStatBar4 { background-color:#".$this->config['AStat_BarColor_Cat']."; top:-3px;}
-       .AStatBarX { background-color:transparent; top:-3px; height:1px; }
-       .MiniSquare1 { color:#".$this->config['AStat_BarColor_Pages'].";   }
-       .MiniSquare2 { color:#".$this->config['AStat_BarColor_Img'].";  }
-       .MiniSquare3 { color:#".$this->config['AStat_BarColor_IP']."; }
-       .MiniSquare4 { color:#".$this->config['AStat_BarColor_Cat']."; }
-       .StatTableRow:hover { background-color:#".$this->config['AStat_MouseOverColor']."; }
-       .formtable, .formtable P { text-align:left; display:block; }
-       .formtable tr { vertical-align:top; }
-       .window_thumb {
-      position:absolute;
-      border: none;
-      background: none;
-      left:0;
-      top:0;
-      margin:0px;
-      padding:0px;
-      z-index:100;
-      overflow:hidden;
-      visibility:hidden; }
-        .img_thumb {
-      border: solid 3px #ffffff;
-      background: #000000;
-      margin:0px;
-      padding:0px; }
-        .time_request {
-      font-size:83%;
-      text-align:right; }
-        .invisible { visibility:hidden; display:none; }
-      .littlefont { font-size:90%; }
-      table.littlefont th { padding:3px; }
-      table.littlefont td { padding:0px;padding-left:3px;padding-right:3px; }
-      #iplist { visibility:hidden; position:absolute; width:200px; z-index:1000; }
-      .iipsellistitem { float:right; }
-      #iipsellist { width:100%; font-family:monospace; }
-    ";
-
-    return($text);
+.StatTableRow:hover { background-color:#".$this->config['AStat_MouseOverColor']."; }
+"
+    );
   }
 
   /* ---------------------------------------------------------------------------
