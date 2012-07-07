@@ -3,17 +3,16 @@
 Plugin Name: AStat.2
 Version: 2.3.0
 Description: Statistiques avancées / Advanced statistics
-Plugin URI: http://phpwebgallery.net/ext/extension_view.php?eid=172
+Plugin URI: http://piwigo.org/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
-Author URI: http://photos.grum.fr/
+Author URI: http://www.grum.fr/
 */
 
 /*
 --------------------------------------------------------------------------------
   Author     : Grum
     email    : grum@piwigo.org
-    website  : http://photos.grum.fr
-    PWG user : http://forum.phpwebgallery.net/profile.php?id=3706
+    website  : http://www.grum.fr
 
     << May the Little SpaceFrog be with you ! >>
 --------------------------------------------------------------------------------
