@@ -12,7 +12,7 @@
     {if isset($f_AStat_catfilter_list_values) and count($f_AStat_catfilter_list_values)
            and isset($plugin.ASTAT_PAGE) and $plugin.ASTAT_PAGE != "config" and $plugin.ASTAT_PAGE != "tools"}
       <center>
-        <form method="GET" action="{$plugin.ASTAT_LINK}" class="general">
+        <form method="GET" action="{$ASTAT_LINK}" class="general">
 
             {if isset($f_AStat_parameters) and count($f_AStat_parameters)}
               {foreach from=$f_AStat_parameters key=name item=data}
