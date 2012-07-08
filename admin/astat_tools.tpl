@@ -59,7 +59,7 @@
 </script>
 {/literal}
 
-{$datas.ASTAT_RESULT_OK}
+{if isset($datas.ASTAT_RESULT_OK)}{$datas.ASTAT_RESULT_OK}{/if}
 
 <fieldset class='formtable'>
   <legend>{'AStat_tools_general_nfo'|@translate}</legend>

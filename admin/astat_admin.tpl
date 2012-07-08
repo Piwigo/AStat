@@ -5,7 +5,7 @@
 <div style="position:relative;top:-24px;clear:right;">
 
   {if isset($datas)}
-    <p>{$datas.ASTAT_NFO_STAT}</p>
+    {if isset($datas.ASTAT_NFO_STAT)}<p>{$datas.ASTAT_NFO_STAT}</p>{/if}
 
     <h3>{$datas.L_STAT_TITLE}</h3>
 
