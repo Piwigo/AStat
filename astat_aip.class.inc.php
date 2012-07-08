@@ -1834,17 +1834,29 @@ class AStat_AIP extends AStat_root
     {
       $template_datas["ASTAT_PURGE_HISTORY_IMAGE_DISABLED"] = " disabled ";
     }
+    else
+    {
+      $template_datas["ASTAT_PURGE_HISTORY_IMAGE_DISABLED"] = '';
+    }
     $nfo=$this->purge_history_count_categoryid0();
     $template_datas["ASTAT_PURGE_HISTORY_CATEGORY_NFO"] = sprintf(l10n('AStat_tools_purge_history_categoryid0'), $nfo);
     if($nfo==0)
     {
       $template_datas["ASTAT_PURGE_HISTORY_CATEGORY_DISABLED"] = " disabled ";
     }
+    else
+    {
+      $template_datas["ASTAT_PURGE_HISTORY_CATEGORY_DISABLED"] = '';
+    }
     $nfo=$this->purge_history_count_ipid0();
     $template_datas["ASTAT_PURGE_HISTORY_IP_NFO"] = sprintf(l10n('AStat_tools_purge_history_ipid0'), $nfo[1], $nfo[0]);
     if($nfo[0]==0)
     {
       $template_datas["ASTAT_PURGE_HISTORY_IP_DISABLED"] = " disabled ";
+    }
+    else
+    {
+      $template_datas["ASTAT_PURGE_HISTORY_IP_DISABLED"] = '';
     }
     // << GENERAL NFO ----------------------------------------------------------
 
