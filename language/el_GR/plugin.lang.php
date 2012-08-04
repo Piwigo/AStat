@@ -122,7 +122,84 @@ $lang['AStat_section_label'] = 'Τμήμα';
 $lang['AStat_section_favorites'] = ' ';
 $lang['AStat_section_deleted_cat'] = 'Η Κατηγορία διαγράφτηκε ';
 $lang['AStat_section_categories'] = ' ';
-$lang['AStat_section_best_rated'] = ' ';
-$lang['AStat_section_additional_page'] = 'Πρόσθετο <a href="http://phpwebgallery.net/ext/extension_view.php?eid=153">Additional pages</a>';
+$lang['AStat_section_best_rated'] = '  ';
+$lang['AStat_section_additional_page'] = 'Πρόσθετο <a href="http://piwigo.org/ext/extension_view.php?eid=153">Additional pages</a>';
 $lang['AStat_period_label_years'] = 'Χρόνια';
+$lang['ratio_Pictures_seen'] = 'Φωτογραφίες που έχουν ιδωθεί';
+$lang['pct_Pictures_seen'] = '%Pictures';
+$lang['pct_Pages_seen'] = '%Pages';
+$lang['Pictures_seen'] = 'Φωτογραφίες που έχουν ιδωθεί';
+$lang['IP_visit'] = 'Διεύθυνση IP';
+$lang['AStat_tools_deleted_picture_ok0'] = 'Διεύθυνση IP';
+$lang['IP_label'] = 'Διεύθυνση IP';
+$lang['Categories_seen'] = 'Κατηγορίες που έχουν ιδωθεί';
+$lang['CATEGORY_LABEL'] = 'Κατηγορία';
+$lang['AStat_yesno_true'] = 'Ναι';
+$lang['AStat_yesno_false'] = 'Όχι';
+$lang['AStat_version'] = 'Έκδοση';
+$lang['AStat_tools_title'] = 'Εργαλεία συντήρησης';
+$lang['AStat_tools_result_ok'] = 'Η δράση εκτελέστηκε σωστά';
+$lang['AStat_tools_result_ko'] = 'Παρουσιάστηκε σφάλμα. Η δράση δεν έχει εκτελεστεί σωστά';
+$lang['AStat_tools_purge_history_nfo'] = 'Αυτή η λειτουργία θα καθαρίσει το ιστορικό από όλες τα προηγούμενα γεγονότα από μια συγκεκριμένη ημερομηνία και θα βελτιστοποιήσει τον πίνακα. 
+<br>
+<b>Η λειτουργία δεν μπορεί να αντιστραφεί</b>.';
+$lang['AStat_tools_purge_history_date'] = 'Για να καθαρίσετε όλα τα γεγονότα πριν από';
+$lang['AStat_tools_purge_history_ipid0'] = 'Για να καθαρίσετε τα γεγονότα που σχετίζονται με IP από τη μαύρη λίστα (%s στοιχεία στη μαύρη λίστα, %s γεγονότα στο ιστορικό)';
+$lang['AStat_tools_purge_history_imageid0'] = 'Για να καθαρίσετε όλα τα γεγονότα που σχετίζονται με διαγραμμένες εικόνες (%s γεγονότα στο ιστορικό)';
+$lang['AStat_tools_purge_history_categoryid0'] = 'Για να καθαρίσετε τα γεγονότα που σχετίζονται με διαγραφή κατηγοριών (%s γεγονότα στην ιστορικό)';
+$lang['AStat_tools_purge_history_apply'] = 'Καθαρίστε';
+$lang['AStat_tools_purge_history'] = 'Καθαρισμός του ιστορικού';
+$lang['AStat_tools_invalid_date2'] = 'Η συγκεκριμένη ημερομηνία είναι ανώτερη ή ίση με την ημερομηνία την σημερινή';
+$lang['AStat_tools_invalid_date'] = 'Η συγκεκριμένη ημερομηνία δεν είναι έγκυρη!';
+$lang['AStat_tools_general_nfo_nfo'] = '<ul><li>%s γεγονότα είναι παρόντα στην ιστορία</li>
+            <li>Τα βάρη του Πίνακα %s (Πίνακας: %s ; Δείκτης: %s)</li>
+            <li>Ημερομηνία πρώτου γεγονότος : %s</li>
+            <li>Ημερομηνία τελευταίου γεγονότος : %s</li>';
+$lang['AStat_tools_general_nfo'] = 'Γενικές πληροφορίες για το ιστορικό';
+$lang['AStat_tools_deleted_user_nfo2'] = 'Όλες οι ταυτότητες ID χρηστών στο ιστορικό των γεγονότων υπάρχουν, καμία ενέργεια δεν θα πρέπει να ληφθεί.';
+$lang['AStat_tools_deleted_user_nfo1'] = '%s άγνωστο ταυτότητα ID χρήστη μεταξύ των γεγονότων του ιστορικού που επηρεάζουν %s γεγονότα : <ul>%s</ul>';
+$lang['AStat_tools_deleted_user_nfo0'] = 'Αυτή η λειτουργία αναγκάζει να παραχθεί μια ταυτότητα ID χρήστη <i>επισκέπτη</ i> ως γεγονός στο ιστορικό του οποίου ο λογαριασμός έχει διαγραφεί από τότε.
+';
+$lang['AStat_tools_deleted_user_apply'] = 'Ενημέρωση ';
+$lang['AStat_tools_deleted_user'] = 'Ενημέρωση ιστορικού με αναφορές χρηστών';
+$lang['AStat_tools_deleted_picture_prepare_action'] = '<u>Πριν</u> από το συγχρονισμό: προετοιμασία του <i>AStat</i>';
+$lang['AStat_tools_deleted_picture_ok1'] = 'Σύνδεση γεγονότος στο ιστορικό πέτυχε';
+$lang['AStat_tools_deleted_picture_nfo_nb'] = '(%s ταυτότητες Ids εικόνων δεν μπορεί να συνδεθούν με %s συμβάντα στο ιστορικό)';
+$lang['AStat_tools_deleted_picture_nfo3'] = 'Όταν οι φωτογραφίες μεταφέρονται στην κυριολεξία από ένα κατάλογο, ο συγχρονισμό διαγράφει τις εικόνες από τη βάση δεδομένων και επανεισάγει στη συνέχεια με ένα νέο σημείο αναφοράς. Η μεταφερόμενη εικόνα έπειτα αφήνει στο ιστορικό  γεγονότα να συνδέονται με αναφορές που δεν υπάρχουν πια.</p>
+<p><i>Το Astat</i> επιτρέπει:
+<ul><li>Να απομνημονεύει αναφορές εικόνας <u><i>πριν</i></u> το συνγχρονισμό</li>
+<li>Συνδέσμους ιστορικού συμβάντος με ακριβή αναφορά εικόνας <u><i>μετά</i></u> από ένα συγχρονισμό</li>
+</p>
+<p><b>Προσοχή!</b><br>
+<ul><li>Το ότι οι εικόνες θα έχουν το ίδιο το όνομα αρχείου δεν μπορεί να προβλεφθεί</li>
+<li>Αυτή η λειτουργία δεν μπορεί να ελέγχξει την εικόνα για την οποία το όνομα του αρχείου έχει αλλάξει στον server</li>
+</ul>';
+$lang['AStat_tools_deleted_picture_nfo2'] = 'Όλες οι ταυτότητες Id φωτογραφιών στο ιστορικό των γεγονότων υπάρχουν, καμία ενέργεια δεν θα πρέπει να παρθεί.';
+$lang['AStat_tools_deleted_picture_nfo1'] = '%s ανύπαρκτη ταυτότητα εικόνας Id περιλαμβάνετε σε γεγονότα στο ιστορικό και έχει επιπτώσεις σε %s γεγονότα: <ul>%s</ul>';
+$lang['AStat_tools_deleted_picture_nfo0'] = 'Επηρεάζει γεγονότα στο ιστορικό που αναφέρονται σε εικόνες που δεν υπάρχουν πλέον,  η <i>εικόνα [Id #0] δεν υπάρχει στη βάση δεδομένων</i>';
+$lang['AStat_tools_deleted_picture_error1'] = 'Νέα σύνδεση των γεγονότων στο ιστορικό απέτυχε';
+$lang['AStat_tools_deleted_picture_error0'] = 'Η επίχριση απέτυχε';
+$lang['AStat_tools_deleted_picture_do_action'] = '<u>Μετά</u>τον συγχρονισμό : συνδέστε και πάλι την νέα ταυτότητα ID της φωτογραφίας με τα γεγονότα στο ιστορικό';
+$lang['AStat_tools_deleted_picture_apply'] = 'Ενημέρωση';
+$lang['AStat_tools_deleted_picture_do'] = 'Κάντε τη διεργασία';
+$lang['AStat_tools_deleted_picture'] = 'Ενημερώστε το ιστορικό με τις παραπομπές εικόνων';
+$lang['AStat_tools_deleted_category_nfo2'] = 'Όλες οι κατηγορίες γεγονότων στην ιστορία υπάρχουν. Καμία ενέργεια δεν θα πρέπει να παρθεί.';
+$lang['AStat_tools_deleted_category_nfo1'] = '%s ανύπαρκτος κατάλογος περιλαμβάνετε σε γεγονότα στο ιστορικό και έχει επιπτώσεις σε %s γεγονότα: <ul>%s</ul>';
+$lang['AStat_tools_deleted_category_nfo0'] = 'Αντιστοίχηση για γεγονότα στην ιστορία που δεν υπάρχουν πια. Διαγραφή κατηγορίας';
+$lang['AStat_tools_deleted_category_apply'] = 'Ενημέρωση';
+$lang['AStat_tools_deleted_category'] = 'Ενημέρωση κατηγοριών στο Ιστορικό';
+$lang['AStat_tools'] = 'Εργαλεία';
+$lang['AStat_title_page'] = 'Στατιστικά για προχωρημένους';
+$lang['AStat_time_request_label'] = 'Η Αίτηση εκτελέστηκε ';
+$lang['AStat_specific_period_config'] = 'Ειδικές ρυθμίσεις των στατιστικών ανά περιόδους';
+$lang['AStat_specific_ip_config'] = 'Ειδικές ρυθμίσεις των στατιστικών ανά IP';
+$lang['AStat_specific_image_config'] = 'Ειδικές ρυθμίσεις των στατιστικών ανά φωτογραφία';
+$lang['AStat_specific_category_config'] = 'Ειδικές ρυθμίσεις των στατιστικών ανά κατηγορία';
+$lang['AStat_sortip_picture'] = 'Αριθμός εικόνων που έχουν ειδωθεί';
+$lang['AStat_sortcat_page'] = 'Απεικόνιση επί τοις εκατό των σελίδων που έχουν ειδωθεί';
+$lang['AStat_sortip_page'] = 'Αριθμός σελίδων που έχουν ειδωθεί';
+$lang['AStat_sortip_ip'] = 'Χρήστης / Διεύθυνση IP';
+$lang['AStat_sortimg_picture'] = 'Αριθμός προβολών της εικόνας';
+$lang['AStat_sortimg_catname'] = 'Αλφαβητική σειρά - Κατηγορία / Όνομα εικόνας';
+$lang['AStat_sortcat_picture'] = 'Απεικόνιση επί τοις εκατό εμφανίσεων εικόνων';
 ?>
