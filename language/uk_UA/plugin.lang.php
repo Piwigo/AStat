@@ -36,4 +36,12 @@ $lang['AStat_MouseOverColor'] = 'Наведіть курсор на рядок';
 $lang['AStat_NbCatPerPages'] = 'Кількість категорій на сторінці';
 $lang['AStat_NbIPPerPages'] = 'Кількість IP на сторінках';
 $lang['AStat_NbImgPerPages'] = 'Кількість зображень на сторінці';
+$lang['AStat_PeriodPerDefault'] = 'За замовчуванням обраний період';
+$lang['AStat_PeriodPerDefault_all'] = 'Всі роки';
+$lang['AStat_PeriodPerDefault_day'] = 'Поточний день';
+$lang['AStat_PeriodPerDefault_global'] = 'Глобальна';
+$lang['AStat_PeriodPerDefault_month'] = 'Поточний місяць';
+$lang['AStat_PeriodPerDefault_year'] = 'Поточного року';
+$lang['AStat_RefIPLabel'] = 'Користувач / IP адреса';
+$lang['AStat_RefImageLabel'] = 'Категорія / Назва зображення';
 ?>
