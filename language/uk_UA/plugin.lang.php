@@ -106,4 +106,11 @@ $lang['AStat_events'] = 'події';
 $lang['AStat_general_config'] = 'Глобальні налаштування';
 $lang['AStat_month_of_year_1'] = 'Січень';
 $lang['AStat_month_of_year_10'] = 'Жовтень';
+$lang['AStat_version'] = 'версія';
+$lang['AStat_yesno_false'] = 'Ні';
+$lang['AStat_yesno_true'] = 'Так';
+$lang['CATEGORY_LABEL'] = 'Категорія';
+$lang['Categories_seen'] = 'Категорій переглянуто';
+$lang['Pictures_seen'] = 'Зображень переглянуто';
+$lang['AStat_tools_purge_history_apply'] = 'Очистити';
 ?>
