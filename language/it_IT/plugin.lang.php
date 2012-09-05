@@ -56,7 +56,7 @@ $lang['AStat_config_colors_and_graph'] = 'Configurazione dei colori & grafici';
 $lang['AStat_specific_ip_config'] = 'Configurazione specifica statistica per IP';
 $lang['AStat_NbIPPerPages'] = 'Numero d\'indirizzi IP per pagine';
 $lang['AStat_MaxBarWidth'] = 'Larghezza massima delle barre (pixels)';
-$lang['AStat_NbCatPerPages'] = 'Numero di categorie per pagine';
+$lang['AStat_NbCatPerPages'] = 'Numero di categorie per pagina';
 $lang['AStat_specific_category_config'] = 'Configurazione specifica statistica per categorie';
 $lang['AStat_do_save'] = 'Salvare';
 
@@ -102,7 +102,7 @@ $lang['AStat_DefaultSortImg'] = 'Ordine di default';
 
 //--- << v1.1.1 <<
 //--- >> v1.2.0 >>
-$lang['AStat_BarColor_Cat'] = 'Numero di categrorie';
+$lang['AStat_BarColor_Cat'] = 'Numero di categorie';
 $lang['AStat_deleted_user'] = 'Utente cancellato';
 $lang['AStat_SortIPLabel'] = 'Ordinato  per:';
 $lang['AStat_sortip_picture'] = 'Numero di immagini viste';
@@ -135,10 +135,10 @@ $lang['AStat_section_label'] = 'Sezione';
 $lang['AStat_deleted_picture'] = 'L\'immagine non è più nella base dati';
 $lang['AStat_tools'] = 'Strumenti';
 $lang['AStat_tools_title'] = 'Strumenti di manutenzione';
-$lang['AStat_tools_result_ok'] = 'L\'azione è stata condotta correttamente';
+$lang['AStat_tools_result_ok'] = 'L\'azione Ã¨ stata eseguita correttamente';
 
 $lang['AStat_tools_deleted_user'] = 'Aggiornare nella cronologia i riferimenti degli utenti';
-$lang['AStat_tools_deleted_user_nfo0'] = 'Questa funzione forza a <i>guest</i> l\'ID di un\'utente che ha generato un evento nella cronologia e di cui il conto è stato eliminato dal ';
+$lang['AStat_tools_deleted_user_nfo0'] = 'Questa funzione forza a <i>guest</i> l\'ID di un\'utente che ha generato un evento nella cronologia e di cui il conto Ã¨ stato eliminato da allora.';
 $lang['AStat_tools_deleted_user_nfo1'] = '%s ID sconosciuti sono presenti negli eventi della cronologia e impattano %s eventi:  <ul>%s </ul>';
 $lang['AStat_tools_deleted_user_nfo2'] = 'Tutti gli ID utente presenti negli eventi della cronologia esistono. Nessuna azione deve essere condotta.';
 $lang['AStat_tools_deleted_user_apply'] = 'Effettuare l\'aggiornamento';
@@ -161,14 +161,14 @@ $lang['AStat_tools_general_nfo_nfo'] = '<ul><li>%s eventi presenti nella cronolo
       <li>Data del primo evento : %s</li>
       <li>Data del ultimo evento : %s</li>';
 $lang['AStat_tools_purge_history'] = '"Ripulire" la cronologia';
-$lang['AStat_tools_purge_history_nfo'] = 'Elimina della cronologia tutti gli enventi precedente alla data ed ottimizza la tabella. <br><b>Questa azione è irreversibile</b>.';
+$lang['AStat_tools_purge_history_nfo'] = 'Elimina della cronologia tutti gli enventi precedente alla data ed ottimizza la tabella. <br><b>Questa azione Ã¨ irreversibile</b>.';
 $lang['AStat_tools_purge_history_apply'] = 'Ripulire';
-$lang['AStat_tools_purge_history_date'] = '"Ripulire" gli eventi precedente di ';
+$lang['AStat_tools_purge_history_date'] = '"Ripulire" tuti gli eventi antecedenti';
 $lang['AStat_tools_purge_history_imageid0'] = '"Ripulire" gli eventi associati alle immagini eliminate (%s eventi nella cronologia)';
-$lang['AStat_tools_purge_history_categoryid0'] = '"Ripulire" gli eventi associati alle catégorie eliminate (%s eventi nella cronologia)';
-$lang['AStat_tools_result_ko'] = 'Un errore si è verificato, l\'azione non ha potuto essere eseguita correttamente ';
-$lang['AStat_tools_invalid_date'] = 'La data inserita non è valida!';
-$lang['AStat_tools_invalid_date2'] = 'La data inserita è superiore o uguale alla data del giorno!';
+$lang['AStat_tools_purge_history_categoryid0'] = '"Ripulire" gli eventi associati alle catÃ©gorie eliminate (%s eventi nella cronologia)';
+$lang['AStat_tools_result_ko'] = 'Un errore si Ã¨ verificato, l\'azione non ha potuto essere eseguita correttamente ';
+$lang['AStat_tools_invalid_date'] = 'La data inserita non Ã¨ valida!';
+$lang['AStat_tools_invalid_date2'] = 'La data inserita Ã¨ superiore o uguale alla data del giorno!';
 $lang['AStat_tools_deleted_picture_error0'] = 'La preparazione non ha funzionato';
 $lang['AStat_tools_deleted_picture_error1'] = 'La riassociazione degli eventi della cronologia non ha funzionato';
 $lang['AStat_tools_deleted_picture_ok0'] = 'La preparazione della tabella è riuscita, potete procedere alla riorganizzazione dei file sul server';
@@ -205,8 +205,8 @@ $lang['AStat_confignotsaved'] = 'È sorto un errore, la configurazione non è stat
 $lang['AStat_gpc2_not_installed'] = '"Il plugin \'Grum Plugins Classes 2\' (versione >= %s) è necessario per i buon funzionamento di AStat"';
 
 //--- >> v2.1.0 >>
-$lang['AStat_BlackListedIP'] = 'blacklist degli indirizzi IP';
-$lang['AStat_AddIP'] = 'Aggiungere all\'elenco';
+$lang['AStat_BlackListedIP'] = 'Blacklist degli indirizzi IP';
+$lang['AStat_AddIP'] = 'Aggiungere alla blacklist';
 $lang['AStat_DelIP'] = 'Eliminare dall\'elenco';
 $lang['AStat_tools_purge_history_ipid0'] = '"Ripulire gli eventi associati agli IP della lista nera (%s elementi nella lista nera, %s eventi nella cronologia)"';
 $lang['AStat_IP_blacklist'] = 'Mettere nella blacklist';
@@ -216,7 +216,6 @@ $lang['AStat_enableddisabled_false'] = 'Filtro inattivo';
 $lang['AStat_enableddisabled_invert'] = 'Filtro inverso';
 
 //--- > 2.2.0
-$lang['To install this plugin, you need to install Grum Plugin Classes %s before'] = 'Per installare questo plugin, dovete prima di tutto, installare il plugin Grum Plugin Classes %s';
 
 
 ?>
