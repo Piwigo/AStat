@@ -128,4 +128,8 @@ $lang['AStat_IP_blacklist'] = 'Přidat na seznam blokovaných';
 $lang['AStat_NbCatPerPages'] = 'Počet kategorií na stránku';
 $lang['AStat_NbIPPerPages'] = 'Počet IP na stránku';
 $lang['AStat_NbImgPerPages'] = 'Počet obrázků na stránku';
+$lang['AStat_section_old_deleted_cat'] = 'Nemožné importovat starou kategorii';
+$lang['AStat_IP_geolocalisation'] = 'Geolokalizace';
+$lang['AStat_MaxBarWidth'] = 'Maximální šířka mřížky (pixely)';
+$lang['AStat_section_unknown'] = 'Neznámý [%s]';
 ?>
