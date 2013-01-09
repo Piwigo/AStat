@@ -127,4 +127,17 @@ $lang['AStat_DefaultSortIP'] = 'Varsayılan sıralama';
 $lang['AStat_DefaultSortImg'] = 'Varsayılan sıralama';
 $lang['AStat_DelIP'] = 'Kara listeden sil';
 $lang['AStat_IP_blacklist'] = 'Kara listeye ekle';
+$lang['AStat_tools_deleted_picture'] = 'Resim referansları ile geçmişi güncelle';
+$lang['AStat_tools_deleted_picture_do_action'] = 'Eşleştirmeden (Senkronizasyon) <u>Sonra</u> : Yeni resim ID\'sini geçmişteki duruma tekrar bağlayın';
+$lang['AStat_sortimg_catname'] = 'Alfabetik sıralama - Kategori / Resmin Adı';
+$lang['AStat_sortcat_picture'] = 'Görülen resimlerin yüzdesi';
+$lang['AStat_sortcat_page'] = 'Görülen sayfaların yüzdesi';
+$lang['AStat_sortcat_nbpicture'] = 'Resim başına ortalama görüntülenme sayısı';
+$lang['AStat_tools_deleted_picture_do'] = 'Süreci gerçekleştir';
+$lang['AStat_section_old_deleted_cat'] = 'Eski kategori alınamıyor';
+$lang['AStat_title_page'] = 'Gelişmiş İstatistikler';
+$lang['AStat_adviser_not_authorized'] = 'Eylemden vazgeçildi: Danışman profili bu tip eyleme izin vermiyor';
+$lang['AStat_ShowThumbCat'] = 'Kategori temsilcisine ait pul resmini (thumbnail) göster';
+$lang['AStat_ShowThumbImg'] = 'Resme ait pul resmini (thumbnail) göster';
+$lang['AStat_SeeTimeRequests'] = 'İsteklerin yürütülme süresini göster';
 ?>
