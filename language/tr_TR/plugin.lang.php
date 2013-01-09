@@ -140,4 +140,8 @@ $lang['AStat_adviser_not_authorized'] = 'Eylemden vazgeçildi: Danışman profil
 $lang['AStat_ShowThumbCat'] = 'Kategori temsilcisine ait pul resmini (thumbnail) göster';
 $lang['AStat_ShowThumbImg'] = 'Resme ait pul resmini (thumbnail) göster';
 $lang['AStat_SeeTimeRequests'] = 'İsteklerin yürütülme süresini göster';
+$lang['AStat_tools_deleted_category'] = 'Geçmiş içindeki kategorileri güncelle';
+$lang['AStat_MouseOverColor'] = 'Mouse over satırı';
+$lang['AStat_tools_deleted_picture_error0'] = 'Hazırlama başarısız oldu';
+$lang['AStat_tools_deleted_picture_error1'] = 'Yeni olayların geçmişe ilişkilendirilmesi başarısız oldu';
 ?>
