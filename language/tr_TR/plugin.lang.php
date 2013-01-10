@@ -155,4 +155,11 @@ $lang['AStat_tools_invalid_date'] = 'Verilen tarih geçersiz!';
 $lang['AStat_tools_general_nfo'] = 'Geçmişteki genel bilgiler';
 $lang['AStat_tools_deleted_user'] = 'Kullanıcı referanslarıyla geçmişi güncelle';
 $lang['AStat_tools_deleted_picture_prepare_action'] = 'Eşitlemeden <u>önce</u>: <i>AStat</i> \'ı hazırla';
+$lang['AStat_tools_result_ko'] = 'Bir hata oluştu. Eylem düzgün biçimde yapılamadı';
+$lang['AStat_tools_purge_history_date'] = 'Önce tüm olayları temizle';
+$lang['AStat_tools_deleted_picture_nfo_nb'] = '(%s resim ID\'si geçmişteki %s olaya bağlantılanamadı)';
+$lang['AStat_specific_period_config'] = 'İstatistikler için periyoda göre özel ayarlar';
+$lang['AStat_specific_ip_config'] = 'İstatistikler için IP\'ye göre özel ayarlar';
+$lang['AStat_specific_image_config'] = 'İstatistikler için resimlere göre özel ayarlar';
+$lang['AStat_specific_category_config'] = 'İstatistikler için kategorilere göre özel ayarlar';
 ?>
