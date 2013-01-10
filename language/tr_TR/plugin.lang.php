@@ -144,4 +144,15 @@ $lang['AStat_tools_deleted_category'] = 'Geçmiş içindeki kategorileri güncel
 $lang['AStat_MouseOverColor'] = 'Mouse over satırı';
 $lang['AStat_tools_deleted_picture_error0'] = 'Hazırlama başarısız oldu';
 $lang['AStat_tools_deleted_picture_error1'] = 'Yeni olayların geçmişe ilişkilendirilmesi başarısız oldu';
+$lang['Pictures_seen'] = 'Görülen resimler';
+$lang['pct_Pages_seen'] = '%Sayfa';
+$lang['pct_Pictures_seen'] = '%Resim';
+$lang['ratio_Pictures_seen'] = 'Görülen resimler';
+$lang['AStat_tools_title'] = 'Bakım araçları';
+$lang['Categories_seen'] = 'Görünen kategoriler';
+$lang['AStat_tools_result_ok'] = 'Eylem düzgün olarak yapıldı';
+$lang['AStat_tools_invalid_date'] = 'Verilen tarih geçersiz!';
+$lang['AStat_tools_general_nfo'] = 'Geçmişteki genel bilgiler';
+$lang['AStat_tools_deleted_user'] = 'Kullanıcı referanslarıyla geçmişi güncelle';
+$lang['AStat_tools_deleted_picture_prepare_action'] = 'Eşitlemeden <u>önce</u>: <i>AStat</i> \'ı hazırla';
 ?>
