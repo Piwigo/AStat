@@ -162,4 +162,10 @@ $lang['AStat_specific_period_config'] = 'İstatistikler için periyoda göre öz
 $lang['AStat_specific_ip_config'] = 'İstatistikler için IP\'ye göre özel ayarlar';
 $lang['AStat_specific_image_config'] = 'İstatistikler için resimlere göre özel ayarlar';
 $lang['AStat_specific_category_config'] = 'İstatistikler için kategorilere göre özel ayarlar';
+$lang['AStat_tools_purge_history_imageid0'] = 'Silinmiş imajlara ilişkilendirilmiş tüm olayları temizle (Geçmişte %s adet olay bulunuyor)';
+$lang['AStat_tools_general_nfo_nfo'] = '<ul><li>Geçmişte %s olay bulunmaktadır</li>
+            <li>Tablo ağırlığı %s (Tablo: %s ; Index: %s)</li>
+            <li>İlk olay tarihi : %s</li>
+            <li>Son olay tarihi : %s</li>';
+$lang['AStat_tools_invalid_date2'] = 'Verilen tarih değeri günün tarihine eşit veya daha büyük';
 ?>
