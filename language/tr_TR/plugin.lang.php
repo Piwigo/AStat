@@ -168,4 +168,8 @@ $lang['AStat_tools_general_nfo_nfo'] = '<ul><li>Geçmişte %s olay bulunmaktadı
             <li>İlk olay tarihi : %s</li>
             <li>Son olay tarihi : %s</li>';
 $lang['AStat_tools_invalid_date2'] = 'Verilen tarih değeri günün tarihine eşit veya daha büyük';
+$lang['AStat_tools_deleted_user_nfo2'] = 'Olay geçmişindeki tüm kullanıcı ID\'leri mevcut, herhangi bir eylem uygulanmayacaktır.';
+$lang['AStat_tools_purge_history_nfo'] = 'Bu fonksiyon, girilen bir tarihteki tüm eski olayları geçmişten temizler ve tabloyu optimize eder.<br><b>Bu işlem geri alınamaz</b>.';
+$lang['AStat_tools_purge_history_ipid0'] = 'Karalistedeki IP\'lere bağlantılı olayları temizlemek (Geçmişte %s öğe ve %s olay bulunuyor)';
+$lang['AStat_tools_purge_history_categoryid0'] = 'Silinmiş kategorilerle bağlantılı olayları temizlemek (Geçmişte %s olay bulunuyor)';
 ?>
