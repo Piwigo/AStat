@@ -108,4 +108,11 @@ $lang['AStat_IP_blacklist'] = 'Dodaj do czarnej listy';
 $lang['AStat_IP_geolocalisation'] = 'Geolokalizacja';
 $lang['AStat_NbIPPerPages'] = 'Liczba adresów IP na stronę';
 $lang['AStat_NbImgPerPages'] = 'Liczba obrazów na stronę';
+$lang['AStat_tools_title'] = 'Narzędzia konserwacyjne';
+$lang['AStat_PeriodPerDefault'] = 'Domyślnie wybrany okres';
+$lang['AStat_ShowThumbImg'] = 'Pokaż miniaturę obrazu';
+$lang['AStat_by_period'] = 'Wg okresu';
+$lang['AStat_enableddisabled_false'] = 'Filtr wyłączony';
+$lang['AStat_enableddisabled_invert'] = 'Filtr odwrócony';
+$lang['AStat_enableddisabled_true'] = 'Filtr włączony';
 ?>
