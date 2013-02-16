@@ -115,4 +115,7 @@ $lang['AStat_by_period'] = 'Wg okresu';
 $lang['AStat_enableddisabled_false'] = 'Filtr wyłączony';
 $lang['AStat_enableddisabled_invert'] = 'Filtr odwrócony';
 $lang['AStat_enableddisabled_true'] = 'Filtr włączony';
+$lang['AStat_BlackListedIP'] = 'IP na czarnej liście';
+$lang['AStat_MaxBarWidth'] = 'Maksymalna szerokość belki (w pikselach)';
+$lang['AStat_MouseOverColor'] = 'Mysz nad wierszem';
 ?>
