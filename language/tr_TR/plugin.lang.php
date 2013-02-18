@@ -172,4 +172,8 @@ $lang['AStat_tools_deleted_user_nfo2'] = 'Olay geçmişindeki tüm kullanıcı I
 $lang['AStat_tools_purge_history_nfo'] = 'Bu fonksiyon, girilen bir tarihteki tüm eski olayları geçmişten temizler ve tabloyu optimize eder.<br><b>Bu işlem geri alınamaz</b>.';
 $lang['AStat_tools_purge_history_ipid0'] = 'Karalistedeki IP\'lere bağlantılı olayları temizlemek (Geçmişte %s öğe ve %s olay bulunuyor)';
 $lang['AStat_tools_purge_history_categoryid0'] = 'Silinmiş kategorilerle bağlantılı olayları temizlemek (Geçmişte %s olay bulunuyor)';
+$lang['AStat_tools_deleted_picture_nfo2'] = 'Olay geçmişindeki tüm resim IDleri bulunuyor, herhangi bir eylem yürütülmeyecektir.';
+$lang['AStat_tools_deleted_category_nfo2'] = 'Geçmiş içindeki tüm olay kategorileri bulunmakta. Herhangi bir eylem yürütülmeyecektir.';
+$lang['AStat_tools_deleted_picture_ok1'] = 'Geçmiş içindeki bağlama olayı başarılı oldu';
+$lang['AStat_Nfo_IP'] = 'Seçilen dönem için, bir IP adresi tarafından görülen sayfa ve resimlerin temsili sayısı';
 ?>
