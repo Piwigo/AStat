@@ -176,4 +176,10 @@ $lang['AStat_tools_deleted_picture_nfo2'] = 'Olay geçmişindeki tüm resim IDle
 $lang['AStat_tools_deleted_category_nfo2'] = 'Geçmiş içindeki tüm olay kategorileri bulunmakta. Herhangi bir eylem yürütülmeyecektir.';
 $lang['AStat_tools_deleted_picture_ok1'] = 'Geçmiş içindeki bağlama olayı başarılı oldu';
 $lang['AStat_Nfo_IP'] = 'Seçilen dönem için, bir IP adresi tarafından görülen sayfa ve resimlerin temsili sayısı';
+$lang['AStat_tools_deleted_category_nfo0'] = 'Artık bulunmayan geçmişteki olaylara atama. Silinmiş kategori';
+$lang['AStat_gpc2_not_installed'] = 'AStat kurulumu için \'Grum Plugins Classes 2\' eklentisi (sürüm >= %s) gerekmektedir';
+$lang['AStat_tools_deleted_picture_nfo0'] = 'Artık bulunmayan resimlere atıfta bulunulan geçmişteki etkili olaylar <i>resim [Id #0] veri tabanında artık bulunmuyor</i>';
+$lang['AStat_section_web_services'] = 'Eklenti <a href="http://phpwebgallery.net/ext/extension_view.php?eid=171">Web servis istatistikleri</a>';
+$lang['AStat_section_most_commented'] = 'Eklenti <a href="http://phpwebgallery.net/ext/extension_view.php?eid=145">En fazla yorumlanan</a>';
+$lang['AStat_section_additional_page'] = 'Eklenti <a href="http://phpwebgallery.net/ext/extension_view.php?eid=153">Ek sayfaları</a>';
 ?>
