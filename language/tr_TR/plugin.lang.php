@@ -182,4 +182,14 @@ $lang['AStat_tools_deleted_picture_nfo0'] = 'Artık bulunmayan resimlere atıfta
 $lang['AStat_section_web_services'] = 'Eklenti <a href="http://phpwebgallery.net/ext/extension_view.php?eid=171">Web servis istatistikleri</a>';
 $lang['AStat_section_most_commented'] = 'Eklenti <a href="http://phpwebgallery.net/ext/extension_view.php?eid=145">En fazla yorumlanan</a>';
 $lang['AStat_section_additional_page'] = 'Eklenti <a href="http://phpwebgallery.net/ext/extension_view.php?eid=153">Ek sayfaları</a>';
+$lang['AStat_tools_deleted_picture_nfo3'] = 'Resimlerin fiziksel olarak bir dizinden aktarıldığında, eşitleme (senkronizasyon) işlemi resimleri veri tabanından siler ve onları yeni sahip oldukları referansları ile yeniden ekler. Aktarılan resim olaylar geçmişinde artık bulunmayan referansını bırakır.</p><p><i>Astat</i> şunları sağlar:<ul><li>eşitleme <u><i>öncesi</i></u> referansları tutmak</li><li>bir eşitleme <u><i>sonrası</i></u> resim referansına olaylar geçmişinde kesin bağlantı</li>
+</p><p><b>Şuna dikkat edin!</b><br><ul><li>sonuçları öngörülemez. Resimler aynı dosya ismini taşımalıdır</li><li>bu işlev, sunucuda adları değiştirilen resim dosyalarını işleyemez.</li></ul>';
+$lang['AStat_Nfo_Category'] = 'Seçilen zaman dilimi için her resmin ortalama görüntülenmesi olarak kategorilere göre görüntülenen sayfa ve resim sayısını gösterir';
+$lang['AStat_Nfo_Image'] = 'Seçilen zaman dilimi için yüzde olarak toplam görüntülenme sayısı içindeki görüntüleme sayısını her resmin görüntüleme sayısını belirtir';
+$lang['AStat_Nfo_Period'] = 'Seçilen zaman dilimi için bağlanan IP adreslerine bağlı olarak görüntülenen sayfa ve resim sayısını gösterir';
+$lang['AStat_tools_deleted_user_nfo1'] = '%s bilinmeyen kullanıcı kimliği olaylar geçmişinde %s olayları etkiliyor: <ul>%s</ul>';
+$lang['AStat_tools_deleted_picture_ok0'] = 'Tablonun hazırlığı başarılı, bu sunucudaki dosyalar yeniden düzenlenebilir';
+$lang['AStat_tools_deleted_category_nfo1'] = '%s bulunmayan dizin geçmişteki olaylarda listeleniyor ve %s olayları etkiliyor: <ul>%s</ul>';
+$lang['AStat_tools_deleted_picture_nfo1'] = '%s bilinmeyen resim kimliği olay geçmişi içinde %s olayları etkiliyor: <ul>%s</ul>';
+$lang['AStat_tools_deleted_user_nfo0'] = 'Bu işlev, hesabı silinen kullanıcı kimliğini <i>misafir</i> olarak zorlar.';
 ?>
