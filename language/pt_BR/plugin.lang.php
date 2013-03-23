@@ -168,4 +168,9 @@ $lang['AStat_config_saved'] = 'Configurações salvas!';
 $lang['AStat_config_title'] = 'Configurações de AStat';
 $lang['AStat_confignotsaved'] = 'Ocorreu um erro, as configurações não foram salvas';
 $lang['AStat_date_time_format'] = 'd/m/Y H:i:s';
+$lang['AStat_tools_purge_history_categoryid0'] = 'Remover eventos associados a categorias apagadas (%s eventos no histórico)';
+$lang['AStat_tools_purge_history_date'] = 'Remover todos os eventos anteriores';
+$lang['AStat_tools_purge_history_imageid0'] = 'Remover eventos associados a fotos apagadas (%s eventos no histórico)';
+$lang['AStat_tools_purge_history_ipid0'] = 'Remover eventos associados a endereços IP que estão na blacklist (%s items na blacklist, %s eventos no histórico)';
+$lang['AStat_tools_result_ko'] = 'Ocorreu um erro. A ação não foi executada corretamente';
 ?>
