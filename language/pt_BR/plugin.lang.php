@@ -173,4 +173,13 @@ $lang['AStat_tools_purge_history_date'] = 'Remover todos os eventos anteriores';
 $lang['AStat_tools_purge_history_imageid0'] = 'Remover eventos associados a fotos apagadas (%s eventos no histórico)';
 $lang['AStat_tools_purge_history_ipid0'] = 'Remover eventos associados a endereços IP que estão na blacklist (%s items na blacklist, %s eventos no histórico)';
 $lang['AStat_tools_result_ko'] = 'Ocorreu um erro. A ação não foi executada corretamente';
+$lang['AStat_tools_deleted_picture_nfo3'] = 'Quando as fotos são fisicamente transferidas de um diretório, a sincronização apaga as fotos da base de dados e as regrava com uma nova referência. Sendo assim, a imagem transferida deixa no histórico eventos ligados a uma referência que não existe mais.</p><p><i>Astat</i> permite :<ul><li>memorizar as referências das fotos <u><i>antes</i></u> para sincronizar</li><li> a ligação dos eventos do histórico com a referência exata da foto <u><i>depois</i></u> da sincronização</li></p><p><b>Cuidado !</b><br><ul><li>caso haja fotos com o mesmo nome o resultado é imprevisível</li><li>esta função não pode lidar com fotos cujo nome tenha sido mudado no servidor</li></ul>';
+$lang['AStat_tools_general_nfo_nfo'] = '<ul><li>%s eventos estão presentes no histórico</li>
+            <li>Tamanho da tabela %s (Tabela: %s ; Índice: %s)</li>
+            <li>Data do primeiro evento : %s</li>
+            <li>Data do último evento : %s</li>';
+$lang['AStat_tools_deleted_user_nfo0'] = 'Esta função força como <i>convidado</i> um ID de usuário que foi gerado como evento no histórico cuja conta tenha sido apagada';
+$lang['AStat_tools_deleted_user_nfo1'] = '%s ID de usuário desconhecido entre os eventos do histórico impactando %s eventos: <ul>%s</ul>';
+$lang['AStat_tools_deleted_user_nfo2'] = 'Todos os IDs de usuário no histórico de eventos existem. Nada a ser feito';
+$lang['AStat_tools_purge_history_nfo'] = 'Esta função limpará do histórico todos os eventos anteriores a uma determinada data e otimizará a tabela.<br><b>Esta operação não poderá ser revertida</b>.';
 ?>
