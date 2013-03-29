@@ -29,7 +29,7 @@ $lang['AStat_day_of_week_6'] = 'Saturday';
 
 $lang['AStat_month_of_year_1'] = 'January';
 $lang['AStat_month_of_year_2'] = 'February';
-$lang['AStat_month_of_year_3'] = 'Mach';
+$lang['AStat_month_of_year_3'] = 'March';
 $lang['AStat_month_of_year_4'] = 'April';
 $lang['AStat_month_of_year_5'] = 'May';
 $lang['AStat_month_of_year_6'] = 'June';
