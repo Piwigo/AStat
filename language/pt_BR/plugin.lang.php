@@ -182,4 +182,13 @@ $lang['AStat_tools_deleted_user_nfo0'] = 'Esta função força como <i>convidado
 $lang['AStat_tools_deleted_user_nfo1'] = '%s ID de usuário desconhecido entre os eventos do histórico impactando %s eventos: <ul>%s</ul>';
 $lang['AStat_tools_deleted_user_nfo2'] = 'Todos os IDs de usuário no histórico de eventos existem. Nada a ser feito';
 $lang['AStat_tools_purge_history_nfo'] = 'Esta função limpará do histórico todos os eventos anteriores a uma determinada data e otimizará a tabela.<br><b>Esta operação não poderá ser revertida</b>.';
+$lang['AStat_section_best_rated'] = ' ';
+$lang['AStat_section_categories'] = ' ';
+$lang['AStat_section_favorites'] = ' ';
+$lang['AStat_section_list'] = ' ';
+$lang['AStat_section_most_visited'] = ' ';
+$lang['AStat_section_recent_cats'] = ' ';
+$lang['AStat_section_recent_pics'] = ' ';
+$lang['AStat_section_search'] = ' ';
+$lang['AStat_section_tags'] = ' ';
 ?>
