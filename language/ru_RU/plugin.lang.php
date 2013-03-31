@@ -130,4 +130,13 @@ $lang['AStat_sortip_ip'] = 'Пользователь/IP адрес';
 $lang['AStat_sortip_page'] = 'Количество просмотренных страниц';
 $lang['AStat_sortip_picture'] = 'Количество просмотренных изображении';
 $lang['AStat_specific_category_config'] = 'Специфические параметры статистики по категориям';
+$lang['AStat_section_best_rated'] = ' ';
+$lang['AStat_section_categories'] = ' ';
+$lang['AStat_section_favorites'] = ' ';
+$lang['AStat_section_list'] = ' ';
+$lang['AStat_section_most_visited'] = ' ';
+$lang['AStat_section_recent_cats'] = ' ';
+$lang['AStat_section_recent_pics'] = ' ';
+$lang['AStat_section_search'] = ' ';
+$lang['AStat_section_tags'] = ' ';
 ?>
