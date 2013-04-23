@@ -139,4 +139,6 @@ $lang['AStat_section_recent_cats'] = ' ';
 $lang['AStat_section_recent_pics'] = ' ';
 $lang['AStat_section_search'] = ' ';
 $lang['AStat_section_tags'] = ' ';
+$lang['AStat_sortcat_page'] = 'Представление просмотренных страниц в процентах';
+$lang['AStat_sortcat_picture'] = 'Представление просмотренных изображений в процентах';
 ?>
