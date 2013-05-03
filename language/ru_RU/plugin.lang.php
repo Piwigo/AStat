@@ -145,4 +145,8 @@ $lang['AStat_tools_deleted_picture_apply'] = 'Обновить';
 $lang['AStat_tools_deleted_picture_do_action'] = '<u>После</u> синхронизации: заново связать ID изображения с событиями в истории. ';
 $lang['AStat_tools_deleted_picture_error1'] = 'Новое объединение событий в истории не удалось';
 $lang['AStat_tools_deleted_picture_nfo1'] = 'Изображение ID %s в событиях затрагивает %s событий: <ul>%s</ul>';
+$lang['AStat_tools_general_nfo'] = 'Общая информация';
+$lang['AStat_tools_deleted_user_apply'] = 'Обновление';
+$lang['AStat_MouseOverColor'] = 'Наведите курсор мыши';
+$lang['AStat_MaxBarWidth'] = 'Максимальная ширина панели (в пикселях)';
 ?>
