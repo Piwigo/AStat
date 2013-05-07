@@ -149,4 +149,42 @@ $lang['AStat_tools_general_nfo'] = 'Общая информация';
 $lang['AStat_tools_deleted_user_apply'] = 'Обновление';
 $lang['AStat_MouseOverColor'] = 'Наведите курсор мыши';
 $lang['AStat_MaxBarWidth'] = 'Максимальная ширина панели (в пикселях)';
+$lang['AStat_tools_deleted_picture_prepare_action'] = '<u>Предварительная</u> синхронизация: подготовка <i>AStat</i>';
+$lang['AStat_tools_deleted_user_nfo2'] = 'Все ID пользователей в истории существуют. Никакие действия выполнять не нужно.';
+$lang['AStat_tools_deleted_picture_do'] = 'Выполнение процесса';
+$lang['AStat_tools_deleted_picture_error0'] = 'Подготовка прошла неудачно';
+$lang['AStat_tools_deleted_picture_nfo_nb'] = '(%s ID-номеров изображений не могут быть связаны с %s шт. сведений в истории)';
+$lang['AStat_tools_deleted_picture_ok0'] = 'Подготовка таблицы прошла успешно, файлы могут быть реорганизованы на сервере';
+$lang['AStat_tools_deleted_picture_ok1'] = 'Связывание события в истории прошло успешно';
+$lang['AStat_tools_deleted_user'] = 'Обновление истории со ссылками пользователя';
+$lang['AStat_tools_general_nfo_nfo'] = '<ul><li>%s сведений имеется в истории</li>
+            <li>Размеры таблицы %s (Таблиц: %s ; Индекс: %s)</li>
+            <li>Дата первого события: %s</li>
+            <li>Дата последнего события: %s</li>';
+$lang['AStat_tools_invalid_date2'] = 'Указанная дата больше или равна дате нужного дня';
+$lang['AStat_tools_purge_history_categoryid0'] = 'Очистить сведения, связаные с удаленными категориями (%s сведений в истории)';
+$lang['AStat_tools_purge_history_date'] = 'Очистить все сведения о предыдущих событиях';
+$lang['AStat_tools_invalid_date'] = 'Указанная дата недействительна!';
+$lang['AStat_IP_geolocalisation'] = 'Геолокализация';
+$lang['AStat_tools_deleted_category_nfo2'] = 'Все категории в истории существуют. Никаких действий производить не нужно.';
+$lang['AStat_tools_deleted_picture_nfo2'] = 'Все изображения в истории существуют. Никаких действий производить не нужно. ';
+$lang['AStat_tools_purge_history_nfo'] = 'Эта функция очистит историю (все сведения), начиная с указанной даты, и оптимизирует таблицу. <br><b>Будьте внимательны! Действие не может быть отменено.</b>.';
+$lang['AStat_tools_purge_history_ipid0'] = 'Очистить сведения, связанные с IP адресами из "черного списка" (%s единиц в "черном списке", %s сведений в истории)';
+$lang['AStat_tools_purge_history_imageid0'] = 'Очистить все сведения, связанные с удаленными изображениями (%s сведений в истории)';
+$lang['AStat_tools_result_ko'] = 'Произошла ошибка. Действие выполнено неправильно';
+$lang['AStat_tools_result_ok'] = 'Действие выполнено успешно';
+$lang['AStat_tools_title'] = 'Обслуживание';
+$lang['Categories_seen'] = 'Видимые категории';
+$lang['Pictures_seen'] = 'Видимые изображения';
+$lang['pct_Pages_seen'] = '%страниц';
+$lang['pct_Pictures_seen'] = '%изображений';
+$lang['ratio_Pictures_seen'] = 'Видимые изображения';
+$lang['AStat_version'] = 'версия';
+$lang['AStat_yesno_false'] = 'нет';
+$lang['AStat_yesno_true'] = 'да';
+$lang['CATEGORY_LABEL'] = 'Категория';
+$lang['IP_label'] = 'IP адрес';
+$lang['IP_visit'] = 'IP адреса';
+$lang['AStat_tools_purge_history'] = 'Очистка истории';
+$lang['AStat_tools_purge_history_apply'] = 'Очистка';
 ?>
