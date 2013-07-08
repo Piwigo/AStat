@@ -129,4 +129,9 @@ $lang['AStat_title_page'] = 'Розширена статистики';
 $lang['AStat_tools'] = 'Інструменти';
 $lang['AStat_tools_deleted_category_apply'] = 'Оновлення';
 $lang['AStat_tools_deleted_picture_apply'] = 'Оновлення';
+$lang['AStat_sortimg_catname'] = 'Алфавітний порядок - Категорія/Назва зображення';
+$lang['AStat_ShowThumbCat'] = 'Показати мініатюру для відповідної категорії';
+$lang['AStat_sortcat_nbpicture'] = 'Середня кількість переглядів кожного зображення';
+$lang['AStat_Nfo_IP'] = 'Представити кількість сторінок і картинок, перглянутих з IP-адреси, за обраний період ';
+$lang['AStat_adviser_not_authorized'] = 'Дію перервано: профіль не дозволяє цей вид дій';
 ?>
