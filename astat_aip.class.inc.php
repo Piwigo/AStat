@@ -1442,7 +1442,7 @@ class AStat_AIP extends AStat_root
 
     if(isset($_POST['submit']))
     {
-      if(!is_adviser())
+      if (true) // if(!is_adviser())
       {
         reset($this->config);
         while (list($key, $val) = each($this->config))
@@ -1573,7 +1573,7 @@ class AStat_AIP extends AStat_root
     // >> PURGE HISTORY --------------------------------------------------------
     if(isset($_POST['apply_tool_purge_history']))
     {
-      if(!is_adviser())
+      if (true) // if(!is_adviser())
       {
         $action_result['action']='AStat_tools_purge_history';
         $action_result['result']='false';
@@ -1631,7 +1631,7 @@ class AStat_AIP extends AStat_root
     // >> DELETED_PICTURE ------------------------------------------------------
     elseif(isset($_POST['apply_tool_deleted_picture_resync']))
     {
-      if(!is_adviser())
+      if (true) // if(!is_adviser())
       {
         $action_result['action']='AStat_tools_deleted_picture';
         $action_result['result']='false';
@@ -1672,7 +1672,7 @@ class AStat_AIP extends AStat_root
     //
     elseif(isset($_POST['apply_tool_deleted_picture']))
     {
-      if(!is_adviser())
+      if (true) // if(!is_adviser())
       {
         $action_result['action']='AStat_tools_deleted_picture';
         $action_result['result']='false';
@@ -1695,7 +1695,7 @@ class AStat_AIP extends AStat_root
     // >> DELETED_CATEGORY -----------------------------------------------------
     elseif(isset($_POST['apply_tool_deleted_category']))
     {
-      if(!is_adviser())
+      if (true) // if(!is_adviser())
       {
         $action_result['action']='AStat_tools_deleted_category';
         $action_result['result']='false';
@@ -1718,7 +1718,7 @@ class AStat_AIP extends AStat_root
     // >> DELETED USER ---------------------------------------------------------
     elseif(isset($_POST['apply_tool_deleted_user']))
     {
-      if(!is_adviser())
+      if (true) // if(!is_adviser())
       {
         $action_result['action']='AStat_tools_deleted_user';
         $action_result['result']='false';

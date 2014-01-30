@@ -1,26 +1,13 @@
+{include file='include/datepicker.inc.tpl'}
 
-{combine_script id="jquery.ui" path="themes/default/js/ui/jquery.ui.core.js"}
-{combine_script id="jquery.ui.datepicker" path="themes/default/js/ui/jquery.ui.datepicker.js"}
-{assign var="datepicker_language" value="themes/default/js/ui/i18n/jquery.ui.datepicker-"|@cat:$lang_info.code|@cat:".js"}
-
-
-{if "PHPWG_ROOT_PATH"|@constant|@cat:$datepicker_language|@file_exists}
-{combine_script id="jquery.ui.datepicker-$lang_info.code" path=$datepicker_language}
-{/if}
-
-{html_head}
-<link rel="stylesheet" type="text/css" href="themes/default/js/ui/theme/jquery.ui.datepicker.css">
-{/html_head}
-
-{literal}
-<script type="text/javascript">
+{footer_script}{literal}
 
  function enabled_purge()
  {
   re = /\d{2}\/\d{2}\/\d{4}/i;
 
-  if(($('#purge_history_confirm').attr('checked')&&$('#purge_history_type0').attr('checked')&&re.test($('#purge_history_date').val()))||
-     ($('#purge_history_confirm').attr('checked')&&!$('#purge_history_type0').attr('checked')))
+  if(($('#purge_history_confirm').is(':checked')&&$('#purge_history_type0').is(':checked')&&re.test($('#purge_history_date').val()))||
+     ($('#purge_history_confirm').is(':checked')&&!$('#purge_history_type0').is(':checked')))
   {
     $('#purge_history_button').attr('disabled', false);
   }
@@ -35,7 +22,7 @@
   var objconfirm = document.getElementById('deleted_picture_confirm_resync');
   var objbutton = document.getElementById('deleted_picture_resync_button');
 
-  if($('#deleted_picture_confirm_resync').attr('checked'))
+  if($('#deleted_picture_confirm_resync').is(':checked'))
   {
     $('deleted_picture_resync_button').attr('disabled', false);
   }
@@ -56,8 +43,9 @@
    });
  }
 
-</script>
-{/literal}
+ init();
+
+{/literal}{/footer_script}
 
 {if isset($datas.ASTAT_RESULT_OK)}{$datas.ASTAT_RESULT_OK}{/if}
 
@@ -87,7 +75,7 @@
   <p>{'AStat_tools_deleted_picture_nfo0'|@translate}</p>
   <p>{$datas.ASTAT_DELETED_PICTURE_NFO}</p>
   <form method="post" action="" class="general">
-    { if isset($datas.AStat_deleted_picture_submit0) and $datas.AStat_deleted_picture_submit0 == 'yes'}
+    {if isset($datas.AStat_deleted_picture_submit0) and $datas.AStat_deleted_picture_submit0 == 'yes'}
       <p class='formtable'>
         <input type="submit" value="{'AStat_tools_deleted_picture_apply'|@translate}" name="apply_tool_deleted_picture"/>
       </p>
@@ -166,7 +154,3 @@
 
   </form>
 </fieldset>
-
-<script type="text/javascript">
-  init();
-</script>
