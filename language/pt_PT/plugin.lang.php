@@ -174,3 +174,12 @@ $lang['AStat_NbImgPerPages'] = 'Número de fotos por página';
 $lang['AStat_Nfo_Category'] = 'Percentagem do número de páginas e fotos vistas por categorias, por estimativa do núemro de visualizações por foto.';
 $lang['AStat_Nfo_IP'] = 'Número de páginas e fotos visualizadas por IP no período escolhido';
 $lang['AStat_Nfo_Image'] = 'Número de visualizações por cada foto, para o período escolhido, representado em percentagem do número de visualizações da foto no total geral de visualizações.';
+$lang['AStat_tools_deleted_picture_do'] = 'Fazer o processo';
+$lang['AStat_tools_deleted_picture_do_action'] = '<u>Depois</u>da sincronização: ligar novo ID de imagem ao historial';
+$lang['AStat_tools_deleted_picture_error0'] = 'Priming falhou';
+$lang['AStat_tools_deleted_picture_nfo0'] = 'Impactos de eventos no historial referem-se a imagens inexistentes, uma <i>imagem[Id#0]não existe mais na base</i>';
+$lang['AStat_tools_deleted_picture_nfo1'] = '%s id de imagem desconhecido no historial de evento com impacto em %s eventos: <ul>%s</ul>
+';
+$lang['AStat_tools_deleted_picture_nfo2'] = 'Todas as imagens existem no historial do evento, Não deve ser tomada qualquer ação. ';
+$lang['AStat_tools_deleted_picture_nfo_nb'] = '(%s imagem lds não pode ser ligada a %s eventos no historial)';
+$lang['AStat_tools_deleted_picture_nfo3'] = 'Quando as imagens são fisicamente transferidos de um diretório, a sincronização apaga-as da base e reinsere-as depois com uma nova referência. A imagem transferida, contudo, permanece no historial dos eventos ligada à referência que não existe mais </p<p>><i> Astat </i> permite:<ul><li> Memorizar referências da imagem<u></i>antes </i></u> para sincronizar </li><li>o historial de eventos com a referência da imagem exata,  <u><i> depois, </i></u> a sincronização </li></p><p><b> Lembre-se! </b><br><ul><li> Se as fotos tiverem o mesmo nome de arquivo, o resultado não pode ser previsto </li><li> esta função não pode lidar com a imagem cujo nome de arquivo foi alterado no servidor </li></ul>';
