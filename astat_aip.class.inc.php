@@ -2370,7 +2370,7 @@ class AStat_AIP extends AStat_root
 
     for($i=0;$i<4;$i++)
     {
-      if(!is_numeric($tmp[$i])) { return (false); }
+      if(!is_numeric($tmp[$i])) {return (false);}
     }
     return (true);
   }
