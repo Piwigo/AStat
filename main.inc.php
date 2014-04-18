@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AStat.2
-Version: 2.4.2
+Version: 2.4.3
 Description: Statistiques avancées / Advanced statistics
 Plugin URI: http://piwigo.org/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
@@ -71,6 +71,7 @@ Author URI: http://www.grum.fr/
 |         |            |
 | 2.4.2   | 2014/01/30 | * compatibility with piwigo 2.6
 |         |            |
+| 2.4.3   | 2014/04/18 | * Unexpected character in code breaks execution (view by IP)
 
 
 
