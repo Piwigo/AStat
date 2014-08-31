@@ -45,16 +45,16 @@ $lang['AStat_by_ip'] = 'Nach IP';
 $lang['AStat_by_category'] = 'Nach Album';
 $lang['AStat_config'] = 'Einstellungen';
 
-$lang['AStat_BarColor_Pages'] = 'Seitenanzahl';
-$lang['AStat_BarColor_Img'] = 'Bilderanzahl';
-$lang['AStat_BarColor_IP'] = 'Anzahl IP Adressen';
-$lang['AStat_MouseOverColor'] = 'Mouse-over Spalte';
+$lang['AStat_BarColor_Pages'] = 'Anzahl Seiten';
+$lang['AStat_BarColor_Img'] = 'Anzahl Bilder';
+$lang['AStat_BarColor_IP'] = 'Anzahl IP-Adressen';
+$lang['AStat_MouseOverColor'] = 'Mouseover-Spalte';
 $lang['AStat_config_title'] = 'AStat-Einstellungen';
 $lang['AStat_config_colors_and_graph'] = 'Farb- und Grafikeinstellungen';
 $lang['AStat_specific_ip_config'] = 'Einstellungen für Statistiken nach IP Adressen';
-$lang['AStat_NbIPPerPages'] = 'Anzahl der IP Adressen pro Seite';
+$lang['AStat_NbIPPerPages'] = 'Anzahl IP pro Seite';
 $lang['AStat_MaxBarWidth'] = 'Maximale Balkenbreite (Pixel)';
-$lang['AStat_NbCatPerPages'] = 'Anzahl der Alben pro Seite';
+$lang['AStat_NbCatPerPages'] = 'Anzahl Kategorien pro Seite';
 $lang['AStat_specific_category_config'] = 'Einstellungen für Statistiken nach Alben';
 $lang['AStat_do_save'] = 'Speichern';
 
@@ -100,7 +100,7 @@ $lang['AStat_DefaultSortImg'] = 'Standardsortierung';
 
 //--- << v1.1.1 <<
 //--- >> v1.2.0 >>
-$lang['AStat_BarColor_Cat'] = 'Albenanzahl';
+$lang['AStat_BarColor_Cat'] = 'Anzahl Kategorien';
 $lang['AStat_deleted_user'] = 'Gelöschte Benutzer';
 $lang['AStat_SortIPLabel'] = 'Sortierung nach ';
 $lang['AStat_sortip_picture'] = 'Anzahl aufgerufener Bilder';
@@ -214,7 +214,6 @@ $lang['AStat_enableddisabled_false'] = "Filter deaktivieren";
 $lang['AStat_enableddisabled_invert'] = "Filter invertieren";
 
 //--- > 2.2.0
-$lang['To install this plugin, you need to install Grum Plugin Classes %s before'] = 'Um diesen Plugin zu installieren, müssen Sie zuerst Grum Plugin Classes %s installieren';
 
 //--- >> v2.1.0 >>
 $lang['AStat_BlackListedIP'] = "Gesperrte IP";
@@ -225,4 +224,3 @@ $lang['AStat_IP_blacklist'] = "In die Sperrliste aufnehmen";
 $lang['AStat_enableddisabled_true'] = "Filter aktivieren";
 $lang['AStat_enableddisabled_false'] = "Filter deaktivieren";
 $lang['AStat_enableddisabled_invert'] = "Filter invertieren";
-?>
