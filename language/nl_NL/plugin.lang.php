@@ -139,3 +139,4 @@ $lang['AStat_MouseOverColor'] = 'Muis over de rij';
 $lang['AStat_MaxBarWidth'] = 'Maximale balk breedte (pixels)';
 $lang['AStat_IP_geolocalisation'] = 'Geo-localisatie (plaatsbepaling)';
 $lang['AStat_BlackListedIP'] = 'IP staat op de zwarte lijst';
+$lang['AStat_tools_deleted_picture_apply'] = 'Update';
