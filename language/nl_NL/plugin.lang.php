@@ -148,8 +148,7 @@ $lang['AStat_section_most_commented'] = 'Plugin <a href="http://phpwebgallery.ne
 $lang['AStat_section_additional_page'] = 'Plugin <a href="http://phpwebgallery.net/ext/extension_view.php?eid=153">Additional pages</a>';
 $lang['AStat_section_label'] = 'Sectie';
 $lang['AStat_tools_deleted_picture_ok0'] = 'De voorbereiding van de tabel was succesvol, u kunt doorgaan met de reorganisatie van de bestanden op de server';
-$lang['AStat_tools_deleted_category_nfo2'] = '
-Alle categorieën in de evenementen van de geschiedenis bestaan reeds. Geen actie moet worden ondernomen.';
+$lang['AStat_tools_deleted_category_nfo2'] = 'Alle categorieën in de evenementen van de geschiedenis bestaan reeds. Geen actie moet worden ondernomen.';
 $lang['AStat_adviser_not_authorized'] = 'Actie geannuleerd: voorkeursprofiel laat dit soort acties niet toe';
 $lang['AStat_tools_deleted_picture_nfo2'] = 'Alle afbeeldingen in de evenementen van de geschiedenis bestaan reeds. Er werd geen actie ondernomen.';
 $lang['AStat_tools_deleted_picture_error1'] = 'De ré-associatie van de evenementen van de geschiedenis is mislukt';
@@ -161,8 +160,25 @@ $lang['AStat_Nfo_Period'] = 'Voor de gekozen periode, het aantal bekeken pagina\
 $lang['AStat_tools_purge_history_imageid0'] = 'Om alle evenementen in verband met verwijderde afbeeldingen uit te wissen (%s evenementen in de geschiedenis)';
 $lang['AStat_tools_purge_history_date'] = 'Om alle voorafgaande evenementen uit te wissen';
 $lang['AStat_tools_purge_history_categoryid0'] = 'Om evenementen verbonden aan verwijderde categorieën te verwijderen (%s evenementen in de geschiedenis)';
-$lang['AStat_tools_deleted_user_nfo2'] = '
-Alle gebruikers-ID\'s in de geschiedenis van het evenement zijn reeds aanwezig. Er wordt geen actie ondernomen.';
+$lang['AStat_tools_deleted_user_nfo2'] = 'Alle gebruikers-ID\'s in de geschiedenis van het evenement zijn reeds aanwezig. Er wordt geen actie ondernomen.';
 $lang['AStat_tools_deleted_picture_prepare_action'] = '<u>Vooraleer</u> de synchronisatie : bereid <i>AStat</i> voor';
 $lang['AStat_Nfo_Category'] = 'Voor de gekozen periode, het procentuele aantal pagina\'s en foto\'s gezien via categorieën, alsook het gemiddelde aantal views per foto';
 $lang['AStat_Nfo_Image'] = 'Voor de gekozen periode, het aantal views voor elke foto, alsook het procentuele aantal van het totaal aan views';
+$lang['AStat_tools_purge_history_nfo'] = 'Deze functie schoont de geschiedenis op van alle gebeurtenissen vanaf een opgegeven datum en zal de tabel optimaliseren.<br><b>Deze actie kan niet ongedaan worden gemaakt</b>.';
+$lang['AStat_tools_purge_history_ipid0'] = 'Om alle gebeurtenissen met een IP van de zwarte lijst uit te wissen (%s items in de zwarte lijst, %s gebeurtenissen in de geschiedenis)';
+$lang['AStat_tools_general_nfo_nfo'] = '<ul><li>%s gebeurtenissen zijn aanwezig in de geschiedenis</li>
+            <li>Tabel afmetingen %s (Tabel: %s ; Index: %s)</li>
+            <li>Datum van de eerste gebeurtenis : %s</li>
+            <li>Datum van de laatste gebeurtenis : %s</li>';
+$lang['AStat_tools_deleted_user_nfo1'] = '%s onbekende gebruiker ID tussen de gebeurtenissen in de geschiedenis van sterke %s gebeurtenissen: <ul>%s</ul>';
+$lang['AStat_tools_deleted_user_nfo0'] = 'Deze functie dwingt de <i>gast</i> tot een gebruikers ID als gebeurtenis in de geschiedenis van wie de account is verwijderd.';
+$lang['AStat_tools_deleted_picture_ok1'] = 'De verbinding van de gebeurtenis in de geschiedenis is geslaagd.';
+$lang['AStat_tools_deleted_picture_nfo_nb'] = '(%s afbeeldings-ID\'s kunnen niet worden gelinkt aan %s gebeurtenissen in de geschiedenis)';
+$lang['AStat_tools_deleted_picture_nfo3'] = 'Als afbeeldingen fysiek van map verplaatst worden zullen deze bij synchronisatie van de database verwijderd worden en opnieuw geplaatst met een nieuwe referentie. Een verplaatste afbeelding laat in de geschiedenislijst een referentie achter die niet langer bestaat.</p><p><i>Astat</i>maakt het mogelijk om:<ul><li>afbeeldingsreferenties te onthouden<u><i>voor</i></u>de synchronisatie van</li><li>de link tussen gebeurtenissen in de geschiedenis met de afbeeldingsreferentie<u><i>na</i></u>de synchronisatie</li></p><p><b>Let op!</b><br><ul><li>of afbeeldingen dezelfde naam behouden is niet te voorspellen</li><li>deze functie kan niet overweg met veranderde namen op de server</li></ul>';
+$lang['AStat_tools_deleted_picture_nfo1'] = '%s onbekende afbeelding ID in de geschiedenislijst van %s gebeurtenissen:<ul>%s</ul> ';
+$lang['AStat_tools_deleted_picture_nfo0'] = 'Bestemming voor gebeurtenissen in de geschiedenis met betrekking tot afbeeldingen die niet meer bestaan, <i>foto ID bestaat niet meer in de database [ Id #0 ]</i>.';
+$lang['AStat_tools_deleted_picture_do_action'] = '<u>Na</u> synchronisatie: verbindt nieuwe afbeelding ID opnieuw met gebeurtenissen in de geschiedenis';
+$lang['AStat_tools_deleted_category_nfo1'] = '%s niet bestaande map in de geschiedenislijst van gebeurtenissen en sterke %s gebeurtenissen: <ul>%s</ul>';
+$lang['AStat_tools_deleted_category_nfo0'] = 'Toewijzingen voor gebeurtenissen uit de geschiedenis die niet langer bestaan. Verwijderde categorie';
+$lang['AStat_date_time_format'] = 'Y/d/m H:i:s';
+$lang['AStat_SeeTimeRequests'] = 'Toont uitvoeringstijd van verzoeken';
