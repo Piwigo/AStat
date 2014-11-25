@@ -67,7 +67,7 @@ $lang['AStat_Nfo_Category'] = "Für den angegebenen Zeitraum wird die Anzahl der
 $lang['AStat_Nfo_IP'] = "Für den angegebenen Zeitraum wird die Anzahl der Seiten- und Bildaufrufe pro IP Adresse dargestellt";
 $lang['AStat_Nfo_Period'] = "Für den angegebenen Zeitraum wird die Anzahl der Seiten- und Bildaufrufe sowie die Anzahl unterschiedlicher IP Adressen dargestellt";
 
-$lang['AStat_IP_geolocalisation'] = 'Geolokalisierung';
+$lang['AStat_IP_geolocalisation'] = 'Geo-Lokalisierung';
 $lang['AStat_PeriodPerDefault'] = 'Standardmäßig eingestellter Zeitraum';
 $lang['AStat_specific_period_config'] = 'Einstellungn für Statistiken nach Zeitraum';
 $lang['AStat_PeriodPerDefault_global'] = 'Global';
@@ -86,7 +86,7 @@ $lang['AStat_DefaultSortCat'] = 'Standardsortierung';
 $lang['AStat_SortCatLabel'] = 'Sortierung nach ';
 $lang['AStat_version'] = 'version ';
 
-$lang['AStat_RefImageLabel'] = 'Album / Bildname';
+$lang['AStat_RefImageLabel'] = 'Album/ Bildname';
 $lang['AStat_by_image'] = 'Pro Bild';
 $lang['AStat_nb_total_image'] = 'Gesamtanzahl der Bilder';
 $lang['AStat_SortImgLabel'] = 'Sortiert nach ';
@@ -106,10 +106,10 @@ $lang['AStat_SortIPLabel'] = 'Sortierung nach ';
 $lang['AStat_sortip_picture'] = 'Anzahl aufgerufener Bilder';
 $lang['AStat_sortip_ip'] = 'Benutzer / IP Adresse';
 $lang['AStat_sortip_page'] = 'Anzahl aufgerufener Seiten';
-$lang['AStat_RefIPLabel'] = 'Benutzer / IP Adresse';
+$lang['AStat_RefIPLabel'] = 'Benutzer/ IP Adresse';
 $lang['AStat_DefaultSortIP'] = 'Standardsortierung';
 $lang['AStat_general_config'] = 'Globale Einstellungen';
-$lang['AStat_SeeTimeRequests'] = 'Zeige Verarbeitungsdauer der Anfragen';
+$lang['AStat_SeeTimeRequests'] = 'Verarbeitungsdauer der Anfragen anzeigen';
 $lang['AStat_time_request_label'] = 'Verarbeitungsdauer der Anfrage';
 
 $lang['AStat_section_categories'] = $lang['Categories'];
