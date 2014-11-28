@@ -108,3 +108,6 @@ $lang['AStat_MaxBarWidth'] = '最大宽度(像素)';
 $lang['AStat_NbCatPerPages'] = '每页类别数量';
 $lang['AStat_NbIPPerPages'] = '每页IP数量';
 $lang['AStat_NbImgPerPages'] = '每页图片数量';
+$lang['AStat_tools'] = '工具';
+$lang['AStat_tools_deleted_category_apply'] = '更新';
+$lang['AStat_tools_deleted_picture_apply'] = '更新';
