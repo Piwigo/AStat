@@ -223,3 +223,5 @@ $lang['AStat_IP_blacklist'] = "In die Sperrliste aufnehmen";
 $lang['AStat_enableddisabled_true'] = "Filter aktivieren";
 $lang['AStat_enableddisabled_false'] = "Filter deaktivieren";
 $lang['AStat_enableddisabled_invert'] = "Filter invertieren";
+
+$lang['AStat_tools_deleted_category_nfo1'] = "%s nicht existierende Verzeichnisse in der Historie werden von %s Ereignissen referenziert : <ul>%s</ul>";
