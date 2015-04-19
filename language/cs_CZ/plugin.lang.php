@@ -132,13 +132,5 @@ $lang['AStat_section_old_deleted_cat'] = 'Nemožné importovat starou kategorii'
 $lang['AStat_IP_geolocalisation'] = 'Geolokalizace';
 $lang['AStat_MaxBarWidth'] = 'Maximální šířka mřížky (pixely)';
 $lang['AStat_section_unknown'] = 'Neznámý [%s]';
-$lang['AStat_section_best_rated'] = ' ';
-$lang['AStat_section_categories'] = ' ';
-$lang['AStat_section_favorites'] = ' ';
-$lang['AStat_section_list'] = ' ';
-$lang['AStat_section_most_visited'] = ' ';
-$lang['AStat_section_recent_cats'] = ' ';
-$lang['AStat_section_recent_pics'] = ' ';
-$lang['AStat_section_search'] = ' ';
-$lang['AStat_section_tags'] = ' ';
-?>
+$lang['AStat_MouseOverColor'] = 'Myš přes řádek';
+$lang['AStat_gpc2_not_installed'] = 'Doplněk \'Grum Plugins Classes 2\'(release >= %s) je potřeba k instalaci AStat';
