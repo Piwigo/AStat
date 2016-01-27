@@ -122,3 +122,5 @@ $lang['AStat_tools_result_ko'] = 'Wystąpił błąd. Operacja nie została ukoń
 $lang['pct_Pages_seen'] = '%Stron';
 $lang['pct_Pictures_seen'] = '%Obrazów';
 $lang['AStat_sortimg_picture'] = 'Liczba wyświetleń obazu';
+$lang['AStat_tools_deleted_category_apply'] = 'Aktualizuj';
+$lang['AStat_tools_deleted_picture_apply'] = 'Aktualizuj';
