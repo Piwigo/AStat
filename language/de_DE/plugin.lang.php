@@ -3,9 +3,9 @@
 //--- >> v1.1.1 >>
 $lang['Pictures_seen'] = 'Betrachtete Bilder';
 $lang['Categories_seen'] = 'Betrachtete Kategorien';
-$lang['IP_visit'] = 'IP Adressen';
+$lang['IP_visit'] = 'IP-Adressen';
 $lang['AStat_title_page'] = 'Erweiterte Statistiken';
-$lang['IP_label'] = 'IP Adresse';
+$lang['IP_label'] = 'IP-Adresse';
 $lang['CATEGORY_LABEL'] = 'Kategorie';
 $lang['pct_Pictures_seen'] = '%Bilder';
 $lang['pct_Pages_seen'] = '%Seiten';
@@ -76,7 +76,7 @@ $lang['AStat_PeriodPerDefault_year'] = 'Das aktuelle Jahr';
 $lang['AStat_PeriodPerDefault_month'] = 'Der aktuelle Monat';
 $lang['AStat_PeriodPerDefault_day'] = 'Der aktuelle Tag';
 $lang['AStat_config_saved'] = 'Die Einstellungen wurden gespeichert!';
-$lang['AStat_ShowThumbCat'] = 'Zeige das dem Album zugewiesene Miniaturbild';
+$lang['AStat_ShowThumbCat'] = 'Das dem Album zugewiesene Vorschaubild anzeigen';
 $lang['AStat_yesno_true'] = 'Ja';
 $lang['AStat_yesno_false'] = 'Nein';
 $lang['AStat_sortcat_page'] = 'Prozentuelle Darstellung der aufgerufenen Seiten';
@@ -87,7 +87,7 @@ $lang['AStat_SortCatLabel'] = 'Sortierung nach ';
 $lang['AStat_version'] = 'Version ';
 
 $lang['AStat_RefImageLabel'] = 'Album/ Bildname';
-$lang['AStat_by_image'] = 'Pro Bild';
+$lang['AStat_by_image'] = 'Nach Bildern';
 $lang['AStat_nb_total_image'] = 'Gesamtzahl der Bilder';
 $lang['AStat_SortImgLabel'] = 'Sortiert nach ';
 $lang['AStat_sortimg_picture'] = 'Anzahl der Bildaufrufe';
@@ -95,7 +95,7 @@ $lang['AStat_sortimg_catname'] = 'Alphabetische Auflistung - Album/ Bildname';
 $lang['AStat_Nfo_Image'] = "Für den angegebenen Zeitraum werden die Aufrufe jedes Bildes im Verhältnis zum Aufruf aller Fotos dargestellt (in Prozent)";
 $lang['AStat_specific_image_config'] = 'Einstellungen für Statistiken nach Bildern';
 $lang['AStat_NbImgPerPages'] = 'Anzahl Bilder pro Seite';
-$lang['AStat_ShowThumbImg'] = 'Miniaturbild des Fotos anzeigen';
+$lang['AStat_ShowThumbImg'] = 'Vorschaubild des Fotos anzeigen';
 $lang['AStat_DefaultSortImg'] = 'Standardsortierung';
 
 //--- << v1.1.1 <<
@@ -136,7 +136,7 @@ $lang['AStat_tools_title'] = 'Wartungswerkzeuge';
 $lang['AStat_tools_result_ok'] = 'Aktion wurde erfolgreich durchgeführt';
 
 $lang['AStat_tools_deleted_user'] = 'Aktualisieren der Historie mit den Verweisen des Benutzers'; //v1.3.0
-$lang['AStat_tools_deleted_user_nfo0'] = "Diese Funktion versetzt einen Benutzer-ID, der aufgrund eines Eintrags in der Historie erstellt und mittlerweile wieder gelöscht wurde, in den Status <i>Gast</i>.";
+$lang['AStat_tools_deleted_user_nfo0'] = 'Diese Funktion verschiebt eine Benutzer-ID, die aufgrund eines Eintrags in der Historie erstellt und mittlerweile wieder gelöscht wurde, in den Status <i>Gast</i>.';
 $lang['AStat_tools_deleted_user_nfo1'] = "%s unbekannte Benutzer-IDs in der Historie in Verbindung mit %s Ereignissen : <ul>%s</ul>";
 $lang['AStat_tools_deleted_user_nfo2'] = "Alle Benutzer-IDs in der Historie dieses Ereignisses existieren, daher wird keine Aktion unternommen.";
 $lang['AStat_tools_deleted_user_apply'] = 'Aktualisierung';
@@ -146,7 +146,7 @@ $lang['AStat_tools_general_nfo'] = 'Allgemeine Information zur Historie';
 $lang['AStat_tools_deleted_picture'] = 'Aktualisieren der Historie mit Bildreferenzen'; // v1.3.0
 $lang['AStat_tools_deleted_picture_nfo0'] = "Ereignisse in der Historie in Verbindung mit Bildern, die nicht mehr existieren, ein <i>Bild [Id #0] existiert nicht mehr</i>"; // v1.3.0
 $lang['AStat_tools_deleted_picture_nfo1'] = "%s unbekannte Bild-IDs in der Ereignishistorie in Verbdindung mit %s Ereignissen : <ul>%s</ul>";
-$lang['AStat_tools_deleted_picture_nfo2'] = "Alle Bild-IDs in Verbindung mit diesem Ereignis existieren, daher wird keine Aktion unternommen.";
+$lang['AStat_tools_deleted_picture_nfo2'] = 'Alle Bild-IDs in Verbindung mit diesem Ereignis existieren, daher wird keine Aktion ausgeführt.';
 $lang['AStat_tools_deleted_picture_apply'] = 'Aktualisieren';
 
 //--- << v1.2.0 <<
@@ -168,13 +168,13 @@ $lang['AStat_tools_result_ko'] = 'Ein Fehler ist aufgetreten, die Aktion konnte 
 $lang['AStat_tools_invalid_date'] = "Das angegebene Datum ist nicht gültig !";
 $lang['AStat_tools_invalid_date2'] = "Das angegebene Datum ist der heutige Tag oder liegt in der Zukunft";
 $lang['AStat_tools_deleted_picture_error0'] = 'Die Vorbereitung ist fehlgeschlagen';
-$lang['AStat_tools_deleted_picture_error1'] = "Die Neuverknüpfung der Ereignisse in der Historie ist fehlgeschlagen";
+$lang['AStat_tools_deleted_picture_error1'] = 'Neuverknüpfung der Ereignisse der Historie ist fehlgeschlagen';
 $lang['AStat_tools_deleted_picture_ok0'] = "Die Vorbereitung der Tabelle wurde erfolgreich abgeschlossen, die Dateien auf dem Server können neu organisiert werden";
 $lang['AStat_tools_deleted_picture_ok1'] = "Die Verknüpfung der Ereignisse in der Historie wurde erfolgreich abgeschlossen";
 
 $lang['AStat_tools_deleted_picture_nfo3'] = "Die Synchronisation löscht Bilder, die physisch verschoben wurden, aus der Basis und legt sie mit einer neuen Referenz an. Ein verschobenes Bild hinterlässt also Ereignisse mit ungültiger Referenz in der Historie.</p><p><i>Astat</i> erlaubt :<ul><li>Speichern von Bildreferenzen <u><i>vor</i></u> der Synchronisation</li><li>Verknüpfen von Ereignissen in der Historie mit der korrekten Bildreferenz <u><i>nach</i></u> einer Synchronisation</li></p><p><b>Achtung !</b><br><ul><li>Haben Bilder den selben Dateinamen ist das Ergebnis nicht vorhersagbar</li><li>Diese Funktion kann nicht mit Bildern umgehen, deren Dateinamen auf dem Server verändert werden</li></ul>";
 
-$lang['AStat_tools_deleted_picture_prepare_action'] = "<u>Vor</u> der Synchronisation : bereite <i>AStat</i> vor";
+$lang['AStat_tools_deleted_picture_prepare_action'] = '<u>Vor</u> der Synchronisation : <i>AStat</i> vorbereiten';
 $lang['AStat_tools_deleted_picture_do_action'] = '<u>Nach</u> der Synchronisation: Neue Bild-ID mit Ereignissen in der Historie verlinken';
 $lang['AStat_tools_deleted_picture_do'] = "Starten";
 $lang['AStat_tools_deleted_picture_nfo_nb'] = "(%s Bild-IDs können nicht mit %s Ereignissen in der Historie verbunden werden)";
