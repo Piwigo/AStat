@@ -30,7 +30,7 @@ class AStat_AIP extends AStat_root
   protected $max_width;
   protected $seetimerequest;
 
-  function AStat_AIP($prefixeTable, $filelocation)
+  function __construct($prefixeTable, $filelocation)
   {
     parent::__construct($prefixeTable, $filelocation);
 
@@ -1475,7 +1475,7 @@ class AStat_AIP extends AStat_root
 
     //standards inputs zones
     reset($this->config);
-    while (list($key, $val) = each($this->config))
+    foreach ($this->config as $key=>$val)
     {
       $template_datas["f_".$key]=$val;
     }
@@ -1496,28 +1496,28 @@ class AStat_AIP extends AStat_root
     // making lists zones
     // default period
     reset($this->list_periods);
-    while (list($key, $val) = each($this->list_periods))
+    foreach ($this->list_periods as $key=>$val)
     {
       $template_list_values['periods'][]=$val;
       $template_list_labels['periods'][]=l10n('AStat_PeriodPerDefault_'.$val);
     }
     // default category order
     reset($this->list_sortcat);
-    while (list($key, $val) = each($this->list_sortcat))
+    foreach ($this->list_sortcat as $key=>$val)
     {
       $template_list_values['sortcat'][]=$val;
       $template_list_labels['sortcat'][]=l10n('AStat_sortcat_'.$val);
     }
     // default ip order
     reset($this->list_sortip);
-    while (list($key, $val) = each($this->list_sortip))
+    foreach ($this->list_sortip as $key=>$val)
     {
       $template_list_values['sortip'][]=$val;
       $template_list_labels['sortip'][]=l10n('AStat_sortip_'.$val);
     }
     // default picture order
     reset($this->list_sortimg);
-    while (list($key, $val) = each($this->list_sortimg))
+    foreach ($this->list_sortimg as $key=>$val)
     {
       $template_list_values['sortimg'][]=$val;
       $template_list_labels['sortimg'][]=l10n('AStat_sortimg_'.$val);
@@ -1920,6 +1920,8 @@ class AStat_AIP extends AStat_root
       if($result)
       {
         $returned[0]=0;
+        $returned[1]=0;
+        $returned[2]=[];
         while ($row = pwg_db_fetch_row($result))
         {
           $returned[2][$returned[0]][0] = $row[0];
@@ -1967,6 +1969,8 @@ class AStat_AIP extends AStat_root
       if($result)
       {
         $returned[0]=0;
+        $returned[1]=0;
+        $returned[2]=[];
         while ($row = pwg_db_fetch_row($result))
         {
           $returned[2][$returned[0]][0] = $row[0];
@@ -2019,6 +2023,8 @@ class AStat_AIP extends AStat_root
       if($result)
       {
         $returned[0]=0;
+        $returned[1]=0;
+        $returned[2]=[];
         while ($row = pwg_db_fetch_row($result))
         {
           $returned[2][$returned[0]][0] = $row[0];
