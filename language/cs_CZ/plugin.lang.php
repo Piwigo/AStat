@@ -140,3 +140,45 @@ $lang['AStat_sortcat_page'] = 'Znázornění v procentech shlédnutých stránek
 $lang['AStat_tools_general_nfo'] = 'Všeobecná informace o historii';
 $lang['AStat_tools_deleted_picture_do'] = 'Zpracuj';
 $lang['AStat_sortimg_picture'] = 'Počet shlédnutí obrázku';
+$lang['AStat_tools_deleted_picture_nfo_nb'] = '(%s Idčko obrázku nejde propojit s %s událostmi v historii)';
+$lang['AStat_tools_deleted_picture_ok0'] = 'Plnění tabulek bylo úspěšné, soubory mohou být reorganizovány na serveru';
+$lang['AStat_tools_deleted_picture_ok1'] = 'Propojování událostí v historii bylo úspěšné';
+$lang['AStat_tools_deleted_picture_prepare_action'] = '<u>Před</u> synchronizací : připravit <i>AStat</i>';
+$lang['AStat_tools_deleted_user'] = 'Aktualizace historie s odkazy na uživatele';
+$lang['AStat_tools_deleted_user_nfo0'] = 'Tato funkce vynutí <i>guest</i> ID uživatele vygenerovaného jako událost v historii, jejíž účet byl od té doby odstraněn.';
+$lang['AStat_tools_deleted_user_nfo1'] = '%s neznámé ID uživatele mezi událostmi ovlivňujícími historii %s událostí : <ul>%s</ul>';
+$lang['AStat_tools_deleted_user_nfo2'] = 'Všechna Id uživatelů existují a není nutná žádná akce.';
+$lang['AStat_tools_general_nfo_nfo'] = '<ul><li>%s události v historii</li>
+            <li>Table weights %s (Table: %s ; Index: %s)</li>
+            <li>Datum první události : %s</li>
+            <li>Datum poslední události : %s</li>';
+$lang['AStat_tools_purge_history_categoryid0'] = 'Vymazat události přiřazené k odstraněným kategoriím (%s událostí v historii)';
+$lang['AStat_tools_purge_history_date'] = 'Vymazat všechny události před';
+$lang['AStat_tools_purge_history_imageid0'] = 'Vymazat události přiřazené k odstraněným obrázkům (%s událostí v historii)';
+$lang['AStat_tools_purge_history_ipid0'] = 'Vymazat události spojené s IP z blacklistu (%s položek v blacklistu, %s událostí v historii)';
+$lang['AStat_tools_purge_history_nfo'] = 'Tato funkce vyčistí historii od všech minulých událostí od daného data a optimalizuje tabulku v db.<br><b>Tuto akci nelze vrátit zpět</b>.';
+$lang['AStat_tools_deleted_picture_nfo2'] = 'Všechna Id fotek jsou v pořádku. Nic není potřeba provést.';
+$lang['AStat_tools_deleted_picture_nfo0'] = 'Dané události v historii odkazují na obrázky, které již neexistují, <i> obrázek [Id # 0] již dlouho neexistuje </i>';
+$lang['AStat_tools_deleted_picture_nfo1'] = '%s neznámý obrázek ID mezi historií události ovlivňující %s události: <ul>%s</ul>';
+$lang['AStat_tools_deleted_picture_error1'] = 'Nové přidružení událostí v historii selhalo';
+$lang['AStat_tools_deleted_picture_nfo3'] = 'Pokud jsou obrázky fyzicky přeneseny z jedné složky, synchronizace vymaže původní obrázky a znovu je nastaví s novou referencí. Přenesený obrázek poté ponechá v historii události spojené s odkazem, které již neexistují.</p><p><i>Pokročilá statistika</i> umožňuje :<ul><li>zapamatovat si odkazy na obrázky <u><i>před</i></u> synchronizací</li><li> událostí historie odkazů s přesným odkazem na obrázek <u><i>po</i></u> synchronizaci </li></p><p><b>Dejte si pozor!</b><br><ul><li>pokud obrázky mají stejný název souboru pak výsledek nelze předvídat</li><li>tato funkce si nedokáže poradit s obrázkem u kterého byl název souboru změněný na serveru</li></ul>';
+$lang['AStat_Nfo_IP'] = 'Pro zvolené období, představuje počet stránek a obrázků zobrazených na IP adresách';
+$lang['AStat_Nfo_Image'] = 'Pro zvolené období, počet zobrazení pro každý obrázek jako procento zobrazení z celkového počtu zobrazení';
+$lang['AStat_Nfo_Period'] = 'Pro zvolené období, představuje počet stránek a zobrazených obrázků pro unikátní IP adresy';
+$lang['AStat_SeeTimeRequests'] = 'Zobrazení času potřebného k provádění požadavků';
+$lang['AStat_adviser_not_authorized'] = 'Akce přerušena: tento profil tento typ požadavku neumožňuje';
+$lang['AStat_section_additional_page'] = 'Plugin <a href="http://phpwebgallery.net/ext/extension_view.php?eid=153">Dodatečné stránky</a>';
+$lang['AStat_section_most_commented'] = 'Plugin <a href="http://phpwebgallery.net/ext/extension_view.php?eid=145">Často komentované</a>';
+$lang['AStat_section_web_services'] = 'Plugin <a href="http://phpwebgallery.net/ext/extension_view.php?eid=171">Web services statistiky</a>';
+$lang['AStat_specific_category_config'] = 'Nastavení statistiky podle kategorií';
+$lang['AStat_specific_image_config'] = 'Nastavení statistiky podle fotek';
+$lang['AStat_specific_ip_config'] = 'Nastavení statistiky podle IP';
+$lang['AStat_specific_period_config'] = 'Nastavení statistiky podle časového rozpětí';
+$lang['AStat_time_request_label'] = 'Požadavek vykonán za';
+$lang['AStat_tools_deleted_category_nfo0'] = 'Přiřazení událostí v historii, které již neexistují. Smazaná kategorie';
+$lang['AStat_tools_deleted_category_nfo1'] = '%s neexistující složky jsou uvedeny mezi událostmi v historii a mají dopad na %s událostí : <ul>%s</ul>';
+$lang['AStat_tools_deleted_category_nfo2'] = 'Všechny kategorie událostí v historii existují. Žádná akce nebude potřeba.';
+$lang['AStat_tools_deleted_picture'] = 'Aktualizujte historii pomocí doporučení obrázků';
+$lang['AStat_tools_deleted_picture_do_action'] = '<u> Po </u> synchronizaci: znovu propojte nové ID obrázku s událostmi v historii';
+$lang['AStat_tools_deleted_picture_error0'] = 'Zpracování selhalo';
+$lang['AStat_Nfo_Category'] = 'Pro zvolené období, představuje v procentuální počet stránek a obrázků zobrazených v kategoriích jako průměr zobrazení na obrázek';
