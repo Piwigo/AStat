@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AStat.2
-Version: 2.4.5
+Version: 2.4.7
 Description: Statistiques avancées / Advanced statistics
 Plugin URI: http://piwigo.org/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
@@ -77,6 +77,10 @@ Has Settings: true
 | 2.4.4   | 2014/09/22 | * compatibility with piwigo 2.7
 |         |            |
 | 2.4.5   | 2018/02/09 | * bug fix: avoid title overlap
+|         |            |
+| 2.4.6   | 2019/09/20 | * compatibility with PHP 7+ (thank you Rasmus Lerdorf)
+|         |            |
+| 2.4.7   | 2021/11/08 | * compatibility with piwigo 12
 
 
 :: TO DO
