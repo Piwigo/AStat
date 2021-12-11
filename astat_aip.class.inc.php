@@ -1445,7 +1445,7 @@ class AStat_AIP extends AStat_root
       if (true) // if(!is_adviser())
       {
         reset($this->config);
-        while (list($key, $val) = each($this->config))
+        foreach ($this->config as $key=>$val)
         {
           if(isset($_POST['f_'.$key]))
           {
