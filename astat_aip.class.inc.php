@@ -1340,7 +1340,7 @@ class AStat_AIP extends AStat_root
       $width_pages = ceil(($stats[$i]["NbVues"] * $max_width)/$stats[$i]["NbVuesMax"] );
       $width_img = ceil(($stats[$i]["PctImg"] * $max_width)/100 );
 
-      if($showthumb=='true')
+      if($showthumb=='true' and !empty($stats[$i]["ImgPath"]))
       {
         $filethumb=DerivativeImage::thumb_url(array('id'=>$stats[$i]["ImgId"], 'path'=>$stats[$i]["ImgPath"]));
       }
