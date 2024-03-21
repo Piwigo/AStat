@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AStat.2
-Version: 2.4.8
+Version: 2.4.9
 Description: Statistiques avancées / Advanced statistics
 Plugin URI: http://piwigo.org/ext/extension_view.php?eid=172
 Author: grum@piwigo.org
@@ -83,7 +83,8 @@ Has Settings: true
 | 2.4.7   | 2021/11/08 | * compatibility with piwigo 12
 |         |            |
 | 2.4.8   | 2021/11/08 | * php 8 compatibility
-
+|         |            |
+| 2.4.9   | 2021/11/08 | * php 8.1 compatibility
 
 :: TO DO
 
