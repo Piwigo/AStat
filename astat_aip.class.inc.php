@@ -352,7 +352,7 @@ class AStat_AIP extends AStat_root
       $sql_order=" order by GId asc";
 
       $delta = 1;
-      $NbDays = strftime('%d', mktime(0,0,0,$month+1,0,$year));
+      $NbDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
       for($i=0;$i<$NbDays;$i++)
       {
         $returned[$i] = array(
